@@ -17,7 +17,7 @@
 
   ### Tracks Time
 
-%table
+%table.usecase
   %tr
     %th Case #
     %td 1
@@ -93,7 +93,7 @@
 
 %h3 Blank Use Case Template
 
-%table
+%table.usecase
   %tr
     %th Case #
     %td
@@ -125,5 +125,30 @@
   %tr
     %th Alternate Flows
     %td
+:css
+  .usecase {
+      font-family:"Lucida Sans Unicode", "Lucida Grande", Sans-Serif;font-size:12px;
+      background:#fff;
+      width:480px;
+      border-collapse:collapse;
+      text-align:left;
+      margin:20px;
+  }
+  .usecase th{
+      vertical-align: top;
+      font-size:14px;
+      font-weight:normal;
+      background-color:#CDF;
+      border-bottom:1px 
+      solid #ccc;
+      padding:10px 8px;
+  }
+  .usecase td{
+      border-bottom:1px solid #ccc;
+      padding:6px 8px;
+  }
+  .usecase tbody tr:hover td{
+      background-color:#CDF;
+  }
 
 </body></html>
