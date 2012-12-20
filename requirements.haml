@@ -1,21 +1,20 @@
 !!! Strict
 <html><body>
-:markdown
-  # Voluntary Tracker Requirements
-  ******
-
-  ## Roles
+%h1 Voluntary Tracker Requirements
+%hr
+:textile
+  h2. Roles
 
   There are two main roles: 
 
   * Trackee (the person who is being tracked) 
   * Viewer/Supervisor
 
-  ## Basic Use cases
+  h2. Basic Use cases
 
-  The following use cases cover the version 1.0 functionality. Just enough to get things off the ground. The format is slightly modified from the standard in that I have the title (a.k.a. Use Case Name) as an h3 above the use case and have named "Application" as "System"
+  The following use cases cover the version 1.0 functionality. Just enough to get things off the ground. The format is slightly modified from the standard in that I have the title (a.k.a. Use Case Name) as an h3 above the use case and have named "Application" as "System". I include it only in case these get printed out or separated some day and someone needs to decide what they are from.
 
-  ### Tracks Time
+  h3. Tracks Time
 
 %table.usecase
   %tr
@@ -91,6 +90,70 @@
 
         Instead of 4-7, the trackee toggles "on-the-clock" first. The system sends nothing. Then the trackee toggles "start" tracking and the system sends its first snapshot, this one marked "on-the-clock".
 
+%h3 Adds Supervisors
+
+%table.usecase
+  %tr
+    %th Case #
+    %td 2
+
+  %tr
+    %th System
+    %td Voluntary Tracker
+
+  %tr
+    %th Case Description
+    %td A trackee allows supervisors to view his on-the-clock activity.
+
+  %tr
+    %th Primary Actor
+    %td Trackee
+
+  %tr
+    %th Preconditions
+    %td
+
+  %tr
+    %th Trigger
+    %td
+
+  %tr
+    %th Basic Flow
+    %td
+      :textile
+        # Trackee logs into the system
+        # Trackee informs system that he wants to add a viewer
+        # System requests (Google) email address and which category the viewer is granted access to
+        # Trackee supplies information
+        # Supervisor now has access to Trackee's records for that given category.
+
+        Note: it is assumed that the Trackee will not have many supervisors and not many categories, so adding one at a time is ok. A future enhancement might be to allow making certain categories public.
+
+  %tr
+    %th Alternate Flows
+    %td
+      :textile
+        h4. The Trackee supplies an invalid address or category
+
+        If an invalid address or category are supplied, the user is informed of this and the information is requested again.
+        
+        h4. The Trackee cancels adding
+
+        Instead of supplying information, the Trackee can cancel when adding a supervisor. If he cancels, no changes are made to his account.
+        
+        h4. The Trackee has never logged in before
+        
+        After login, the system creates a new user object linked to the trackee's Google account and a random write-access password. The new object will have two categories to which supervisors can be added: on the clock and off the clock. Both will have the Trackee as a member.
+
+        I'll make a 17 character password, but use python's built-in prng to generate it. Eventually, I might go to the more cryptograpically secure option of random.org - however, random.org is only accessible through http not https - so the extra work might not be worth it.
+
+        Thoughts on random.org:
+        * 17 chars base-64 is 102 bits - get it as a list of integers and then convert them to characters passwords.
+        * Use base-64 so we don't waste bits (95 possible chars requires random.org to generate 7 bits for each, even though not all of the information is used).
+        * At this rate 200K bits per day at 102 bits per password is 1960 new accounts per day average usage. I don't know if this app would ever get that kind of traffic.
+        * The rate-limiting will require a classical bounded buffer. The client code can be a reader for the buffer of fetched passwords. Maybe Google's worker threads will be able to do the writing into the buffer.
+
+      
 %h3 Blank Use Case Template
 
 %table.usecase
@@ -100,7 +163,7 @@
 
   %tr
     %th System
-    %td
+    %td Voluntary Tracker
 
   %tr
     %th Case Description
@@ -125,6 +188,8 @@
   %tr
     %th Alternate Flows
     %td
+
+      
 :css
   .usecase {
       font-family:"Lucida Sans Unicode", "Lucida Grande", Sans-Serif;font-size:12px;
