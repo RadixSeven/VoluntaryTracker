@@ -193,18 +193,30 @@
         %li Supervisor tells system that he wants to view time logs
         %li Supervisor selects trackee (which may be himself)
         %li
-          %p Supervisor selects category (from the ones the Trackee has made accessible to him), time period (day, week, month, year, all time), granularity (hour, day, week, month, year), and starting time (some time before now).
+          %p
+            Supervisor selects
+            %ul
+              %li category (from the ones the Trackee has made accessible to him),
+              %li time period (day, week, month, year, all time),
+              %li granularity (hour, day, week, month, year)
+              %li starting time (some time before now).
 
           %p.wrongphase Note: A good interface for starting time might be to populate a dropdown box with time-period units before this one (rounding to the nearest time-period) down to the earliest for which there is data.
         
-        %li System prepares a chart - bar chart, where each bar sums all time intervals in the half-open interval [start_time+n*granularity, start_time+(n+1)*granularity) where n is a non-negative integer and n*granularity <= time_period.
+        %li
+          %p System prepares a chart - bar chart, where each bar sums all time intervals in the half-open interval [start_time+n*granularity, start_time+(n+1)*granularity) where n is a non-negative integer and n*granularity <= time_period.
+          %p Intervals where no data has been recorded will show up as having 0 time spent.
         %li Supervisor can then select next and previous on the chart to change the starting time by time_period
+        %li Supervisor can also change time period and granularity
 
       %p Note: an interesting feature (that doesn't belong in the basic use cases) is to allow looking at the total for a subset of the repetition interval. For example, look at total hours worked on Mondays for the whole year next to the total for Tuesdays. Or the total for each hour on Mondays over the whole year or for each hour of the day in general over the whole year. (And instead of year, one could look at all data.)
   %tr
     %th(scope="row") Alternate Flows
     %td
+      %h4 Supervisor does not have access to any Trackees
 
+      An error message is printed. 
+      
 %h3 Blank Use Case Template
 
 %table.usecase
