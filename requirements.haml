@@ -188,18 +188,19 @@
   %tr
     %th(scope="row") Basic Flow
     %td
-      :textile
-        # Supervisor logs into system
-        # Supervisor tells system that he wants to view time logs
-        # Supervisor selects trackee (which may be himself)
-        # Supervisor selects category (from the ones the Trackee has made accessible to him), time period (day, week, month, year, all time), granularity (hour, day, week, month, year), and starting time (some time before now).
+      %ol
+        %li Supervisor logs into system
+        %li Supervisor tells system that he wants to view time logs
+        %li Supervisor selects trackee (which may be himself)
+        %li
+          %p Supervisor selects category (from the ones the Trackee has made accessible to him), time period (day, week, month, year, all time), granularity (hour, day, week, month, year), and starting time (some time before now).
 
-        A good interface might be to populate a list box TODO: finish
+          %p.wrongphase Note: A good interface for starting time might be to populate a dropdown box with time-period units before this one (rounding to the nearest time-period) down to the earliest for which there is data.
         
-        # System prepares a chart - bar chart, where each bar sums all time intervals in the half-open interval [start_time+n*granularity, start_time+(n+1)*granularity) where n is a non-negative integer and n*granularity <= time_period.
-        # Supervisor can then select next and previous on the chart to change the starting time by time_period
+        %li System prepares a chart - bar chart, where each bar sums all time intervals in the half-open interval [start_time+n*granularity, start_time+(n+1)*granularity) where n is a non-negative integer and n*granularity <= time_period.
+        %li Supervisor can then select next and previous on the chart to change the starting time by time_period
 
-        Note: an interesting feature (that doesn't belong in the basic use cases) is to allow looking at the total for a subset of the repetition interval. For example, look at total hours worked on Mondays for the whole year next to the total for Tuesdays. Or the total for each hour on Mondays over the whole year or for each hour of the day in general over the whole year. (And instead of year, one could look at all data.)
+      %p Note: an interesting feature (that doesn't belong in the basic use cases) is to allow looking at the total for a subset of the repetition interval. For example, look at total hours worked on Mondays for the whole year next to the total for Tuesdays. Or the total for each hour on Mondays over the whole year or for each hour of the day in general over the whole year. (And instead of year, one could look at all data.)
   %tr
     %th(scope="row") Alternate Flows
     %td
@@ -244,26 +245,30 @@
   .usecase {
       font-family:"Lucida Sans Unicode", "Lucida Grande", Sans-Serif;font-size:12px;
       background:#fff;
-      width:480px;
       border-collapse:collapse;
       text-align:left;
-      margin:20px;
+      margin:1em;
   }
   .usecase th{
       vertical-align: top;
-      font-size:14px;
+      font-size:100%;
       font-weight:normal;
       background-color:#CDF;
       border-bottom:1px 
       solid #ccc;
-      padding:10px 8px;
+      padding:0.5em 0.4em;
   }
   .usecase td{
       border-bottom:1px solid #ccc;
-      padding:6px 8px;
+      font-size: 100%;
+      padding:0.3em 0.4em;
   }
   .usecase tbody tr:hover td{
-      background-color:#CDF;
+      background-color:#E6EEFF;
   }
 
+  /*wrongphase is used to mark up elements that are from the wrong phase of the engineering process - implementaton or design mentioned in requirements, for example*/
+  .wrongphase {
+      color: #ccc;
+  }
 </body></html>
