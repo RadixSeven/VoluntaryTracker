@@ -14,6 +14,10 @@
 
   The following use cases cover the version 1.0 functionality. Just enough to get things off the ground. The format is slightly modified from the standard in that I have the title (a.k.a. Use Case Name) as an h3 above the use case and have named "Application" as "System". I include it only in case these get printed out or separated some day and someone needs to decide what they are from.
 
+  Some glaring omissions from basic use cases: remove snapshots, remove supervisors, edit activity flagging list
+
+  Some less-glaring omissions: add categories and sub-categories
+
   h3. Tracks Time
 
 %table.usecase
@@ -154,6 +158,52 @@
         * The rate-limiting will require a classical bounded buffer. The client code can be a reader for the buffer of fetched passwords. Maybe Google's worker threads will be able to do the writing into the buffer.
 
       
+%h3 Views Time-Spent Log
+
+%table.usecase
+  %tr
+    %th(scope="row") Case #
+    %td 3
+
+  %tr
+    %th(scope="row") System
+    %td Voluntary Tracker
+
+  %tr
+    %th(scope="row") Case Description
+    %td Supervisor looks at the raw amounts of time spent over a given time-interval for a given trackee
+
+  %tr
+    %th(scope="row") Primary Actor
+    %td Supervisor
+
+  %tr
+    %th(scope="row") Preconditions
+    %td
+
+  %tr
+    %th(scope="row") Trigger
+    %td
+
+  %tr
+    %th(scope="row") Basic Flow
+    %td
+      :textile
+        # Supervisor logs into system
+        # Supervisor tells system that he wants to view time logs
+        # Supervisor selects trackee (which may be himself)
+        # Supervisor selects category (from the ones the Trackee has made accessible to him), time period (day, week, month, year, all time), granularity (hour, day, week, month, year), and starting time (some time before now).
+
+        A good interface might be to populate a list box TODO: finish
+        
+        # System prepares a chart - bar chart, where each bar sums all time intervals in the half-open interval [start_time+n*granularity, start_time+(n+1)*granularity) where n is a non-negative integer and n*granularity <= time_period.
+        # Supervisor can then select next and previous on the chart to change the starting time by time_period
+
+        Note: an interesting feature (that doesn't belong in the basic use cases) is to allow looking at the total for a subset of the repetition interval. For example, look at total hours worked on Mondays for the whole year next to the total for Tuesdays. Or the total for each hour on Mondays over the whole year or for each hour of the day in general over the whole year. (And instead of year, one could look at all data.)
+  %tr
+    %th(scope="row") Alternate Flows
+    %td
+
 %h3 Blank Use Case Template
 
 %table.usecase
