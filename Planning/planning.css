@@ -31,3 +31,42 @@
     color: #ccc;
 }
 
+/*This hidden class allows me to mark anything I need to as undisplayed*/
+.hidden
+{
+    visibility:hidden
+}
+
+/*The preliminary design is stored in an unordered list of definition lists. The dt is the item name. I have the comment and the why-needed classes separately */
+ul.prelim-design, .prelim-design ul
+{
+    margin: 2em 0;
+    width: 40em;
+    list-style-type: none;
+}
+
+
+.prelim-design dt.item-name
+{
+    background-color: #000000;
+    color: #959289;
+    padding: .5em;
+    font-weight: bold;
+    text-align: left;
+    text-transform: uppercase;
+    border-left: 1px solid #000000;
+    border-right: 1px solid #000000;
+    border-top: 1px solid #000000;
+}
+	
+.prelim-design dd.why-needed, .prelim-design dd.comment
+{
+    margin: 0 0 0 0;
+    background: #DBD8D8;
+    text-align: left;
+    padding: 1em .5em;
+    font-style: italic;
+    border-left: 1px solid #000000;
+    border-right: 1px solid #000000;
+    border-bottom: 1px solid #000000;
+}

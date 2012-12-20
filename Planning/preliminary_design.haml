@@ -1,0 +1,40 @@
+!!! Strict
+<html>
+%head
+  %link(rel="stylesheet" type="text/css" href="planning.css")
+<body>
+%h1 Voluntary Tracker Preliminary Design
+
+%hr
+
+%h2 Introduction
+
+%p This preliminary design is mainly a list of things that need further design. It is my first 1000 foot view on how the system will go together. Each item will have some subitems and some comments about how I am thinking the system will be put together and why each thing is needed. The first thing for each item will be the justification and then there will be a separate slot for the comment if one is present.
+
+%p
+  Basic format for a preliminary design entry:
+  %ul.prelim-design
+    %li
+      %dl
+        %dt.item-name Ladle frotzer
+        %dd.why-needed
+          Fulfills id 8,9,10 from requirements
+        %dd.comment
+          Ladles are frotzed only on alternate thursdays. The ladle frotzing should be disabled on other days
+      %ul
+        %li
+          %dl
+            %dt.item-name Ladle frotzer button
+            %dd.why-needed So users can activate the ladle frotzer
+            %dd.comment.hidden
+        %li
+          %dl
+            %dt.item-name Ladle frotzer backend
+            %dd.why-needed So the ladle frotzer does something
+            %dd.comment
+              Ladle frotzing support is buggy in Python we need to either write our own or use some other language for this component
+          
+
+%h2 Things that need further design
+      
+</body></html>
