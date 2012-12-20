@@ -118,18 +118,16 @@
 
   %tr
     %th(scope="row") Preconditions
-    %td
+    %td Trackee is logged in
 
   %tr
     %th(scope="row") Trigger
-    %td
+    %td Trackee informs system that he wants to add a viewer
 
   %tr
     %th(scope="row") Basic Flow
     %td
       :textile
-        # Trackee logs into the system
-        # Trackee informs system that he wants to add a viewer
         # System requests (Google) email address and which category the viewer is granted access to
         # Trackee supplies information
         # Supervisor now has access to Trackee's records for that given category.
@@ -182,18 +180,16 @@
 
   %tr
     %th(scope="row") Preconditions
-    %td
+    %td Supervisor is logged in
 
   %tr
     %th(scope="row") Trigger
-    %td
+    %td Supervisor tells system that he wants to view time logs (this may be default on log-in, since I suspect it will be the main reason users use the web system)
 
   %tr
     %th(scope="row") Basic Flow
     %td
       %ol
-        %li Supervisor logs into system
-        %li Supervisor tells system that he wants to view time logs (this may be default on log-in, since I suspect it will be the main reason users use the web system)
         %li Supervisor selects trackee (which may be himself)
         %li
           %p
@@ -213,6 +209,11 @@
           %p.wrongphase &lt;time periods&gt; would be normal text that would change depending on the selection in the [time period] dropdown.
 
           %p.wrongphase This would default to category: on-the-clock, time-period: week, granularity: day, starting-time: 0 weeks ago (so, this week). If someone entered a fraction, it would be rounded and negative numbers would just search for data that hasn't happened yet. Non-numbers would also be treated as 0.
+
+          %p.wrongphase Maybe it would be good just to have a start time and end time.
+          %p.wrongphase Or, to keep it simple, one could have:
+          %ul
+            %li.wrongphase Time spent in [category] for each [granularity] starting at [day] [hour] and ending at [day] [hour]
         
         %li
           %p System prepares a chart - bar chart, where each bar sums all time intervals in the half-open interval [start_time+n*granularity, start_time+(n+1)*granularity) where n is a non-negative integer and n*granularity <= time_period. The bars are labeled with the appropriate date/time.
@@ -229,6 +230,79 @@
 
       An error message is printed. 
       
+%h3 View and flag foreground windows
+
+%table.usecase
+  %tr
+    %th(scope="row") Case #
+    %td 4
+
+  %tr
+    %th(scope="row") System
+    %td Voluntary Tracker
+
+  %tr
+    %th(scope="row") Case Description
+      
+    %td Each snapshot will have a record of the window title text of the foreground window. A Supervisor should be able to list the window titles and change whether given window titles are appropriate to a category, inappropriate, or unknown. The default view should minimize the effort of the supervisor in finding appropriate titles.
+
+  %tr
+    %th(scope="row") Primary Actor
+    %td Supervisor
+
+  %tr
+    %th(scope="row") Preconditions
+    %td Supervisor is logged in
+
+  %tr
+    %th(scope="row") Trigger
+    %td Supervisor tells system he wants to view/flag window titles
+
+  %tr
+    %th(scope="row") Basic Flow
+    %td
+      %ol
+        %li
+          Supervisor selects:
+          %ul
+            %li Trackee (default last tracked - or self if none last tracked)
+            %li category (default on-the-clock - or first if on-the-clock is not available) - in the future one might select the union of several categories
+            %li start time (default yesterday midnight)
+            %li end time (default now)
+            %li set of items to display (all, appropriate & unknown (default), only appropriate, only unknown)
+            %li what kind of appropriateness marking to display (fraction of votes for all supervisors (default for viewing own data), own markings (default for viewing others' data)) - this is a feature to be added later (see below)
+          %li System displays list of window titles marked with date/time, appropriateness, and with some way of altering their appropriateness
+          %li Supervisor sees one unknown item that is appropriate. He marks it appropriate
+          %li
+            %p The system remembers that window title as appropriate and marks it as such in the future for that supervisor/trackee/category triple.
+            %p It is important to use the supervisor/trackee/category triple. It may be appropriate for a purchasing agent to be surfing amazon on-the-clock. It may not be appropriate for a programmer. One supervisor may deem something appropriate, while another may deem it inappropriate. It is perfectly appropriate to read web-comics off-the-clock, but not on-the-clock (for everyone but web-comic authors).
+          %li Supervisor sees an appropriate item that is inappropriate and changes it.
+          %li The system remembers the supervisor's choice.
+          %li Supervisor sees an inappropriate item that is actually unknown and changes it (it is unknown because it is ambiguous)
+          %li The system remembers the supervisor's choice.
+
+      %p It would be good to have a list of sensible defaults for any Trackee. Improving the system's unaided performance is a major opportunity for research - identifying whether activity (inferred from sequence of window titles) is appropriate to the given category.
+
+      %p As an initial approximation, the system could make an estimate based on the window title and all supervisors that have seen that window title and marked it for that category. Because of the danger of marking something appropriate when it is actually inappropriate, such a marking would have to have high reliability before being used.
+
+      %p A desirable future feature is for users to be able to recategorize and delete snapshots in their own track. So, if I am reviewing my day and I see a window title inappropriate for on-the-clock (for example, I forgot to switch the tracker before I started reading web-comics), I can change its category and this changes the category of the snapshot of which the window-title is a part. Alternately, I can also delete the snapshot (though this would be more technically involved because one would have to deal with modifying other snapshots that refer to this one and claim activity was constantly monitored since it).
+
+      %p Another good feature would be to have users see their supervisors' votes on appropriateness for each item (allowing them to change category, that is, mark things on/off the clock, in response to feedback.)
+
+      %p In the same vein, it might be nice to have a way for a supervisor to send a message asking the trackee about inappropriate window titles - so the trackee could justify them or place them in the right category.
+
+      %p I am using category rather than "on-the-clock" because it might be useful for some users in the future to mark things as: "off-the-clock", "20% time", "project management", "in meeting", "coding" and different activities might be appropriate for each.
+
+      %p Full screen apps on mobile platforms might be lacking window titles - need to look into this when I create clients for them.
+
+      %p A neat report that doesn't belong in the basic feature list would be to mine common substrings in the window titles and list them by time spent.
+  %tr
+    %th(scope="row") Alternate Flows
+    %td
+      %h4 Supervisor does not have access to any Trackees
+
+      %p An error message is printed. 
+            
 %h3 Blank Use Case Template
 
 %table.usecase
