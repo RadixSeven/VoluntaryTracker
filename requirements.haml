@@ -190,24 +190,33 @@
     %td
       %ol
         %li Supervisor logs into system
-        %li Supervisor tells system that he wants to view time logs
+        %li Supervisor tells system that he wants to view time logs (this may be default on log-in, since I suspect it will be the main reason users use the web system)
         %li Supervisor selects trackee (which may be himself)
         %li
           %p
             Supervisor selects
             %ul
-              %li category (from the ones the Trackee has made accessible to him),
-              %li time period (day, week, month, year, all time),
+              %li category (from the ones the Trackee has made accessible to him). If there is only one category there is no need to make this selection.
+              %li time period (day, week, month, year, all time)
               %li granularity (hour, day, week, month, year)
               %li starting time (some time before now).
 
           %p.wrongphase Note: A good interface for starting time might be to populate a dropdown box with time-period units before this one (rounding to the nearest time-period) down to the earliest for which there is data.
+
+          %p.wrongphase Another potential interface would just be to allow the user to type in an integer number. So the line above the chart would read:
+          %ul 
+            %li.wrongphase Time spent in [category] for each [granularity] over one [time period] starting [number] &lt;time periods&gt; ago.
+
+          %p.wrongphase &lt;time periods&gt; would be normal text that would change depending on the selection in the [time period] dropdown.
+
+          %p.wrongphase This would default to category: on-the-clock, time-period: week, granularity: day, starting-time: 0 weeks ago (so, this week). If someone entered a fraction, it would be rounded and negative numbers would just search for data that hasn't happened yet. Non-numbers would also be treated as 0.
         
         %li
-          %p System prepares a chart - bar chart, where each bar sums all time intervals in the half-open interval [start_time+n*granularity, start_time+(n+1)*granularity) where n is a non-negative integer and n*granularity <= time_period.
+          %p System prepares a chart - bar chart, where each bar sums all time intervals in the half-open interval [start_time+n*granularity, start_time+(n+1)*granularity) where n is a non-negative integer and n*granularity <= time_period. The bars are labeled with the appropriate date/time.
           %p Intervals where no data has been recorded will show up as having 0 time spent.
         %li Supervisor can then select next and previous on the chart to change the starting time by time_period
         %li Supervisor can also change time period and granularity
+        %li Supervisor can also change Trackee or select another main activity
 
       %p Note: an interesting feature (that doesn't belong in the basic use cases) is to allow looking at the total for a subset of the repetition interval. For example, look at total hours worked on Mondays for the whole year next to the total for Tuesdays. Or the total for each hour on Mondays over the whole year or for each hour of the day in general over the whole year. (And instead of year, one could look at all data.)
   %tr
