@@ -11,31 +11,40 @@
 
 %p This preliminary design is mainly a list of things that need further design. It is my first 1000 foot view on how the system will go together. Each item will have some subitems and some comments about how I am thinking the system will be put together and why each thing is needed. The first thing for each item will be the justification and then there will be a separate slot for the comment if one is present.
 
-%p
-  Basic format for a preliminary design entry:
-  %ul.prelim-design
-    %li
-      %dl
-        %dt.item-name Item name
-        %dd.why-needed
-          Why needed
-        %dd.comment
-          Optional comment
-      %ul
-        %li
-          %dl
-            %dt.item-name Ladle frotzer button
-            %dd.why-needed So users can activate the ladle frotzer
-            %dd.comment.hidden
-        %li
-          %dl
-            %dt.item-name Ladle frotzer backend
-            %dd.why-needed So the ladle frotzer does something
-            %dd.comment
-              Ladle frotzing support is buggy in Python we need to either write our own or use some other language for this component
-          
-
+%h2 Preliminary Design Entry Example
+%ul.prelim-design
+  %li
+    %dl
+      %dt.item-name Item name
+      %dd.why-needed
+        Why needed
+      %dd.comment
+        Optional comment
+    %ul
+      %li
+        %dl
+          %dt.item-name Ladle frotzer button
+          %dd.why-needed So users can activate the ladle frotzer
+          %dd.comment.hidden
+      %li
+        %dl
+          %dt.item-name Ladle frotzer backend
+          %dd.why-needed So the ladle frotzer does something
+          %dd.comment
+            Ladle frotzing support is buggy in Python we need to either write our own or use some other language for this component
+        
 %h2 Things that will have detailed design
+
+%ul.prelim-design
+  %li
+    %dl
+      %dt.item-name Website Front End
+      %dd.why-needed
+        %p Provides the simplest way to access the data stored on in a shared location for multiple users.
+        %p I could also implement a client for reading and only have the back-end, but authentication is a tricky issue with such private information. I think it is better to use Google App Engine and have Google handle the authentication.
+        %p The disadvantage is that I am not 
+      %dd.comment.hidden
+
 
 %h2 Empty item template
 
