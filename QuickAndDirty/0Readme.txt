@@ -19,10 +19,14 @@ Dependencies
 
 I've written things using python 2.7
 
-Requires installing fbconsole (for access to facebook) and Requests (for the current way of handling HTTP
+Requires installing:
+  fbconsole (for access to facebook - this is the reason I'm not using python 3.2, fbconsole wouldn't install using pip)
+  Requests (for the most up-to-date way of handling HTTP in 2013)
+  scipi (for statistics so I don't have to reinvent the wheel for a t-test)
 
 $ sudo pip install fbconsole
 $ sudo apt-get install python-requests #Default pip installation fails on ubuntu
+$ sudo apt-get install python-scipy
 
 ------------------------------------------------------------------------------
 Important improvements to make it useful to others
