@@ -3,6 +3,63 @@ from __future__ import print_function
 import os.path, datetime, sys, pickle
 import requests
 import xml.etree.ElementTree as ET
+from tzutil import UTC,LocalTimezone
+
+def fogbugz_datetime(date_str):
+    """Returns a datetime object with the UTC timezone constructed from the fogbugz date string
+
+    As a special case, returns None when it is passed None
+    """
+    if date_str is None:
+        return None
+    else:
+        dt=datetime.datetime.strptime(date_str,'%Y-%m-%dT%H:%M:%SZ');
+        return dt.replace(tzinfo=UTC());
+
+class FogbugzInterval:
+    def __init__(self, interval_element):
+        """Takes an xml interval element (xml.etree.ElementTree.Element) and constructs an Interval object containing all its data
+
+        It is assumed that the the interval element is the root of a
+        tree with the following children (I've left the content in for
+        use as an example):
+        
+        <ixInterval>944</ixInterval>
+        <ixPerson>2</ixPerson>
+        <ixBug>767</ixBug>
+        <dtStart>2013-02-19T00:26:00Z</dtStart>
+        <dtEnd>2013-02-19T00:41:00Z</dtEnd>
+        <fDeleted>false</fDeleted>
+        <sTitle>Computer maintenance</sTitle>
+
+        It is assumed that there is exactly one of each child and the
+        code will die horribly if you violate its assumptions.
+        """
+        # Extract from xml tree
+        self.interval_id = int(interval_element.find('ixInterval').text)
+        self.person_id = int(interval_element.find('ixPerson').text)
+        self.case_id = int(interval_element.find('ixBug').text)
+        self.start = fogbugz_datetime(interval_element.find('dtStart').text)
+        self.end = fogbugz_datetime(interval_element.find('dtEnd').text)
+        self.deleted = interval_element.find('fDeleted').text == 'true'
+        self.title = interval_element.find('sTitle').text
+
+        # Adjust start and endpoints to local time zone if they are not None
+        local = LocalTimezone();
+        if self.start:
+            self.start = self.start.astimezone(local);
+        if self.end:
+            self.end = self.end.astimezone(local);
+
+    def __str__(self):
+        return repr(self)
+    def __repr__(self):
+        return ''.join(['<',
+                 'ID:',      str(self.interval_id),' ',
+                 'Person:',  str(self.person_id),' ',
+                 'Case:',    str(self.case_id),' ',
+                 str(self.start),' - ',str(self.end), ' ',
+                 '(deleted)' if self.deleted else '(present)','>']);
 
 # Set up directory location constants
 #
@@ -59,7 +116,19 @@ if token_elt is None:
 
 token = token_elt.text
 
+# Now list the work intervals since the last successful upload
+last_upload_date_UTC = last_upload_date.astimezone(UTC());
+last_upload_date_UTC_str = last_upload_date_UTC.strftime(
+    '%Y-%m-%dT%H:%M:%SZ')
+listintervals_resp = requests.get(api_url,
+    params = {'cmd':'listIntervals','token':token,
+              'dtstart':last_upload_date_UTC_str})
+listintervals_root = ET.fromstring(listintervals_resp.text);
+intervals = [FogbugzInterval(interval) for interval in listintervals_root.find('intervals')]
+
+for i in intervals:
+    print(str(i))
 
 # Now log off
 logoff_resp = requests.get(api_url, params = {'cmd':'logoff','token':token})
-print(logoff_resp.text)
+
