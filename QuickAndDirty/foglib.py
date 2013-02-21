@@ -94,7 +94,7 @@ class FogbugzInterval:
                  'Person:',  str(self.person_id),' ',
                  'Case:',    str(self.case_id),' ',
                  str(self.start),' - ',str(self.end), ' ',
-                 '(deleted)' if self.deleted else '(present)','>']);
+                 '(deleted)' if self.deleted else '(not deleted)','>']);
 
 class IncompatibleAPIVersionException:
     """The API is no longer compatible with the version supported by this library
@@ -102,11 +102,6 @@ class IncompatibleAPIVersionException:
     api_min_ver member contains the minimum allowed api version (a number)
 
     api_supp_ver member contains the version this library supports (a number)
-
-
-    Original error message (remove when have transferred to rewritten code):
-                print('Fogbugz api has changed incompatibly since version 8 where this code was written. Minimum version is now {}. Quitting.'.format(api_min_ver),
-                      file = sys.stderr)
 
     """
     def __init__(self, api_min_ver, api_supp_ver):
@@ -123,11 +118,7 @@ class IncompatibleAPIVersionException:
 class IncompatibleAPICallFormatException:
     """The HTML for making API calls has changed and no longer includes a ?
 
-    Original error message (remove when have transferred to rewritten code):
-                print('Method of making api calls has changed - query url fragment no longer ends in a ?. Cannot continue until someone has updated the program for the new calling parameter.', file = sys.stderr)
-                sys.exit(0)
     """
-
     pass
 
 class LoginException:
@@ -136,12 +127,6 @@ class LoginException:
     xml member holds the xml that indicated the failed response
 
     TODO: break this into sub-exceptions for the various reasons a login may have failed
-
-
-    Original error message (remove when have transferred to rewritten code):
-            print('Could not log on to fogbugz. Actual xml returned is {}'.
-                  format(login_resp.text), file = sys.stderr)
-            sys.exit(0)
 
     """
     def __init__(self, xml):
@@ -223,16 +208,15 @@ class Session:
         if self._token:
             logoff_resp = requests.get(self._api_url, params = {'cmd':'logoff','token':self._token})
 
-    def list_intervals_since(start_time):
+    def list_intervals_since(self, start_time):
         """Return the time intervals recorded for the logged in user since the given start time
 
         start_time - (a time-zone aware datetime object) the earliest
             time a returned interval will start
 
         """
-
-        # Now list the work intervals since the last successful upload
-        start_time_UTC = start_time.astimezone(UTC());
+        
+	start_time_UTC = start_time.astimezone(UTC());
         start_time_UTC_str = start_time_UTC.strftime(
             '%Y-%m-%dT%H:%M:%SZ')
         listintervals_resp = requests.get(self._api_url,
@@ -240,6 +224,7 @@ class Session:
                       'dtstart':start_time_UTC_str})
         listintervals_root = ET.fromstring(listintervals_resp.text);
         intervals = [FogbugzInterval(interval) for interval in listintervals_root.find('intervals')]
+        return intervals
 
 
 
