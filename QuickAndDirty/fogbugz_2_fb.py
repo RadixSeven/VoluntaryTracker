@@ -17,13 +17,35 @@ def fogbugz_datetime(date_str):
         return dt.replace(tzinfo=UTC());
 
 class FogbugzInterval:
+    """Represents an interval recorded by the time-tracking parts of Fogbugz.
+
+    Members:
+
+        interval_id - The id number of this interval
+
+        person_id - The id number of the person working during this
+              interval
+
+        case_id - The id number of the case being worked on in this
+              interval
+
+        start - A datetime object giving the start of the interval (or
+              None because I used the same code as for end)
+
+        end - A datetime object giving the end of the interval (or
+              None if the interval is still ongoing)
+
+        deleted Whether this interval was deleted after its creation
+
+        title The title of the case being worked on in this interval
+    """
     def __init__(self, interval_element):
         """Takes an xml interval element (xml.etree.ElementTree.Element) and constructs an Interval object containing all its data
 
         It is assumed that the the interval element is the root of a
         tree with the following children (I've left the content in for
         use as an example):
-        
+
         <ixInterval>944</ixInterval>
         <ixPerson>2</ixPerson>
         <ixBug>767</ixBug>
@@ -33,7 +55,10 @@ class FogbugzInterval:
         <sTitle>Computer maintenance</sTitle>
 
         It is assumed that there is exactly one of each child and the
-        code will die horribly if you violate its assumptions.
+        code will die horribly if you violate its
+        assumptions. (Actually, the start and the endpoints can be
+        missing. If they are, instead of datetime objects, the
+        contents of self.start and self.end will be None respectively)
         """
         # Extract from xml tree
         self.interval_id = int(interval_element.find('ixInterval').text)
