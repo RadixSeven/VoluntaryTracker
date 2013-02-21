@@ -81,7 +81,13 @@ if args.display:
     print('Username:', str(username))
     print('Password:', str(password))
     print('Address:', str(address))
-    print('Last upload date:', str(last_upload_date),'\n')
+    isnaive = not (last_upload_date.tzinfo is None or 
+                   last_upload_date.tzinfo.utcoffset(last_upload_date) is None)
+    if isnaive:
+        last_upload_date_str = '{} (no timezone information)'.format(str(last_upload_date))
+    else:
+        last_upload_date_str = '{} (includes timezone information)'.format(str(last_upload_date))
+    print('Last upload date:', last_upload_date_str,'\n')
     sys.exit(-1)
 
 # Set (and possibly write) any new values for fogbugz.pickle
