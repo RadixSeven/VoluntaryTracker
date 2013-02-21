@@ -17,12 +17,12 @@ Run at log-in.
 Dependencies
 ------------
 
-I've written things using python3, so it is not backwards compatible
+I've written things using python 2.7
 
 Requires installing fbconsole (for access to facebook) and Requests (for the current way of handling HTTP
 
-$ pip install fbconsole
-$ sudo pip install requests
+$ sudo pip install fbconsole
+$ sudo apt-get install python-requests #Default pip installation fails on ubuntu
 
 ------------------------------------------------------------------------------
 Important improvements to make it useful to others

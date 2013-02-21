@@ -1,5 +1,6 @@
-#!/usr/bin/python3
-import argparse, os.path, datetime, sys, pickle
+#!/usr/bin/python
+from __future__ import print_function
+import argparse, os.path, datetime, sys, pickle, errno
 
 # Utility function used by the command line arguments to parse a date
 def day_month_year_date(date_string):
@@ -19,7 +20,15 @@ fogbugz_loc = os.path.join(pickle_dir,'fogbugz.pickle')
 last_upload_date_loc = os.path.join(pickle_dir,'last_upload.pickle')
 
 # Make the configuration directory if it does not exist
-os.makedirs(pickle_dir, exist_ok=True)
+try:
+    os.makedirs(pickle_dir)
+except OSError as exc: 
+    if exc.errno == errno.EEXIST and os.path.isdir(pickle_dir):
+        pass #Ignore when directory already exists
+    else: 
+        print('Could not ensure that "{}" was a directory'.format(pickle_dir),
+              file=sys.stderr)
+        sys.exit(0)
 
 # Read in old vlaues for the configuration variables
 success = False
