@@ -1,4 +1,8 @@
 #!/usr/bin/python
+"""
+Library providing access to the fogbugz API
+
+"""
 from __future__ import print_function
 import os.path, datetime, sys, pickle
 import requests
@@ -6,9 +10,15 @@ import xml.etree.ElementTree as ET
 from tzutil import UTC,LocalTimezone
 
 def fogbugz_datetime(date_str):
-    """Returns a datetime object with the UTC timezone constructed from the fogbugz date string
+    """Return a `datetime.datetime` object with the UTC timezone constructed from the fogbugz date string
 
     As a special case, returns None when it is passed None
+
+    :param date_str: The date-time string to convert into a `datetime.datetime` object 
+    :type date_str: string
+    :return: a datetime object with the UTC timezone constructed from the fogbugz date string or None when the input string is None
+    :rtype: datetime.datetime or None
+
     """
     if date_str is None:
         return None
@@ -86,74 +96,150 @@ class FogbugzInterval:
                  str(self.start),' - ',str(self.end), ' ',
                  '(deleted)' if self.deleted else '(present)','>']);
 
-# Set up directory location constants
-#
-# TODO: move these to their own module or whatever the convention is
-# for shared constants in Python
-pickle_dir = os.path.join(os.path.expanduser('~'),'.config','fogbugz_2_fb')
-fogbugz_loc = os.path.join(pickle_dir,'fogbugz.pickle')
-last_upload_date_loc = os.path.join(pickle_dir,'last_upload.pickle')
+class IncompatibleAPIVersionException:
+    """The API is no longer compatible with the version supported by this library
 
-# Read the configuration variables
-success = False
-try:
-    with open(fogbugz_loc, 'rb') as f:
-        username, password, address = pickle.load(f)
-    with open(last_upload_date_loc, 'rb') as f:
-        last_upload_date = pickle.load(f)
-except:
-    print('Could not read configuration files. Use the make_fogbugz_2_fb_pickle to create the configuration files.');
-    sys.exit(0)
+    api_min_ver member contains the minimum allowed api version (a number)
 
-# Check the API metadata
-api_metadata_resp = requests.get('https://{}/{}'.format(address,'api.xml'))
-api_metadata_root = ET.fromstring(api_metadata_resp.text)
+    api_supp_ver member contains the version this library supports (a number)
 
-# Quit if API incompatible
-api_min_ver = float(api_metadata_root.find('minversion').text);
-if api_min_ver > 8:
-    print('Fogbugz api has changed incompatibly since version 8 where this code was written. Minimum version is now {}. Quitting.'.format(api_min_ver),
-          file = sys.stderr)
-    sys.exit(0)
 
-# Extract query url fragment and quit if it doesn't end in '?'
-api_url_fragment=api_metadata_root.find('url').text
-last_char = api_url_fragment[-1]
-if last_char == '?':
-    api_url_fragment = api_url_fragment[:-1]
-else:
-    print('Method of making api calls has changed - query url fragment no longer ends in a ?. Cannot continue until someone has updated the program for the new calling parameter.', file = sys.stderr)
-    sys.exit(0)
+    Original error message (remove when have transferred to rewritten code):
+                print('Fogbugz api has changed incompatibly since version 8 where this code was written. Minimum version is now {}. Quitting.'.format(api_min_ver),
+                      file = sys.stderr)
 
-# Update the address by tacking on the query url without the ?
-api_url = ''.join(['https://',address,'/',api_url_fragment])
+    """
+    def __init__(self, api_min_ver, api_supp_ver):
+        """Set the minimum accepted and supported version
+        
+        api_min_ver - number
 
-# Now log in and get login token
-login_resp = requests.get(api_url,
-    params = {'cmd':'logon','email':username,'password':password})
+        api_supp_ver - number
 
-login_root = ET.fromstring(login_resp.text)
-token_elt = login_root.find('token')
-if token_elt is None:
-    print('Could not log on to fogbugz. Actual xml returned is {}'.
-          format(login_resp.text), file = sys.stderr)
-    sys.exit(0)
+        """
+        self.api_min_ver = api_min_ver
+        self.api_supp_ver = api_supp_ver
 
-token = token_elt.text
+class IncompatibleAPICallFormatException:
+    """The HTML for making API calls has changed and no longer includes a ?
 
-# Now list the work intervals since the last successful upload
-last_upload_date_UTC = last_upload_date.astimezone(UTC());
-last_upload_date_UTC_str = last_upload_date_UTC.strftime(
-    '%Y-%m-%dT%H:%M:%SZ')
-listintervals_resp = requests.get(api_url,
-    params = {'cmd':'listIntervals','token':token,
-              'dtstart':last_upload_date_UTC_str})
-listintervals_root = ET.fromstring(listintervals_resp.text);
-intervals = [FogbugzInterval(interval) for interval in listintervals_root.find('intervals')]
+    Original error message (remove when have transferred to rewritten code):
+                print('Method of making api calls has changed - query url fragment no longer ends in a ?. Cannot continue until someone has updated the program for the new calling parameter.', file = sys.stderr)
+                sys.exit(0)
+    """
 
-for i in intervals:
-    print(str(i))
+    pass
 
-# Now log off
-logoff_resp = requests.get(api_url, params = {'cmd':'logoff','token':token})
+class LoginException:
+    """A session could not log in
+    
+    xml member holds the xml that indicated the failed response
+
+    TODO: break this into sub-exceptions for the various reasons a login may have failed
+
+
+    Original error message (remove when have transferred to rewritten code):
+            print('Could not log on to fogbugz. Actual xml returned is {}'.
+                  format(login_resp.text), file = sys.stderr)
+            sys.exit(0)
+
+    """
+    def __init__(self, xml):
+        """Create a `LoginException` where the failure response was the string contained in `xml`"""
+        self.xml = xml
+
+class Session:
+    """A session interacting with fogbugz
+
+    Allows logging on, making queries, and logging off
+
+    _token = string or None. Holds the token used when logged in or None if not logged in
+    _address = string or None. Holds the base address for the fogbugz instance or None if not logged in.
+
+    _api_url = string or None. Holds url to use in making calls to requests.get or requests.post or None if not logged in
+
+    """
+
+    def isLoggedIn(self):
+        """Return `True` iff this session is currently logged in""" 
+        return not( self._token is None )
+
+    def __init__(self):
+        """Create a session that is not logged in"""
+        self._set_login_dependent_members_to_none()
+
+    def _set_login_dependent_members_to_none(self):
+        """Set all the member variables that are None when not logged in to None"""
+        self._token = None
+        self._address = None
+        self._api_url = None
+
+    def login(self, username, password, address):
+        """Attempt to log in this session as the given user
+
+        Raises IncompatibleAPIVersionException, IncompatibleAPICallFormatException, or LoginException on error
+        """
+        self._address = address;
+
+        # Check the API metadata
+        api_metadata_resp = requests.get('https://{}/{}'.format(address,'api.xml'))
+        api_metadata_root = ET.fromstring(api_metadata_resp.text)
+
+        # Quit if API incompatible
+        api_min_ver = float(api_metadata_root.find('minversion').text);
+        if api_min_ver > 8:
+            self._set_login_dependent_members_to_none()
+            raise IncompatibleApiVersionException(api_min_ver, 8)
+
+        # Extract query url fragment and quit if it doesn't end in '?'
+        api_url_fragment=api_metadata_root.find('url').text
+        last_char = api_url_fragment[-1]
+        if last_char == '?':
+            api_url_fragment = api_url_fragment[:-1]
+        else:
+            self._set_login_dependent_members_to_none()
+            raise IncompatibleAPICallFormatException()
+        
+        # Update the address by tacking on the query url without the ?
+        self._api_url = ''.join(['https://',address,'/',api_url_fragment])
+
+        # Now log in and get login token
+        login_resp = requests.get(self._api_url,
+            params = {'cmd':'logon','email':username,'password':password})
+
+        login_root = ET.fromstring(login_resp.text)
+        token_elt = login_root.find('token')
+        if token_elt is None:
+            raise LoginException(login_resp.text)
+        else:
+            self._token = token_elt.text
+
+    def logoff(self):
+        """Ensures that this session has logged off
+
+        If the session is logged on, contacts the server and logs off.
+        If not logged on, does nothing.
+        """
+        if self._token:
+            logoff_resp = requests.get(self._api_url, params = {'cmd':'logoff','token':self._token})
+
+    def list_intervals_since(start_time):
+        """Return the time intervals recorded for the logged in user since the given start time
+
+        start_time - (a time-zone aware datetime object) the earliest
+            time a returned interval will start
+
+        """
+
+        # Now list the work intervals since the last successful upload
+        start_time_UTC = start_time.astimezone(UTC());
+        start_time_UTC_str = start_time_UTC.strftime(
+            '%Y-%m-%dT%H:%M:%SZ')
+        listintervals_resp = requests.get(self._api_url,
+            params = {'cmd':'listIntervals','token':self._token,
+                      'dtstart':start_time_UTC_str})
+        listintervals_root = ET.fromstring(listintervals_resp.text);
+        intervals = [FogbugzInterval(interval) for interval in listintervals_root.find('intervals')]
+
+
 
