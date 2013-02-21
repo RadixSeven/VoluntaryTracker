@@ -13,11 +13,16 @@ Write simple second command line to fill the pickle file
 
 Run at log-in.
 
-Requires installing fbconsole (for access to facebook)
+------------------------------------------------------------------------------
+Dependencies
+------------
+
+I've written things using python3, so it is not backwards compatible
+
+Requires installing fbconsole (for access to facebook) and Requests (for the current way of handling HTTP
 
 $ pip install fbconsole
-
-I've written things using python3
+$ sudo pip install requests
 
 ------------------------------------------------------------------------------
 Important improvements to make it useful to others
