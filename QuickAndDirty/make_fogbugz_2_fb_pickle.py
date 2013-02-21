@@ -81,8 +81,8 @@ if args.display:
     print('Username:', str(username))
     print('Password:', str(password))
     print('Address:', str(address))
-    isnaive = not (last_upload_date.tzinfo is None or 
-                   last_upload_date.tzinfo.utcoffset(last_upload_date) is None)
+    isnaive = (last_upload_date.tzinfo is None or 
+               last_upload_date.tzinfo.utcoffset(last_upload_date) is None)
     if isnaive:
         last_upload_date_str = '{} (no timezone information)'.format(str(last_upload_date))
     else:
