@@ -17,6 +17,7 @@ Requires installing fbconsole (for access to facebook)
 
 $ pip install fbconsole
 
+I've written things using python3
 
 ------------------------------------------------------------------------------
 Important improvements to make it useful to others
