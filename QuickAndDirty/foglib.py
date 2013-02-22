@@ -115,6 +115,352 @@ class IncompatibleAPIVersionException:
         self.api_min_ver = api_min_ver
         self.api_supp_ver = api_supp_ver
 
+class CaseAttribute:
+    """Represents an optional attribute of a fogbugz case
+
+    In the API documentation, they are alled columns.
+
+    Members: (all are strings)
+
+    name - the name of the attribute
+
+    description - the description of the property represented by the attribute
+
+    sample_data - a string giving sample data content of the html element from the documentation
+
+    """
+    def __init__(self, name, sample_data, description):
+        """Create a CaseAttribute with the given name, description, and sample_data
+
+        """
+        if name and description and sample_data:
+            self.name = name
+            self.description = description
+            self.sample_data
+        else:
+            raise ValueError("No argument to CaseAttribute's constructor can be None.");
+
+    @staticmethod
+    def all():
+        """Return all attributes a case can have 
+
+        Note that event is one of the attributes (and events have lots of tags as their payload).
+        """
+        return [
+            ClassAttribute('ixBug','123','case number'),
+            ClassAttribute('ixBugParent','234','parent case number'),
+            ClassAttribute('ixBugChildren','456,876','subcase numbers'),
+            ClassAttribute('tags',""" 
+                <tag><![CDATA[first]]></tag>
+                <tag><![CDATA[second]]></tag>
+                <tag><![CDATA[third]]></tag>""",'tags'),
+            ClassAttribute('fOpen','true','true if open, false if closed '),
+            ClassAttribute('sTitle','Duck, Duck... but No Goose!','title '),
+            ClassAttribute('sOriginalTitle','Problem finding the goose...',
+                           'original title for a case opened by an '
+                           'incoming email or a public case submission '),
+            ClassAttribute('sLatestTextSummary','I searched the docs, '
+                           'but no goose!','short string with case\'s '
+                           'latest comment '),
+            ClassAttribute('ixBugEventLatestText','1151','ixBugEvent '
+                           'for latest event with actual text comment '),
+            ClassAttribute('ixProject','22','project id '),
+            ClassAttribute('sProject','The Farm','project name '),
+            ClassAttribute('ixArea','35','area id '),
+            ClassAttribute('sArea','Pond','area name '),
+            ClassAttribute('ixGroup','6','group id (deprecated as of '
+                           'FogBugz 8--will always return 0) '),
+            ClassAttribute('ixPersonAssignedTo','1','person case is '
+                           'assigned to (id) '),
+            ClassAttribute('sPersonAssignedTo','Old MacDonald','person case '
+                           'is assigned to (name) '),
+            ClassAttribute('sEmailAssignedTo','grandpa@oldmacdonald.com',
+                           'email of person case is assigned to '),
+            ClassAttribute('ixPersonOpenedBy','2','person case was '
+                           'opened by (id) '),
+            ClassAttribute('ixPersonResolvedBy','2','person case was '
+                           'resolved by (id) '),
+            ClassAttribute('ixPersonClosedBy','','person case was closed '
+                           'by (id) '),
+            ClassAttribute('ixPersonLastEditedBy','0','person case was '
+                           'last edited by (id) '),
+            ClassAttribute('ixStatus','2','status (id) '),
+            ClassAttribute('ixBugDuplicates','321','cases that are closed '
+                           'as duplicates of this one (id) '),
+            ClassAttribute('ixBugOriginal','654','the case which this '
+                           'one was a duplicate of (id) '),
+            ClassAttribute('sStatus','Geschlossen (Fixed)','status (name) '),
+            ClassAttribute('ixPriority','3','priority (id) '),
+            ClassAttribute('sPriority','Must Fix','priority (name) '),
+            ClassAttribute('ixFixFor','3','fixfor (id) '),
+            ClassAttribute('sFixFor','Test','fixfor (name) '),
+            ClassAttribute('dtFixFor','2007-05-06T22:47:59Z','date of '
+                           'fixfor (date) '),
+            ClassAttribute('sVersion','','version field (custom field #1) '),
+            ClassAttribute('sComputer','','computer field (custom field #2) '),
+            ClassAttribute('hrsOrigEst','0',
+                           'hours of original estimate (0 if no estimate) '),
+            ClassAttribute('hrsCurrEst','0','hours of current estimate '),
+            ClassAttribute('hrsElapsed','0',
+                           'includes all time from time intervals PLUS '
+                           'hrsElapsedExtra time '),
+            ClassAttribute('c','0','number of occurrences (minus 1) of this '
+                           'bug (increased via bugzscout -- to display the '
+                           'actual number of occurrences, add 1 to this '
+                           'number '),
+            ClassAttribute('sCustomerEmail','','if there is a customer '
+                           'contact for this case, this is their email '),
+            ClassAttribute('ixMailbox','0','if this case came in via '
+                           'dispatcho, the mailbox it came in on '),
+            ClassAttribute('ixCategory','1','category (id) '),
+            ClassAttribute('sCategory','Feature','category (name) '),
+            ClassAttribute('dtOpened','2007-05-06T22:47:59Z',
+                           'date case was opened '),
+            ClassAttribute('dtResolved','2007-05-06T22:47:59Z',
+                           'date case was resolved '),
+            ClassAttribute('dtClosed','2007-05-06T22:47:59Z',
+                           'date case was closed '),
+            ClassAttribute('ixBugEventLatest','1151','latest bugevent '),
+            ClassAttribute('dtLastUpdated','2007-05-06T22:47:59Z',
+                           'the date when this case was last updated'),
+            ClassAttribute('fReplied','false',
+                           'has this case been replied to? '),
+            ClassAttribute('fForwarded','false',
+                           'has this case been forwarded? '),
+            ClassAttribute('sTicket','','id for customer to view bug '
+                           '(bug number + 8 letters e.g. 4003_XFLFFFCS) '),
+            ClassAttribute('ixDiscussTopic','0','id of discussion topic if '
+                           'case is related '),
+            ClassAttribute('dtDue','','date this case is due (empty if no '
+                           'due date) '),
+            ClassAttribute('sReleaseNotes','','release notes '),
+            ClassAttribute('ixBugEventLastView','1151','the ixBugEventLatest '
+                           'when you last viewed this case '),
+            ClassAttribute('dtLastView','2007-05-06T22:47:59Z','the date '
+                           'when you last viewed this case '),
+            ClassAttribute('ixRelatedBugs','345,267,2920','comma separated '
+                           'list of other related case numbers '),
+            ClassAttribute('sScoutDescription','Main.cpp:165','if this case '
+                           'is a Scout case, this ID is the unique '
+                           'identifier '),
+            ClassAttribute('sScoutMessage','Please contact us or visit our '
+                           'knowledge base to resolve.','this is the '
+                           'message -- displayed to users when they submit a '
+                           'case that matches this sScoutDescription '),
+            ClassAttribute('fScoutStopReporting','false','whether we are '
+                           'still recording occurrences of this crash or not'),
+            ClassAttribute('fSubscribed','true','true if you are subscribed '
+                           'to this case, otherwise false'),
+            ClassAttribute('events',
+                           """<event ixBugEvent="174" ixBug="13">\n"""
+
+                           """<ixBugEvent>174</ixBugEvent> -- Identity """
+                           """field in the database for this event\n"""
+
+                           """<evt>4</evt> -- Number for type of event, """
+                           """see event codes\n"""
+
+                           """<sVerb>Assigned to Captain Caveman</sVerb> """
+                           """-- Description of event in English always\n"""
+
+                           """<ixPerson>3</ixPerson> -- Identity field of """
+                           """the person who made this event happen\n"""
+
+                           """<sPerson>Mikey</sPerson> -- Person's full """
+                           """name\n"""
+
+                           """<ixPersonAssignedTo>4</ixPersonAssignedTo> """
+                           """-- Identity field of the person this case """
+                           """is assigned to\n"""
+
+                           """<dt>2007-05-06T22:47:59Z</dt> -- Date """
+                           """event happened (in RFC822 UTC format)\n"""
+
+                           """<s>Up up and away!</s> -- The text of the """
+                           """event (if this is an email or was created in """
+                           """HTML mode via Rich Case Events, this is a """
+                           """plain-text version of the event)\n"""
+
+                           """<sHTML><![CDATA[<strong>Up up and """
+                           """away!</strong>]]></sHTML> -- If this is """
+                           """an event created in HTML mode via Rich """
+                           """Case Events, this contains the raw HTML """
+                           """version of the event\n"""
+
+                           """<fEmail>false</fEmail> -- True if it is """
+                           """an email event\n"""
+
+                           """<bEmail>false</bEmail> -- Deprecated: use """
+                           """fEmail\n"""
+
+                           """<fExternal>false</fExternal> -- True if """
+                           """this case was created via an incoming """
+                           """email, discussion topic, or BugzScout\n"""
+
+                           """<bExternal>false</bExternal> -- Deprecated: """
+                           """use fExternal\n"""
+
+                           """<fHTML>true</fHTML> -- True if the event is """
+                           """an email and the html version has been """
+                           """cached. You should not need to look at """
+                           """this field. Instead use fEmail to determine """
+                           """if the event is an email and sFormat """
+                           """to determine if an edit is html-formatted\n"""
+
+                           """<sFormat>html</sFormat> -- 'html' if """
+                           """the event was created in HTML mode via """
+                           """Rich Case Events\n"""
+                           
+                           """<sChanges>Project changed from 'Inbox' to """
+                           """'Cave'.</sChanges> -- Description of """
+                           """changes to the case during this event\n"""
+
+                           """<evtDescription>Captain Caveman von Mikey """
+                           """zugewiesen</evtDescription> -- Description """
+                           """of event in YOUR language (in this """
+                           """case German)\n"""
+
+                           """\n"""
+                           """<rgAttachments>\n"""
+                           """    <attachment>\n"""
+
+                           """        <sFileName>Test Word.doc"""
+                           """</sFileName> -- name of the attached file\n"""
+
+                           """        <sURL>default.asp?pg=pgDownload"""
+                           """&amp;pgType=pgAttachment&amp;ixBugEvent"""
+                           """=756&amp;sPart=2&amp;sTicket=&amp;"""
+                           """sFileName=Test%20Word.doc</sURL> -- url """
+                           """to hit to get the contents of the"""
+                           """ attached file (add on token=<yourtoken>)\n"""
+
+                           """    </attachment>\n"""
+                           """</rgAttachments>\n"""
+                           """\n"""
+
+                           """-- if the event is an email """
+                           """(fEmail == true) then there are """
+                           """additional fields --\n"""
+
+                           """\n"""
+
+                           """<sFrom>"JJ Walker" <jj@dynomite.org></sFrom> """
+                           """-- the from header from the message\n"""
+
+                           """<sTo>good@times.org</sTo> -- the to header """
+                           """from the message\n"""
+
+                           """<sCC></sCC> -- the cc header from the """
+                           """message\n"""
+
+                           """<sBCC></sBCC> -- the bcc header from the """
+                           """message (if readable)\n"""
+
+                           """<sReplyTo></sReplyTo> -- the replyto header """
+                           """from the message\n"""
+
+                           """<sSubject></sSubject> -- the subject header """
+                           """from the message\n"""
+
+                           """<sDate>5 Jun 07 21:07:54 GMT</sDate> -- the """
+                           """date header from the message (exactly as """
+                           """it appears usually rfc822 date)\n"""
+
+                           """<sBodyText></sBodyText> -- the body plaintext """
+                           """from the message\n"""
+
+                           """<sBodyHTML></sBodyHTML> -- the message """
+                           """formatted in html\n"""
+
+                           """\n"""
+
+                           """</event>\n"""
+                           ,'Include to receive the list of all events '
+                           'for the class')
+            ];
+
+    @classmethod
+    def from_name(cls, name):
+        """Return the ClassAttribute corresponding to the given name
+
+        Raises ValueError if there is no class attribute with that name
+        """
+        return cls.all().index(name)
+
+
+class UnparsedCaseValue:
+    """Represents the value of a case attribute that has not been parsed
+
+    Attributes:
+
+    attribute - the CaseAttribute object of which this is a value
+
+    text - the string for the given attribute (includes the xml for
+        the elment itself)
+
+    """
+    def __init__(self, attribute, text):
+        """Create an UnparsedCaseValue with the given attribute and text attributes"""
+        self.attribute = attribute
+        self.text = text
+
+class Case:
+    """A case in fogbugz
+
+    Attributes:
+
+    id - integer - the id of this case (If not present, 0 or None)
+
+    parent - integer - the id of the parent of this case (If not
+        present, 0 or None)
+
+    title - string - the title of this case (None if not present)
+
+    hoursElapsed - float - total elapsed hours -- includes all time
+        from time intervals PLUS hrsElapsedExtra time. 0 if not present
+
+    unparsed - array of UnparsedCaseValue objects for all the
+        attributes returned for this case. 
+
+        This list includes id, parent and others that have also been
+        made into class attributes (incidentally, the class attributes
+        are called different names from the xml tags).  Retaining the
+        unparsed versions keeps backwards compatibility. As more and
+        more attributes are parsed, any code using the unparsed
+        version will still work.
+
+    """
+
+    def __init__(self, root):
+        """Create a case whose attributes are the children of root
+
+        root is an xml.etree.ElementTree.Element representing
+        Fogbugz's xml encoding for a case.
+
+        raises ValueException if one of the children of root is not a
+        known case name
+        
+        """
+        self.id = None
+        self.parent = None
+        self.title = None
+        self.hoursElapsed = 0
+        self.unparsed = []
+        for child in root:
+            name = child.tag
+            attr = CaseAttribute.from_name(name)
+            self.unparsed.extend(UnparsedCaseValue(attr, child.tostring()))
+            if   'ixBug' == name:
+                self.id = int(child.text)
+            elif 'ixBugParent' == name:
+                self.parent = int(child.text)
+            elif 'sTitle' == name:
+                self.title = child.text
+            elif 'hrsElapsed' == name:
+                self.hoursElapsed = float(child.text)
+        
+                
+    
 class IncompatibleAPICallFormatException:
     """The HTML for making API calls has changed and no longer includes a ?
 
