@@ -26,7 +26,7 @@ def fogbugz_datetime(date_str):
         dt=datetime.datetime.strptime(date_str,'%Y-%m-%dT%H:%M:%SZ');
         return dt.replace(tzinfo=UTC());
 
-class FogbugzInterval:
+class Interval:
     """Represents an interval recorded by the time-tracking parts of Fogbugz.
 
     Members:
@@ -223,7 +223,7 @@ class Session:
             params = {'cmd':'listIntervals','token':self._token,
                       'dtstart':start_time_UTC_str})
         listintervals_root = ET.fromstring(listintervals_resp.text);
-        intervals = [FogbugzInterval(interval) for interval in listintervals_root.find('intervals')]
+        intervals = [Interval(interval) for interval in listintervals_root.find('intervals')]
         return intervals
 
 
