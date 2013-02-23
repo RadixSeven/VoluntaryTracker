@@ -1,4 +1,5 @@
 #!/usr/bin/python
+import os.path
 
 # Set up directory location constants
 pickle_dir = os.path.join(os.path.expanduser('~'),'.config','fogzap')
