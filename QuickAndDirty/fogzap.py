@@ -4,24 +4,15 @@ import os.path, datetime, sys, pickle
 import requests
 import xml.etree.ElementTree as ET
 from tzutil import UTC,LocalTimezone
+import config_file
 import foglib
-
-
-
-# Set up directory location constants
-#
-# TODO: move these to their own module or whatever the convention is
-# for shared constants in Python
-pickle_dir = os.path.join(os.path.expanduser('~'),'.config','fogzap')
-fogbugz_loc = os.path.join(pickle_dir,'fogbugz.pickle')
-last_upload_date_loc = os.path.join(pickle_dir,'last_upload.pickle')
 
 # Read the configuration variables
 success = False
 try:
-    with open(fogbugz_loc, 'rb') as f:
+    with open(config_file.fogbugz_loc, 'rb') as f:
         username, password, address = pickle.load(f)
-    with open(last_upload_date_loc, 'rb') as f:
+    with open(config_file.last_upload_date_loc, 'rb') as f:
         last_upload_date = pickle.load(f)
 except:
     print('Could not read configuration files. Use the make_fogzap_pickle to create the configuration files.');
