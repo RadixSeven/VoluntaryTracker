@@ -19,7 +19,7 @@ def day_month_year_date(date_string):
 #
 # TODO: move these to their own module or whatever the convention is
 # for shared constants in Python
-pickle_dir = os.path.join(os.path.expanduser('~'),'.config','fogbugz_2_fb')
+pickle_dir = os.path.join(os.path.expanduser('~'),'.config','fogzap')
 fogbugz_loc = os.path.join(pickle_dir,'fogbugz.pickle')
 last_upload_date_loc = os.path.join(pickle_dir,'last_upload.pickle')
 
@@ -59,7 +59,7 @@ if not success:
     last_upload_date = None
 
 # Read the command line arguments
-parser = argparse.ArgumentParser(description='Write values to pickle files used to configure fogbugz_2_fb. Any omitted values will not be written.')
+parser = argparse.ArgumentParser(description='Write values to pickle files used to configure fogzap. Any omitted values will not be written.')
 parser.add_argument('-a', dest = 'address', action = 'store',
                     help = 'The fogbugz address. Example: ericmoyer.fogbugz.com')
 parser.add_argument('-u', dest = 'username', action = 'store', 

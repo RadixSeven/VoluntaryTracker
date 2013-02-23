@@ -12,7 +12,7 @@ import foglib
 #
 # TODO: move these to their own module or whatever the convention is
 # for shared constants in Python
-pickle_dir = os.path.join(os.path.expanduser('~'),'.config','fogbugz_2_fb')
+pickle_dir = os.path.join(os.path.expanduser('~'),'.config','fogzap')
 fogbugz_loc = os.path.join(pickle_dir,'fogbugz.pickle')
 last_upload_date_loc = os.path.join(pickle_dir,'last_upload.pickle')
 
@@ -24,7 +24,7 @@ try:
     with open(last_upload_date_loc, 'rb') as f:
         last_upload_date = pickle.load(f)
 except:
-    print('Could not read configuration files. Use the make_fogbugz_2_fb_pickle to create the configuration files.');
+    print('Could not read configuration files. Use the make_fogzap_pickle to create the configuration files.');
     sys.exit(0)
 
 session = foglib.Session();
