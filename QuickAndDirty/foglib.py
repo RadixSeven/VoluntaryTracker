@@ -26,7 +26,7 @@ def fogbugz_datetime(date_str):
         dt=datetime.datetime.strptime(date_str,'%Y-%m-%dT%H:%M:%SZ');
         return dt.replace(tzinfo=UTC());
 
-class Interval:
+class Interval(object):
     """Represents an interval recorded by the time-tracking parts of Fogbugz.
 
     Members:
@@ -96,7 +96,7 @@ class Interval:
                  str(self.start),' - ',str(self.end), ' ',
                  '(deleted)' if self.deleted else '(not deleted)','>']);
 
-class IncompatibleAPIVersionException:
+class IncompatibleAPIVersionException(object):
     """The API is no longer compatible with the version supported by this library
 
     api_min_ver member contains the minimum allowed api version (a number)
@@ -115,7 +115,7 @@ class IncompatibleAPIVersionException:
         self.api_min_ver = api_min_ver
         self.api_supp_ver = api_supp_ver
 
-class CaseAttribute:
+class CaseAttribute(object):
     """Represents an optional attribute of a fogbugz case
 
     In the API documentation, they are alled columns.
@@ -388,7 +388,7 @@ class CaseAttribute:
         return cls.all().index(name)
 
 
-class UnparsedCaseValue:
+class UnparsedCaseValue(object):
     """Represents the value of a case attribute that has not been parsed
 
     Attributes:
@@ -404,7 +404,7 @@ class UnparsedCaseValue:
         self.attribute = attribute
         self.text = text
 
-class Case:
+class Case(object):
     """A case in fogbugz
 
     Attributes:
@@ -461,13 +461,13 @@ class Case:
         
                 
     
-class IncompatibleAPICallFormatException:
+class IncompatibleAPICallFormatException(object):
     """The HTML for making API calls has changed and no longer includes a ?
 
     """
     pass
 
-class LoginException:
+class LoginException(object):
     """A session could not log in
     
     xml member holds the xml that indicated the failed response
@@ -479,7 +479,7 @@ class LoginException:
         """Create a `LoginException` where the failure response was the string contained in `xml`"""
         self.xml = xml
 
-class Session:
+class Session(object):
     """A session interacting with fogbugz
 
     Allows logging on, making queries, and logging off
