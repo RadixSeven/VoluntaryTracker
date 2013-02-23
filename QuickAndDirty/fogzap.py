@@ -156,6 +156,12 @@ all_commands = {}; # Each entry in all commands is a key (the command
 
 def list_unshared_intervals(session, last_upload_date, args):
     """Executes the list_unshared_intervals command
+
+    session - a login session
+
+    last_upload_date - a timezone aware datetime - the date of the
+        last successful upload to facebook
+
     args - a list of strings - the arguments passed to the subcommand
 
     """
@@ -173,6 +179,52 @@ all_commands[
                                          'have not yet been shared on '
                                          'social media.', 
                                          list_unshared_intervals)
+
+
+def list_unshared_work_times(session, last_upload_date, args):
+    """Executes the list_unshared_work_times command
+
+    session - a login session
+
+    last_upload_date - a timezone aware datetime - the date of the
+        last successful upload to facebook
+
+    args - a list of strings - the arguments passed to the subcommand
+
+    """
+    parser = argparse.ArgumentParser(prog = 'list_unshared_work_times')
+    a = parser.parse_args(args=args)
+
+    intervals = session.list_intervals_since(last_upload_date)
+    
+    days = {}
+    for i in intervals:
+        start = i.start if i.start else last_upload_date
+        start_day = start.date()
+        end = i.end if i.end else datetime.datetime.now(LocalTimezone())
+        end_day = end.date()
+            
+        if start_day != end_day:
+            print('Warning: interval {} starts and ends on different days. '
+                  'Counting it in the start day only', file=sys.stderr)
+        duration = (end - start).total_seconds()
+        if not i.deleted:
+            if not days.has_key(start_day):
+                days[start_day] = 0
+            days[start_day] += duration
+
+    for day in sorted(days.keys()):
+        print('{}: {} hours'.format(str(day), days[day]/3600))
+        
+    
+
+
+all_commands[
+    'list_unshared_work_times'] = Command('list_unshared_work_times',
+                                         'Lists time spent working for '
+                                         'each day that has not been '
+                                         'shared on social media.', 
+                                         list_unshared_work_times)
 
 
 def list_commands(last_upload_date, args):
