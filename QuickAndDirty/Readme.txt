@@ -2,16 +2,18 @@
 Simple idea
 -----------
 
-command-line client that downloads all days since last download from
-fogbugz, parses the result and uploads them to facebook as fbconsole
-program.
+command-line client for fogbugz. Allows many different queries. 
 
-Python pickle file holds: username, password, and last download date
-Pickle file will not be stored in the repo.
+One function is posting daily time worked to Facebook. It downloads
+all days since last successful upload, parses the result and uploads
+them to facebook as fbconsole program.
+
+Python pickle file holds: username, password, fogbugz address, and
+last download date Pickle file will not be stored in the repo.
 
 Write simple second command line to fill the pickle file
 
-Run at log-in.
+Run upload at log-in.
 
 ------------------------------------------------------------------------------
 Dependencies
@@ -43,6 +45,11 @@ Have the program learn last upload date by doing a query from facebook
 Other improvements
 ------------------
 
-Improve the uploaded data: break out times uploaded by project. 
+Improve the uploaded data: break out times uploaded by project. (This
+may not be a good idea. When I mess up, sharing only the aggregate, I
+can redeem myself by working more. If I share the time intervals, I
+cannot erase the stain of a mistake. Better to share only the
+aggregate to encourage myself to work up to my goals. Improvement
+requires an avenue for redemption.)
 
 Graph time usage over a given time period (time spent over the last week).
