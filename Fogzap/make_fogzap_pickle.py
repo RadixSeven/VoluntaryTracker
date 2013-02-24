@@ -87,9 +87,7 @@ if args.display:
     if last_upload_date is None:
         last_upload_date_str = 'None'
     else:
-        isnaive = (last_upload_date.tzinfo is None or 
-                   last_upload_date.tzinfo.utcoffset(last_upload_date) is None)
-        if isnaive:
+        if tzutil.is_naive(last_upload_date):
             last_upload_date_str = '{} (no timezone information)'.format(
                 str(last_upload_date))
         else:

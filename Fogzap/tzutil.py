@@ -54,3 +54,12 @@ class UTC(datetime.tzinfo):
     def dst(self, dt):
         return ZERO
 
+def is_naive(a_datetime):
+    """Return true iff a_datetime is timezone naive (see datetime docs)
+
+    timezone aware is the opposite of timezone naive.
+
+    a_datetime - an instance of datetime.datetime
+    """
+    return (a_datetime.tzinfo is None or 
+            a_datetime.tzinfo.utcoffset(a_datetime) is None)
