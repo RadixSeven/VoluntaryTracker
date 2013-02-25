@@ -436,7 +436,7 @@ class OngoingTimeInterval(collections.namedtuple("BoundedTimeInterval", ["first"
         the present instant or lie in the past.
 
     It is subclassed from namedtuple because that was the way
-    stackoverflow recommended doing immutability. 
+    stackoverflow recommended doing immutability. ( http://stackoverflow.com/questions/4828080/how-to-make-an-immutable-object-in-python )
 
     Copies of the input datetime objects are contained in the
     constructed OngoingTimeInterval object.
