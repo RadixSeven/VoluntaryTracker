@@ -1,9 +1,14 @@
 #!/usr/bin/python
+
+# Standard libraries
 import os.path, datetime, sys, pickle, argparse, textwrap, inspect
 import xml.etree.ElementTree as ET
 
+# 3rd Party packages
 import requests
+import fbconsole
 
+# Local modules
 from tzutil import UTC,LocalTimezone
 import config_file
 import foglib
@@ -288,8 +293,6 @@ def list_unshared_work_times(session, last_upload_date, args):
     
     for day in sorted(days.keys()):
         print('{}: {} hours'.format(str(day), days[day]/3600))
-        
-    
 
 
 all_commands[
@@ -298,6 +301,7 @@ all_commands[
                                          'each day that has not been '
                                          'shared on social media.', 
                                          list_unshared_work_times)
+
 
 def share_work_times(session, last_upload_date, args):
     """Executes the share_work_times command
@@ -315,6 +319,25 @@ def share_work_times(session, last_upload_date, args):
 
     intervals = session.list_intervals_since(last_upload_date)
     
+    days = summarize_intervals_by_day(intervals)
+    
+    fbconsole.AUTH_SCOPE = ['publish_stream']
+    fbconsole.authenticate()
+
+    today = LocalTimezone.now().date()
+
+    for day in sorted(days.keys()):
+        if day < today:
+            msg = 'I worked {} hours on {}'.format(days[day]/3600, str(day))
+            fbconsole.post( '/me/feed/',{'message':msg} )
+
+all_commands[
+    'share_work_times'] = Command('share_work_times',
+                                  'For each unshared day, shares the time '
+                                  'spent working that day on Facebook and '
+                                  'marks that day as shared. Does not '
+                                  'share the stats for today.', 
+                                  share_work_times)
 
 
 def list_commands(last_upload_date, args):
