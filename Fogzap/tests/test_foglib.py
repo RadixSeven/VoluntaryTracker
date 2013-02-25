@@ -1311,14 +1311,24 @@ class TestBoundedTimeInterval(unittest.TestCase):
         self.assertTrue(False, "Haven't implemented this test yet") 
         # TODO: implement your test here
     def test_intersection_with_and_is_ongoing(self):
-        bounded_time_interval = BoundedTimeInterval()
-        self.assertEqual(False, bounded_time_interval.is_ongoing())
-        self.assertRaises(AttributeError, lambda: bounded_time_interval.intersection_with(BoundedTimeInterval()))
+        first1 = datetime_from_19_char_string('20130225_0000000500')
+        last1  = datetime_from_19_char_string('20130225_2359590500')
+        bounded_time_interval_1_day = BoundedTimeInterval(first1, last1)
+        first2 = datetime_from_19_char_string('20130225_0100000500')
+        last2  = datetime_from_19_char_string('20130226_2359590500')        
+        bounded_time_interval_overlap = BoundedTimeInterval(first2,last2)
+        expected_intersection = BoundedTimeInterval(first2,last1)
+        self.assertEqual(False, bounded_time_interval_1_day.is_ongoing())
+        self.assertEqual(False, bounded_time_interval_overlap.is_ongoing())
+        self.assertEqual(expected_intersection, bounded_time_interval_1_day.intersection_with(bounded_time_interval_overlap))
 
 
+    @unittest.expectedFailure #This shouldn't be raising an error
     def test_intersection_with_raises_attribute_error_for_20130225_0000000500__20130225_2359599999990500(self):
-        bounded_time_interval = BoundedTimeInterval()
-        self.assertRaises(AttributeError, lambda: bounded_time_interval.intersection_with(BoundedTimeInterval()))
+        first = datetime_from_19_char_string('20130225_0000000500')
+        last  = datetime_from_19_char_string('20130225_2359590500')
+        bounded_time_interval = BoundedTimeInterval(first, last)
+        self.assertRaises(AttributeError, lambda: bounded_time_interval.intersection_with(bounded_time_interval))
 
     def test_is_ongoing_returns_false(self):
         bounded_time_interval = BoundedTimeInterval()
