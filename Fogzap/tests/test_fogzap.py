@@ -18,6 +18,21 @@ from fogzap import run_fogzap
 
 
 import datetime
+
+class tz(datetime.tzinfo):
+    def __init__(self, tz_hour, tz_min):
+        self.tz_hour = tz_hour
+        self.tz_min = tz_min
+
+    def utcoffset(self, dt):
+        return datetime.timedelta(hours = self.tz_hour, minutes = self.tz_min)
+    
+    def dst(self, dt):
+        return datetime.timedelta(0)
+    
+    def tzname(self, dt):
+        return None
+
 def datetime_from_19_char_string(s):
     """String in format: '20130221_0107030500'
                           YYYYMMDD_HHmmSStimz
@@ -36,19 +51,11 @@ def datetime_from_19_char_string(s):
     tz_hour = -int(s[15:17])
     tz_min  = -int(s[17:19])
 
-    class tz(datetime.tzinfo):
-        def utcoffset(self, dt):
-            return datetime.timedelta(hours = tz_hour, minutes = tz_min)
 
-        def dst(self, dt):
-            return timedelta(0)
-
-        def tzname(self, dt):
-            return None
     
     try:
         return datetime.datetime(year, month, day, hour, minute, 
-                                 second, 0, tz())
+                                 second, 0, tz(tz_hour, tz_min))
     except ValueError as e:
         raise ValueError("Original message: '{}' params: {} {} {} {} {} {}"
                          .format(str(e), year, month, day, hour, minute, second)
@@ -68,326 +75,32 @@ class TestReadConfigurationVariables(unittest.TestCase):
 
 class TestTimeIntervalForDayContaining(unittest.TestCase):
     def test_time_interval_for_day_containing_returns_20130221_0000000500__20130221_2359599999990500_for_a_datetime_equal_20130221_0106500500_and_a_timezone_equal_local_timezone_instance(self):
-        # obj1 = <TODO: datetime.timedelta>
-        # obj2 = <TODO: datetime.timedelta>
-        # obj3 = <TODO: datetime.datetime>
-        # self.assertEqual(BoundedTimeInterval(), time_interval_for_day_containing(<TODO: datetime.datetime>, LocalTimezone()))
-        pass
+        dfirst = datetime_from_19_char_string('20130221_0000000500')
+        dlast  = (datetime_from_19_char_string('20130222_0000000500') -
+                  datetime.timedelta(microseconds=1))
+        t = datetime_from_19_char_string('20130221_0106500500')
+        tzone = tz(-5,0)
+        self.assertEqual(BoundedTimeInterval(dfirst,dlast), 
+                         time_interval_for_day_containing(t, tzone))
 
-    def test_time_interval_for_day_containing_returns_20130221_0000000500__20130221_2359599999990500_for_a_datetime_equal_20130221_0525000500_and_a_timezone_equal_local_timezone_instance(self):
-        # obj1 = <TODO: datetime.timedelta>
-        # obj2 = <TODO: datetime.timedelta>
-        # obj3 = <TODO: datetime.datetime>
-        # self.assertEqual(BoundedTimeInterval(), time_interval_for_day_containing(<TODO: datetime.datetime>, LocalTimezone()))
-        pass
+    def test_time_interval_for_day_containing_returns_20130220_0000000500__20130220_2359599999990500_for_a_datetime_equal_20130220_0000000500_and_a_timezone_equal_local_timezone_instance(self):
+        dfirst = datetime_from_19_char_string('20130220_0000000500')
+        dlast  = (datetime_from_19_char_string('20130221_0000000500') -
+                  datetime.timedelta(microseconds=1))
+        t = datetime_from_19_char_string('20130220_0000000500')
+        tzone = tz(-5,0)
+        self.assertEqual(BoundedTimeInterval(dfirst,dlast), 
+                         time_interval_for_day_containing(t, tzone))
 
-    def test_time_interval_for_day_containing_returns_20130221_0000000500__20130221_2359599999990500_for_a_datetime_equal_20130221_0551060500_and_a_timezone_equal_local_timezone_instance(self):
-        # obj1 = <TODO: datetime.timedelta>
-        # obj2 = <TODO: datetime.timedelta>
-        # obj3 = <TODO: datetime.datetime>
-        # self.assertEqual(BoundedTimeInterval(), time_interval_for_day_containing(<TODO: datetime.datetime>, LocalTimezone()))
-        pass
+    def test_time_interval_for_day_containing_returns_20130220_0000000500__20130220_2359599999990500_for_a_datetime_equal_20130220_2359599999990500_and_a_timezone_equal_local_timezone_instance(self):
+        dfirst = datetime_from_19_char_string('20130220_0000000500')
+        dlast  = (datetime_from_19_char_string('20130221_0000000500') -
+                  datetime.timedelta(microseconds=1))
+        t = dlast
+        tzone = tz(-5,0)
+        self.assertEqual(BoundedTimeInterval(dfirst,dlast), 
+                         time_interval_for_day_containing(t, tzone))
 
-    def test_time_interval_for_day_containing_returns_20130221_0000000500__20130221_2359599999990500_for_a_datetime_equal_20130221_1325000500_and_a_timezone_equal_local_timezone_instance(self):
-        # obj1 = <TODO: datetime.timedelta>
-        # obj2 = <TODO: datetime.timedelta>
-        # obj3 = <TODO: datetime.datetime>
-        # self.assertEqual(BoundedTimeInterval(), time_interval_for_day_containing(<TODO: datetime.datetime>, LocalTimezone()))
-        pass
-
-    def test_time_interval_for_day_containing_returns_20130221_0000000500__20130221_2359599999990500_for_a_datetime_equal_20130221_1331090500_and_a_timezone_equal_local_timezone_instance(self):
-        # obj1 = <TODO: datetime.timedelta>
-        # obj2 = <TODO: datetime.timedelta>
-        # obj3 = <TODO: datetime.datetime>
-        # self.assertEqual(BoundedTimeInterval(), time_interval_for_day_containing(<TODO: datetime.datetime>, LocalTimezone()))
-        pass
-
-    def test_time_interval_for_day_containing_returns_20130221_0000000500__20130221_2359599999990500_for_a_datetime_equal_20130221_1345410500_and_a_timezone_equal_local_timezone_instance(self):
-        # obj1 = <TODO: datetime.timedelta>
-        # obj2 = <TODO: datetime.timedelta>
-        # obj3 = <TODO: datetime.datetime>
-        # self.assertEqual(BoundedTimeInterval(), time_interval_for_day_containing(<TODO: datetime.datetime>, LocalTimezone()))
-        pass
-
-    def test_time_interval_for_day_containing_returns_20130221_0000000500__20130221_2359599999990500_for_a_datetime_equal_20130221_1407160500_and_a_timezone_equal_local_timezone_instance(self):
-        # obj1 = <TODO: datetime.timedelta>
-        # obj2 = <TODO: datetime.timedelta>
-        # obj3 = <TODO: datetime.datetime>
-        # self.assertEqual(BoundedTimeInterval(), time_interval_for_day_containing(<TODO: datetime.datetime>, LocalTimezone()))
-        pass
-
-    def test_time_interval_for_day_containing_returns_20130221_0000000500__20130221_2359599999990500_for_a_datetime_equal_20130221_1432300500_and_a_timezone_equal_local_timezone_instance(self):
-        # obj1 = <TODO: datetime.timedelta>
-        # obj2 = <TODO: datetime.timedelta>
-        # obj3 = <TODO: datetime.datetime>
-        # self.assertEqual(BoundedTimeInterval(), time_interval_for_day_containing(<TODO: datetime.datetime>, LocalTimezone()))
-        pass
-
-    def test_time_interval_for_day_containing_returns_20130221_0000000500__20130221_2359599999990500_for_a_datetime_equal_20130221_1532380500_and_a_timezone_equal_local_timezone_instance(self):
-        # obj1 = <TODO: datetime.timedelta>
-        # obj2 = <TODO: datetime.timedelta>
-        # obj3 = <TODO: datetime.datetime>
-        # self.assertEqual(BoundedTimeInterval(), time_interval_for_day_containing(<TODO: datetime.datetime>, LocalTimezone()))
-        pass
-
-    def test_time_interval_for_day_containing_returns_20130221_0000000500__20130221_2359599999990500_for_a_datetime_equal_20130221_1630000500_and_a_timezone_equal_local_timezone_instance(self):
-        # obj1 = <TODO: datetime.timedelta>
-        # obj2 = <TODO: datetime.timedelta>
-        # obj3 = <TODO: datetime.datetime>
-        # self.assertEqual(BoundedTimeInterval(), time_interval_for_day_containing(<TODO: datetime.datetime>, LocalTimezone()))
-        pass
-
-    def test_time_interval_for_day_containing_returns_20130221_0000000500__20130221_2359599999990500_for_a_datetime_equal_20130221_1646090500_and_a_timezone_equal_local_timezone_instance(self):
-        # obj1 = <TODO: datetime.timedelta>
-        # obj2 = <TODO: datetime.timedelta>
-        # obj3 = <TODO: datetime.datetime>
-        # self.assertEqual(BoundedTimeInterval(), time_interval_for_day_containing(<TODO: datetime.datetime>, LocalTimezone()))
-        pass
-
-    def test_time_interval_for_day_containing_returns_20130221_0000000500__20130221_2359599999990500_for_a_datetime_equal_20130221_1736020500_and_a_timezone_equal_local_timezone_instance(self):
-        # obj1 = <TODO: datetime.timedelta>
-        # obj2 = <TODO: datetime.timedelta>
-        # obj3 = <TODO: datetime.datetime>
-        # self.assertEqual(BoundedTimeInterval(), time_interval_for_day_containing(<TODO: datetime.datetime>, LocalTimezone()))
-        pass
-
-    def test_time_interval_for_day_containing_returns_20130221_0000000500__20130221_2359599999990500_for_a_datetime_equal_20130221_1802110500_and_a_timezone_equal_local_timezone_instance(self):
-        # obj1 = <TODO: datetime.timedelta>
-        # obj2 = <TODO: datetime.timedelta>
-        # obj3 = <TODO: datetime.datetime>
-        # self.assertEqual(BoundedTimeInterval(), time_interval_for_day_containing(<TODO: datetime.datetime>, LocalTimezone()))
-        pass
-
-    def test_time_interval_for_day_containing_returns_20130221_0000000500__20130221_2359599999990500_for_a_datetime_equal_20130221_1811080500_and_a_timezone_equal_local_timezone_instance(self):
-        # obj1 = <TODO: datetime.timedelta>
-        # obj2 = <TODO: datetime.timedelta>
-        # obj3 = <TODO: datetime.datetime>
-        # self.assertEqual(BoundedTimeInterval(), time_interval_for_day_containing(<TODO: datetime.datetime>, LocalTimezone()))
-        pass
-
-    def test_time_interval_for_day_containing_returns_20130221_0000000500__20130221_2359599999990500_for_a_datetime_equal_20130221_1814570500_and_a_timezone_equal_local_timezone_instance(self):
-        # obj1 = <TODO: datetime.timedelta>
-        # obj2 = <TODO: datetime.timedelta>
-        # obj3 = <TODO: datetime.datetime>
-        # self.assertEqual(BoundedTimeInterval(), time_interval_for_day_containing(<TODO: datetime.datetime>, LocalTimezone()))
-        pass
-
-    def test_time_interval_for_day_containing_returns_20130221_0000000500__20130221_2359599999990500_for_a_datetime_equal_20130221_1904110500_and_a_timezone_equal_local_timezone_instance(self):
-        # obj1 = <TODO: datetime.timedelta>
-        # obj2 = <TODO: datetime.timedelta>
-        # obj3 = <TODO: datetime.datetime>
-        # self.assertEqual(BoundedTimeInterval(), time_interval_for_day_containing(<TODO: datetime.datetime>, LocalTimezone()))
-        pass
-
-    def test_time_interval_for_day_containing_returns_20130221_0000000500__20130221_2359599999990500_for_a_datetime_equal_20130221_2103300500_and_a_timezone_equal_local_timezone_instance(self):
-        # obj1 = <TODO: datetime.timedelta>
-        # obj2 = <TODO: datetime.timedelta>
-        # obj3 = <TODO: datetime.datetime>
-        # self.assertEqual(BoundedTimeInterval(), time_interval_for_day_containing(<TODO: datetime.datetime>, LocalTimezone()))
-        pass
-
-    def test_time_interval_for_day_containing_returns_20130221_0000000500__20130221_2359599999990500_for_a_datetime_equal_20130221_2129260500_and_a_timezone_equal_local_timezone_instance(self):
-        # obj1 = <TODO: datetime.timedelta>
-        # obj2 = <TODO: datetime.timedelta>
-        # obj3 = <TODO: datetime.datetime>
-        # self.assertEqual(BoundedTimeInterval(), time_interval_for_day_containing(<TODO: datetime.datetime>, LocalTimezone()))
-        pass
-
-    def test_time_interval_for_day_containing_returns_20130221_0000000500__20130221_2359599999990500_for_a_datetime_equal_20130221_2152300500_and_a_timezone_equal_local_timezone_instance(self):
-        # obj1 = <TODO: datetime.timedelta>
-        # obj2 = <TODO: datetime.timedelta>
-        # obj3 = <TODO: datetime.datetime>
-        # self.assertEqual(BoundedTimeInterval(), time_interval_for_day_containing(<TODO: datetime.datetime>, LocalTimezone()))
-        pass
-
-    def test_time_interval_for_day_containing_returns_20130222_0000000500__20130222_2359599999990500_for_a_datetime_equal_20130222_1303000500_and_a_timezone_equal_local_timezone_instance(self):
-        # obj1 = <TODO: datetime.timedelta>
-        # obj2 = <TODO: datetime.timedelta>
-        # obj3 = <TODO: datetime.datetime>
-        # self.assertEqual(BoundedTimeInterval(), time_interval_for_day_containing(<TODO: datetime.datetime>, LocalTimezone()))
-        pass
-
-    def test_time_interval_for_day_containing_returns_20130222_0000000500__20130222_2359599999990500_for_a_datetime_equal_20130222_1337000500_and_a_timezone_equal_local_timezone_instance(self):
-        # obj1 = <TODO: datetime.timedelta>
-        # obj2 = <TODO: datetime.timedelta>
-        # obj3 = <TODO: datetime.datetime>
-        # self.assertEqual(BoundedTimeInterval(), time_interval_for_day_containing(<TODO: datetime.datetime>, LocalTimezone()))
-        pass
-
-    def test_time_interval_for_day_containing_returns_20130222_0000000500__20130222_2359599999990500_for_a_datetime_equal_20130222_1347000500_and_a_timezone_equal_local_timezone_instance(self):
-        # obj1 = <TODO: datetime.timedelta>
-        # obj2 = <TODO: datetime.timedelta>
-        # obj3 = <TODO: datetime.datetime>
-        # self.assertEqual(BoundedTimeInterval(), time_interval_for_day_containing(<TODO: datetime.datetime>, LocalTimezone()))
-        pass
-
-    def test_time_interval_for_day_containing_returns_20130222_0000000500__20130222_2359599999990500_for_a_datetime_equal_20130222_1623000500_and_a_timezone_equal_local_timezone_instance(self):
-        # obj1 = <TODO: datetime.timedelta>
-        # obj2 = <TODO: datetime.timedelta>
-        # obj3 = <TODO: datetime.datetime>
-        # self.assertEqual(BoundedTimeInterval(), time_interval_for_day_containing(<TODO: datetime.datetime>, LocalTimezone()))
-        pass
-
-    def test_time_interval_for_day_containing_returns_20130222_0000000500__20130222_2359599999990500_for_a_datetime_equal_20130222_1630000500_and_a_timezone_equal_local_timezone_instance(self):
-        # obj1 = <TODO: datetime.timedelta>
-        # obj2 = <TODO: datetime.timedelta>
-        # obj3 = <TODO: datetime.datetime>
-        # self.assertEqual(BoundedTimeInterval(), time_interval_for_day_containing(<TODO: datetime.datetime>, LocalTimezone()))
-        pass
-
-    def test_time_interval_for_day_containing_returns_20130222_0000000500__20130222_2359599999990500_for_a_datetime_equal_20130222_1819000500_and_a_timezone_equal_local_timezone_instance(self):
-        # obj1 = <TODO: datetime.timedelta>
-        # obj2 = <TODO: datetime.timedelta>
-        # obj3 = <TODO: datetime.datetime>
-        # self.assertEqual(BoundedTimeInterval(), time_interval_for_day_containing(<TODO: datetime.datetime>, LocalTimezone()))
-        pass
-
-    def test_time_interval_for_day_containing_returns_20130222_0000000500__20130222_2359599999990500_for_a_datetime_equal_20130222_1821000500_and_a_timezone_equal_local_timezone_instance(self):
-        # obj1 = <TODO: datetime.timedelta>
-        # obj2 = <TODO: datetime.timedelta>
-        # obj3 = <TODO: datetime.datetime>
-        # self.assertEqual(BoundedTimeInterval(), time_interval_for_day_containing(<TODO: datetime.datetime>, LocalTimezone()))
-        pass
-
-    def test_time_interval_for_day_containing_returns_20130222_0000000500__20130222_2359599999990500_for_a_datetime_equal_20130222_1824000500_and_a_timezone_equal_local_timezone_instance(self):
-        # obj1 = <TODO: datetime.timedelta>
-        # obj2 = <TODO: datetime.timedelta>
-        # obj3 = <TODO: datetime.datetime>
-        # self.assertEqual(BoundedTimeInterval(), time_interval_for_day_containing(<TODO: datetime.datetime>, LocalTimezone()))
-        pass
-
-    def test_time_interval_for_day_containing_returns_20130222_0000000500__20130222_2359599999990500_for_a_datetime_equal_20130222_1853030500_and_a_timezone_equal_local_timezone_instance(self):
-        # obj1 = <TODO: datetime.timedelta>
-        # obj2 = <TODO: datetime.timedelta>
-        # obj3 = <TODO: datetime.datetime>
-        # self.assertEqual(BoundedTimeInterval(), time_interval_for_day_containing(<TODO: datetime.datetime>, LocalTimezone()))
-        pass
-
-    def test_time_interval_for_day_containing_returns_20130222_0000000500__20130222_2359599999990500_for_a_datetime_equal_20130222_2151000500_and_a_timezone_equal_local_timezone_instance(self):
-        # obj1 = <TODO: datetime.timedelta>
-        # obj2 = <TODO: datetime.timedelta>
-        # obj3 = <TODO: datetime.datetime>
-        # self.assertEqual(BoundedTimeInterval(), time_interval_for_day_containing(<TODO: datetime.datetime>, LocalTimezone()))
-        pass
-
-    def test_time_interval_for_day_containing_returns_20130222_0000000500__20130222_2359599999990500_for_a_datetime_equal_20130222_2244000500_and_a_timezone_equal_local_timezone_instance(self):
-        # obj1 = <TODO: datetime.timedelta>
-        # obj2 = <TODO: datetime.timedelta>
-        # obj3 = <TODO: datetime.datetime>
-        # self.assertEqual(BoundedTimeInterval(), time_interval_for_day_containing(<TODO: datetime.datetime>, LocalTimezone()))
-        pass
-
-    def test_time_interval_for_day_containing_returns_20130222_0000000500__20130222_2359599999990500_for_a_datetime_equal_20130222_2301180500_and_a_timezone_equal_local_timezone_instance(self):
-        # obj1 = <TODO: datetime.timedelta>
-        # obj2 = <TODO: datetime.timedelta>
-        # obj3 = <TODO: datetime.datetime>
-        # self.assertEqual(BoundedTimeInterval(), time_interval_for_day_containing(<TODO: datetime.datetime>, LocalTimezone()))
-        pass
-
-    def test_time_interval_for_day_containing_returns_20130223_0000000500__20130223_2359599999990500_for_a_datetime_equal_20130223_0106030500_and_a_timezone_equal_local_timezone_instance(self):
-        # obj1 = <TODO: datetime.timedelta>
-        # obj2 = <TODO: datetime.timedelta>
-        # obj3 = <TODO: datetime.datetime>
-        # self.assertEqual(BoundedTimeInterval(), time_interval_for_day_containing(<TODO: datetime.datetime>, LocalTimezone()))
-        pass
-
-    def test_time_interval_for_day_containing_returns_20130223_0000000500__20130223_2359599999990500_for_a_datetime_equal_20130223_0342000500_and_a_timezone_equal_local_timezone_instance(self):
-        # obj1 = <TODO: datetime.timedelta>
-        # obj2 = <TODO: datetime.timedelta>
-        # obj3 = <TODO: datetime.datetime>
-        # self.assertEqual(BoundedTimeInterval(), time_interval_for_day_containing(<TODO: datetime.datetime>, LocalTimezone()))
-        pass
-
-    def test_time_interval_for_day_containing_returns_20130223_0000000500__20130223_2359599999990500_for_a_datetime_equal_20130223_0416000500_and_a_timezone_equal_local_timezone_instance(self):
-        # obj1 = <TODO: datetime.timedelta>
-        # obj2 = <TODO: datetime.timedelta>
-        # obj3 = <TODO: datetime.datetime>
-        # self.assertEqual(BoundedTimeInterval(), time_interval_for_day_containing(<TODO: datetime.datetime>, LocalTimezone()))
-        pass
-
-    def test_time_interval_for_day_containing_returns_20130223_0000000500__20130223_2359599999990500_for_a_datetime_equal_20130223_0420410500_and_a_timezone_equal_local_timezone_instance(self):
-        # obj1 = <TODO: datetime.timedelta>
-        # obj2 = <TODO: datetime.timedelta>
-        # obj3 = <TODO: datetime.datetime>
-        # self.assertEqual(BoundedTimeInterval(), time_interval_for_day_containing(<TODO: datetime.datetime>, LocalTimezone()))
-        pass
-
-    def test_time_interval_for_day_containing_returns_20130223_0000000500__20130223_2359599999990500_for_a_datetime_equal_20130223_1323510500_and_a_timezone_equal_local_timezone_instance(self):
-        # obj1 = <TODO: datetime.timedelta>
-        # obj2 = <TODO: datetime.timedelta>
-        # obj3 = <TODO: datetime.datetime>
-        # self.assertEqual(BoundedTimeInterval(), time_interval_for_day_containing(<TODO: datetime.datetime>, LocalTimezone()))
-        pass
-
-    def test_time_interval_for_day_containing_returns_20130223_0000000500__20130223_2359599999990500_for_a_datetime_equal_20130223_1325160500_and_a_timezone_equal_local_timezone_instance(self):
-        # obj1 = <TODO: datetime.timedelta>
-        # obj2 = <TODO: datetime.timedelta>
-        # obj3 = <TODO: datetime.datetime>
-        # self.assertEqual(BoundedTimeInterval(), time_interval_for_day_containing(<TODO: datetime.datetime>, LocalTimezone()))
-        pass
-
-    def test_time_interval_for_day_containing_returns_20130223_0000000500__20130223_2359599999990500_for_a_datetime_equal_20130223_1422040500_and_a_timezone_equal_local_timezone_instance(self):
-        # obj1 = <TODO: datetime.timedelta>
-        # obj2 = <TODO: datetime.timedelta>
-        # obj3 = <TODO: datetime.datetime>
-        # self.assertEqual(BoundedTimeInterval(), time_interval_for_day_containing(<TODO: datetime.datetime>, LocalTimezone()))
-        pass
-
-    def test_time_interval_for_day_containing_returns_20130223_0000000500__20130223_2359599999990500_for_a_datetime_equal_20130223_1952310500_and_a_timezone_equal_local_timezone_instance(self):
-        # obj1 = <TODO: datetime.timedelta>
-        # obj2 = <TODO: datetime.timedelta>
-        # obj3 = <TODO: datetime.datetime>
-        # self.assertEqual(BoundedTimeInterval(), time_interval_for_day_containing(<TODO: datetime.datetime>, LocalTimezone()))
-        pass
-
-    def test_time_interval_for_day_containing_returns_20130223_0000000500__20130223_2359599999990500_for_a_datetime_equal_20130223_2300060500_and_a_timezone_equal_local_timezone_instance(self):
-        # obj1 = <TODO: datetime.timedelta>
-        # obj2 = <TODO: datetime.timedelta>
-        # obj3 = <TODO: datetime.datetime>
-        # self.assertEqual(BoundedTimeInterval(), time_interval_for_day_containing(<TODO: datetime.datetime>, LocalTimezone()))
-        pass
-
-    def test_time_interval_for_day_containing_returns_20130224_0000000500__20130224_2359599999990500_for_a_datetime_equal_20130224_1519390500_and_a_timezone_equal_local_timezone_instance(self):
-        # obj1 = <TODO: datetime.timedelta>
-        # obj2 = <TODO: datetime.timedelta>
-        # obj3 = <TODO: datetime.datetime>
-        # self.assertEqual(BoundedTimeInterval(), time_interval_for_day_containing(<TODO: datetime.datetime>, LocalTimezone()))
-        pass
-
-    def test_time_interval_for_day_containing_returns_20130224_0000000500__20130224_2359599999990500_for_a_datetime_equal_20130224_2359000500_and_a_timezone_equal_local_timezone_instance(self):
-        # obj1 = <TODO: datetime.timedelta>
-        # obj2 = <TODO: datetime.timedelta>
-        # obj3 = <TODO: datetime.datetime>
-        # self.assertEqual(BoundedTimeInterval(), time_interval_for_day_containing(<TODO: datetime.datetime>, LocalTimezone()))
-        pass
-
-    def test_time_interval_for_day_containing_returns_20130225_0000000500__20130225_2359599999990500_for_a_datetime_equal_20130225_0012000500_and_a_timezone_equal_local_timezone_instance(self):
-        # obj1 = <TODO: datetime.timedelta>
-        # obj2 = <TODO: datetime.timedelta>
-        # obj3 = <TODO: datetime.datetime>
-        # self.assertEqual(BoundedTimeInterval(), time_interval_for_day_containing(<TODO: datetime.datetime>, LocalTimezone()))
-        pass
-
-    def test_time_interval_for_day_containing_returns_20130225_0000000500__20130225_2359599999990500_for_a_datetime_equal_20130225_0014540500_and_a_timezone_equal_local_timezone_instance(self):
-        # obj1 = <TODO: datetime.timedelta>
-        # obj2 = <TODO: datetime.timedelta>
-        # obj3 = <TODO: datetime.datetime>
-        # self.assertEqual(BoundedTimeInterval(), time_interval_for_day_containing(<TODO: datetime.datetime>, LocalTimezone()))
-        pass
-
-    def test_time_interval_for_day_containing_returns_20130225_0000000500__20130225_2359599999990500_for_a_datetime_equal_20130225_0016250500_and_a_timezone_equal_local_timezone_instance(self):
-        # obj1 = <TODO: datetime.timedelta>
-        # obj2 = <TODO: datetime.timedelta>
-        # obj3 = <TODO: datetime.datetime>
-        # self.assertEqual(BoundedTimeInterval(), time_interval_for_day_containing(<TODO: datetime.datetime>, LocalTimezone()))
-        pass
-
-    def test_time_interval_for_day_containing_returns_20130225_0000000500__20130225_2359599999990500_for_a_datetime_equal_20130225_0123543397930500_and_a_timezone_equal_local_timezone_instance(self):
-        # obj1 = <TODO: datetime.timedelta>
-        # obj2 = <TODO: datetime.timedelta>
-        # obj3 = <TODO: datetime.datetime>
-        # self.assertEqual(BoundedTimeInterval(), time_interval_for_day_containing(<TODO: datetime.datetime>, LocalTimezone()))
-        pass
 
 class TestSplitIntoDays(unittest.TestCase):
     def test_split_into_days_returns_list_for_20130221_0000000500__20130221_0106500500(self):
