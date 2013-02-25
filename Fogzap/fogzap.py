@@ -99,11 +99,8 @@ def summarize_intervals_by_day(intervals):
     """
     # Make a list of intervals split so they don't overlap a day boundary
     extant = [i for i in intervals if not i.deleted]
-    print('Extant\n',extant)
     split_intervals_l = [split_into_days(i.time_interval) for i in extant]
-    print('Split_l\n',split_intervals_l)
     split_intervals = [i for sublist in split_intervals_l for i in sublist]
-    print('Split\n',split_intervals)
     
     # For each interval, add its duration to the day in which it falls
     days = {}
@@ -113,7 +110,7 @@ def summarize_intervals_by_day(intervals):
             
         assert( start_day == end_day) # Make sure the splitting workede
 
-        duration = i.duration.total_seconds()
+        duration = i.duration().total_seconds()
         if days.has_key(start_day):
             days[start_day] += duration
         else:
