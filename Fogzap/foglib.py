@@ -4,10 +4,11 @@ Library providing access to the fogbugz API
 
 """
 from __future__ import print_function
-import os.path, datetime, sys, pickle, collections
+import os.path, datetime, sys, pickle, collections, copy
 import requests
 import xml.etree.ElementTree as ET
 from tzutil import UTC,LocalTimezone
+import tzutil
 
 def fogbugz_datetime(date_str):
     """Return a `datetime.datetime` object with the UTC timezone constructed from the fogbugz date string
@@ -139,7 +140,7 @@ class Interval(object):
                  'ID:',      str(self.interval_id),' ',
                  'Person:',  str(self.person_id),' ',
                  'Case:',    str(self.case_id),' ',
-                 repr(self.interval), ' ',
+                 repr(self.time_interval), ' ',
                  '(deleted)' if self.deleted else '(not deleted)','>']);
 
 class TimeInterval(object):
@@ -318,7 +319,7 @@ class BoundedTimeInterval(collections.namedtuple("BoundedTimeInterval", ["first"
                 "come after the last time")
         
         
-        return cls.__bases__[0].__new__(cls, copy(first), copy(last))
+        return cls.__bases__[0].__new__(cls, copy.copy(first), copy.copy(last))
 
 
     def is_ongoing ( self ):
@@ -456,7 +457,7 @@ class BoundedTimeInterval(collections.namedtuple("BoundedTimeInterval", ["first"
         return self.last - self.first + datetime.timedelta(microseconds=1)
 
     def __repr__(self):
-        return ''.join([str(self.first), ' - ', str(last)])
+        return ''.join([str(self.first), ' - ', str(self.last)])
 
 
 
@@ -493,7 +494,7 @@ class OngoingTimeInterval(collections.namedtuple("BoundedTimeInterval", ["first"
                 "The starting time of a fogbugz OngoingTimeInterval must not "
                 "be in the future. ({})".format(str(first)))
         
-        return cls.__bases__[0].__new__(cls, copy(first))
+        return cls.__bases__[0].__new__(cls, copy.copy(first))
 
 
     def is_ongoing ( self ):
@@ -1080,7 +1081,7 @@ class Session(object):
             params = {'cmd':'listIntervals','token':self._token,
                       'dtstart':start_time_UTC_str})
         listintervals_root = ET.fromstring(listintervals_resp.text);
-        intervals = [Interval(interval) for interval in listintervals_root.find('intervals')]
+        intervals = [Interval.from_xml(interval) for interval in listintervals_root.find('intervals')]
         return intervals
 
 
