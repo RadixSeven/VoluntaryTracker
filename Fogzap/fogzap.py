@@ -335,8 +335,6 @@ all_commands[
                                list_commands)
 
 
-username, password, address, last_upload_date = read_configuration_variables()
-
 
 #################
 #
@@ -344,26 +342,30 @@ username, password, address, last_upload_date = read_configuration_variables()
 #
 #################
 
-# Handle command line arguments
-parser = argparse.ArgumentParser(description='Miscelaneous utilities for '
-                                 'interacting with fogbugz');
-parser.add_argument('command', help='The command to execute. All commands '
-                    'take a -h option to print details of what arguments '
-                    'they take. The list_commands command will list all '
-                    'the commands with a short description.');
-parser.add_argument('arguments', nargs=argparse.REMAINDER, 
-                    help='All arguments to the command');
-args = parser.parse_args()
+def run_fogzap()
+    username, password, address, last_upload_date = read_configuration_variables()
+
+    # Handle command line arguments
+    parser = argparse.ArgumentParser(description='Miscelaneous utilities for '
+                                     'interacting with fogbugz');
+    parser.add_argument('command', help='The command to execute. All commands '
+                        'take a -h option to print details of what arguments '
+                        'they take. The list_commands command will list all '
+                        'the commands with a short description.');
+    parser.add_argument('arguments', nargs=argparse.REMAINDER, 
+                        help='All arguments to the command');
+    args = parser.parse_args()
 
 
 
-# Execute the selected command or print help if the command does not exist
-if all_commands.has_key(args.command.lower()):
-    all_commands[args.command.lower()].execute(
-        username, password, address, last_upload_date, args.arguments)
-else:
-    parser.print_help()
+    # Execute the selected command or print help if the command does not exist
+    if all_commands.has_key(args.command.lower()):
+        all_commands[args.command.lower()].execute(
+            username, password, address, last_upload_date, args.arguments)
+    else:
+        parser.print_help()
 
 
 
-
+if __name__ == "__main__":
+    run_fogzap()
