@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 # Standard libraries
-import os.path, datetime, sys, pickle, argparse, textwrap, inspect
+import os.path, datetime, sys, pickle, argparse, textwrap, inspect, urllib
 import xml.etree.ElementTree as ET
 
 # 3rd Party packages
@@ -98,9 +98,10 @@ def summarize_intervals_by_day(intervals):
         sum of the durations of the intervals for that date. Ongoing
         intervals are treates as if they ended now.
 
-    return - a dictionary in which each key is a date and each value
-        is a float giving the number of hours worked on that date (as
-        determined by the local timezone.
+    return - a dictionary in which each key is a timezone aware
+        datetime.datetime that specifies the first microsecond of a
+        day and each value is a float giving the number of hours
+        worked on the day that started with that datetime.
     """
     # Make a list of intervals split so they don't overlap a day boundary
     extant = [i for i in intervals if not i.deleted]
@@ -110,10 +111,10 @@ def summarize_intervals_by_day(intervals):
     # For each interval, add its duration to the day in which it falls
     days = {}
     for i in split_intervals:
-        start_day = i.first.date()
-        end_day = i.last.date()
+        start_day = i.first.replace(hour=0,minute=0,second=0,microsecond=0)
+        end_day = i.last.replace(hour=0,minute=0,second=0,microsecond=0)
             
-        assert( start_day == end_day) # Make sure the splitting workede
+        assert( start_day == end_day) # Make sure the splitting worked
 
         duration = i.duration().total_seconds()
         if days.has_key(start_day):
@@ -292,7 +293,8 @@ def list_unshared_work_times(session, last_upload_date, args):
     days = summarize_intervals_by_day(intervals)
     
     for day in sorted(days.keys()):
-        print('{}: {} hours'.format(str(day), days[day]/3600))
+        print('{}/{}/{}: {} hours'.format(
+                day.month, day.day, day.year, days[day]/3600))
 
 
 all_commands[
@@ -321,15 +323,24 @@ def share_work_times(session, last_upload_date, args):
     
     days = summarize_intervals_by_day(intervals)
     
-    fbconsole.AUTH_SCOPE = ['publish_stream']
+    fbconsole.AUTH_SCOPE = ['publish_actions']
+    fbconsole.APP_ID = 354868984626652
     fbconsole.authenticate()
 
     today = LocalTimezone.now().date()
+    day_end_delta = ( datetime.timedelta(days=1)-
+                      datetime.timedelta(microseconds=1) )
 
     for day in sorted(days.keys()):
-        if day < today:
-            msg = 'I worked {} hours on {}'.format(days[day]/3600, str(day))
-            fbconsole.post( '/me/feed/',{'message':msg} )
+        if day.date() < today:
+            fbconsole.post( 
+                '/me/fogzap_app:spend_time',
+                {'activity':('https://uri.insightnotnumbers.com/'
+                             'fogzap/2013-02Feb-23/activity/Working'),
+                 'duration':str(days[day]/3600),
+                 'start_time':day.isoformat(),
+                 'end_time':(day+day_end_delta).isoformat()
+                 } )
 
 all_commands[
     'share_work_times'] = Command('share_work_times',
