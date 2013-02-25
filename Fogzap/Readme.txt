@@ -30,6 +30,10 @@ $ sudo pip install fbconsole
 $ sudo apt-get install python-requests #Default pip installation fails on ubuntu
 $ sudo apt-get install python-scipy
 
+I also used pythoscope to generate the boiler-plate test cases that I
+hadn't bothered to write up until now. You shouldn't need to install
+it.
+
 ------------------------------------------------------------------------------
 Important improvements to make it useful to others
 --------------------------------------------------
