@@ -856,7 +856,8 @@ class TestInterval(unittest.TestCase):
         self.assertEqual('<ID:1007 Person:2 Case:825 2013-02-25 00:12:46-05:00 - 2013-02-25 00:14:54-05:00 (not deleted)>', interval.__str__())
 
     def test___str___returns_str_instance_after_creation_with_case_id_equal_825_and_deleted_equal_false_and_interval_id_equal_1009_and_person_id_equal_2_and_time_interval_equal_20130225_0016250500__Ongoing_and_title_equal_Add_test_cases_for_fogzap_and_libraries(self):
-        interval = Interval(1009, 2, 825, OngoingTimeInterval(), False, 'Add test cases for fogzap and libraries')
+        first = datetime_from_19_char_string('20130225_0016250500')
+        interval = Interval(1009, 2, 825, OngoingTimeInterval(first), False, 'Add test cases for fogzap and libraries')
         self.assertEqual('<ID:1009 Person:2 Case:825 2013-02-25 00:16:25-05:00 - Ongoing (not deleted)>', interval.__str__())
 
     def test___str___returns_str_instance_after_creation_with_case_id_equal_826_and_deleted_equal_false_and_interval_id_equal_1005_and_person_id_equal_2_and_time_interval_equal_20130224_1556000500__20130224_2359000500_and_title_equal_Refactor_foglibInterval(self):
@@ -1130,7 +1131,8 @@ class TestInterval(unittest.TestCase):
         # Make sure it doesn't raise any exceptions.
 
     def test_creation_with_case_id_equal_825_and_deleted_equal_false_and_interval_id_equal_1009_and_person_id_equal_2_and_time_interval_equal_20130225_0016250500__Ongoing_and_title_equal_Add_test_cases_for_fogzap_and_libraries(self):
-        interval = Interval(1009, 2, 825, OngoingTimeInterval(), False, 'Add test cases for fogzap and libraries')
+        first = datetime_from_19_char_string('20130225_0016250500')
+        interval = Interval(1009, 2, 825, OngoingTimeInterval(first), False, 'Add test cases for fogzap and libraries')
         # Make sure it doesn't raise any exceptions.
 
     def test_creation_with_case_id_equal_826_and_deleted_equal_false_and_interval_id_equal_1005_and_person_id_equal_2_and_time_interval_equal_20130224_1556000500__20130224_2359000500_and_title_equal_Refactor_foglibInterval(self):
@@ -1536,7 +1538,8 @@ class TestOngoingTimeInterval(unittest.TestCase):
         self.assertTrue(False, "Haven't implemented this test yet") 
         # TODO: implement your test here
     def test___repr___returns_20130225_0016250500__Ongoing(self):
-        ongoing_time_interval = OngoingTimeInterval()
+        first = datetime_from_19_char_string('20130225_0016250500')
+        ongoing_time_interval = OngoingTimeInterval(first)
         self.assertEqual('2013-02-25 00:16:25-05:00 - Ongoing', ongoing_time_interval.__repr__())
 
     @unittest.expectedFailure
@@ -1552,7 +1555,8 @@ class TestOngoingTimeInterval(unittest.TestCase):
         self.assertTrue(False, "Haven't implemented this test yet") 
         # TODO: implement your test here
     def test_is_ongoing_returns_true(self):
-        ongoing_time_interval = OngoingTimeInterval()
+        first = datetime_from_19_char_string('20130225_0016250500')
+        ongoing_time_interval = OngoingTimeInterval(first)
         self.assertEqual(True, ongoing_time_interval.is_ongoing())
 
     @unittest.expectedFailure
