@@ -532,9 +532,13 @@ class TestListUnsharedWorkTimes(unittest.TestCase):
         pass
 
 class TestShareWorkTimes(unittest.TestCase):
+    @unittest.expectedFailure
     def test_share_work_times(self):
         # self.assertEqual(expected, share_work_times(session, last_upload_date, args))
-        assert False # TODO: implement your test here
+
+        # TODO: implement your test here
+        self.assertTrue(False, "Haven't implemented this test yet")
+        
 
 class TestListCommands(unittest.TestCase):
     def test_list_commands_returns_None_for_args_equal_list_and_last_upload_date_equal_20130221_0000000500(self):

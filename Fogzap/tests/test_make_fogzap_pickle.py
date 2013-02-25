@@ -18,9 +18,13 @@ from fogzap import run_fogzap
 from make_fogzap_pickle import run_make_fogzap_pickle
 
 class TestDayMonthYearDate(unittest.TestCase):
+    @unittest.expectedFailure
     def test_day_month_year_date(self):
         # self.assertEqual(expected, day_month_year_date(date_string))
-        assert False # TODO: implement your test here
+
+        # TODO: implement your test here
+        self.assertTrue(False, "Haven't implemented this test yet")
+
 
 class TestRunMakeFogzapPickle(unittest.TestCase):
     def test_run_make_fogzap_pickle_raises_1_for_list(self):

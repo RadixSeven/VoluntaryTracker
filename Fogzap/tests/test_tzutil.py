@@ -2534,20 +2534,32 @@ class TestLocalTimezone(unittest.TestCase):
         # self.assertEqual(timedelta, type(local_timezone.utcoffset(obj7)))
         pass
 
+    @unittest.expectedFailure
     def test_in_future(self):
         # local_timezone = LocalTimezone()
         # self.assertEqual(expected, local_timezone.in_future())
-        assert False # TODO: implement your test here
 
+        # TODO: implement your test here
+        self.assertTrue(False, "Haven't implemented this test yet")
+
+
+    @unittest.expectedFailure
     def test_now(self):
         # local_timezone = LocalTimezone()
         # self.assertEqual(expected, local_timezone.now())
-        assert False # TODO: implement your test here
 
+        # TODO: implement your test here
+        self.assertTrue(False, "Haven't implemented this test yet")
+
+
+    @unittest.expectedFailure
     def test_tzname(self):
         # local_timezone = LocalTimezone()
         # self.assertEqual(expected, local_timezone.tzname(dt))
-        assert False # TODO: implement your test here
+
+        # TODO: implement your test here
+        self.assertTrue(False, "Haven't implemented this test yet")
+
 
     def test_utcoffset_2_times(self):
         # obj1 = <TODO: datetime.datetime>
@@ -2588,10 +2600,14 @@ class TestUTC(unittest.TestCase):
         # self.assertEqual(timedelta, type(u_t_c.dst(obj3)))
         pass
 
+    @unittest.expectedFailure
     def test_tzname(self):
         # u_t_c = UTC()
         # self.assertEqual(expected, u_t_c.tzname(dt))
-        assert False # TODO: implement your test here
+
+        # TODO: implement your test here
+        self.assertTrue(False, "Haven't implemented this test yet")
+
 
     def test_utcoffset_returns_00000_for_20130221_0500000000(self):
         u_t_c = UTC()

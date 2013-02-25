@@ -925,58 +925,69 @@ class TestInterval(unittest.TestCase):
         interval = Interval(1006, 2, 826, BoundedTimeInterval(), False, 'Refactor foglib.Interval')
         # Make sure it doesn't raise any exceptions.
 
+    @unittest.expectedFailure
     def test_from_xml(self):
         # interval = Interval(interval_id, person_id, case_id, time_interval, deleted, title)
         # self.assertEqual(expected, interval.from_xml())
-        assert False # TODO: implement your test here
+        self.assertTrue(False, "Haven't implemented this test yet") 
+        # TODO: implement your test here
 
 class TestTimeInterval(unittest.TestCase):
+    @unittest.expectedFailure
     def test___str__(self):
         # time_interval = TimeInterval()
         # self.assertEqual(expected, time_interval.__str__())
-        assert False # TODO: implement your test here
-
+        self.assertTrue(False, "Haven't implemented this test yet") 
+        # TODO: implement your test here
 class TestEmptyTimeInterval(unittest.TestCase):
+    @unittest.expectedFailure
     def test___repr__(self):
         # empty_time_interval = EmptyTimeInterval()
         # self.assertEqual(expected, empty_time_interval.__repr__())
-        assert False # TODO: implement your test here
-
+        self.assertTrue(False, "Haven't implemented this test yet") 
+        # TODO: implement your test here
+    @unittest.expectedFailure
     def test_contains(self):
         # empty_time_interval = EmptyTimeInterval()
         # self.assertEqual(expected, empty_time_interval.contains(a_datetime))
-        assert False # TODO: implement your test here
-
+        self.assertTrue(False, "Haven't implemented this test yet") 
+        # TODO: implement your test here
+    @unittest.expectedFailure
     def test_duration(self):
         # empty_time_interval = EmptyTimeInterval()
         # self.assertEqual(expected, empty_time_interval.duration())
-        assert False # TODO: implement your test here
-
+        self.assertTrue(False, "Haven't implemented this test yet") 
+        # TODO: implement your test here
+    @unittest.expectedFailure
     def test_intersection_with(self):
         # empty_time_interval = EmptyTimeInterval()
         # self.assertEqual(expected, empty_time_interval.intersection_with(a_TimeInterval))
-        assert False # TODO: implement your test here
-
+        self.assertTrue(False, "Haven't implemented this test yet") 
+        # TODO: implement your test here
+    @unittest.expectedFailure
     def test_is_ongoing(self):
         # empty_time_interval = EmptyTimeInterval()
         # self.assertEqual(expected, empty_time_interval.is_ongoing())
-        assert False # TODO: implement your test here
-
+        self.assertTrue(False, "Haven't implemented this test yet") 
+        # TODO: implement your test here
+    @unittest.expectedFailure
     def test_subinterval_before(self):
         # empty_time_interval = EmptyTimeInterval()
         # self.assertEqual(expected, empty_time_interval.subinterval_before(a_datetime))
-        assert False # TODO: implement your test here
-
+        self.assertTrue(False, "Haven't implemented this test yet") 
+        # TODO: implement your test here
+    @unittest.expectedFailure
     def test_subinterval_starting_at_or_after(self):
         # empty_time_interval = EmptyTimeInterval()
         # self.assertEqual(expected, empty_time_interval.subinterval_starting_at_or_after(a_datetime))
-        assert False # TODO: implement your test here
-
+        self.assertTrue(False, "Haven't implemented this test yet") 
+        # TODO: implement your test here
 class TestBoundedTimeInterval(unittest.TestCase):
+    @unittest.expectedFailure
     def test___new__(self):
         # bounded_time_interval = BoundedTimeInterval(first, last)
-        assert False # TODO: implement your test here
-
+        self.assertTrue(False, "Haven't implemented this test yet") 
+        # TODO: implement your test here
     def test___repr___returns_20130221_0000000500__20130221_0106500500(self):
         bounded_time_interval = BoundedTimeInterval()
         self.assertEqual('2013-02-21 00:00:00-05:00 - 2013-02-21 01:06:50-05:00', bounded_time_interval.__repr__())
@@ -1157,240 +1168,23 @@ class TestBoundedTimeInterval(unittest.TestCase):
         bounded_time_interval = BoundedTimeInterval()
         self.assertEqual('2013-02-25 00:14:54-05:00 - 2013-02-25 00:16:25-05:00', bounded_time_interval.__repr__())
 
+    @unittest.expectedFailure
     def test_contains(self):
         # bounded_time_interval = BoundedTimeInterval(first, last)
         # self.assertEqual(expected, bounded_time_interval.contains(a_datetime))
-        assert False # TODO: implement your test here
-
+        self.assertTrue(False, "Haven't implemented this test yet") 
+        # TODO: implement your test here
+    @unittest.expectedFailure
     def test_duration(self):
         # bounded_time_interval = BoundedTimeInterval(first, last)
         # self.assertEqual(expected, bounded_time_interval.duration())
-        assert False # TODO: implement your test here
-
+        self.assertTrue(False, "Haven't implemented this test yet") 
+        # TODO: implement your test here
     def test_intersection_with_and_is_ongoing(self):
         bounded_time_interval = BoundedTimeInterval()
         self.assertEqual(False, bounded_time_interval.is_ongoing())
         self.assertRaises(AttributeError, lambda: bounded_time_interval.intersection_with(BoundedTimeInterval()))
 
-    def test_intersection_with_and_is_ongoing_case_2(self):
-        bounded_time_interval = BoundedTimeInterval()
-        self.assertEqual(False, bounded_time_interval.is_ongoing())
-        self.assertRaises(AttributeError, lambda: bounded_time_interval.intersection_with(BoundedTimeInterval()))
-
-    def test_intersection_with_and_is_ongoing_case_3(self):
-        bounded_time_interval = BoundedTimeInterval()
-        self.assertEqual(False, bounded_time_interval.is_ongoing())
-        self.assertRaises(AttributeError, lambda: bounded_time_interval.intersection_with(BoundedTimeInterval()))
-
-    def test_intersection_with_and_is_ongoing_case_4(self):
-        bounded_time_interval = BoundedTimeInterval()
-        self.assertEqual(False, bounded_time_interval.is_ongoing())
-        self.assertRaises(AttributeError, lambda: bounded_time_interval.intersection_with(BoundedTimeInterval()))
-
-    def test_intersection_with_and_is_ongoing_case_5(self):
-        bounded_time_interval = BoundedTimeInterval()
-        self.assertEqual(False, bounded_time_interval.is_ongoing())
-        self.assertRaises(AttributeError, lambda: bounded_time_interval.intersection_with(BoundedTimeInterval()))
-
-    def test_intersection_with_and_is_ongoing_case_6(self):
-        bounded_time_interval = BoundedTimeInterval()
-        self.assertEqual(False, bounded_time_interval.is_ongoing())
-        self.assertRaises(AttributeError, lambda: bounded_time_interval.intersection_with(BoundedTimeInterval()))
-
-    def test_intersection_with_and_is_ongoing_case_7(self):
-        bounded_time_interval = BoundedTimeInterval()
-        self.assertEqual(False, bounded_time_interval.is_ongoing())
-        self.assertRaises(AttributeError, lambda: bounded_time_interval.intersection_with(BoundedTimeInterval()))
-
-    def test_intersection_with_and_is_ongoing_case_8(self):
-        bounded_time_interval = BoundedTimeInterval()
-        self.assertEqual(False, bounded_time_interval.is_ongoing())
-        self.assertRaises(AttributeError, lambda: bounded_time_interval.intersection_with(BoundedTimeInterval()))
-
-    def test_intersection_with_and_is_ongoing_case_9(self):
-        bounded_time_interval = BoundedTimeInterval()
-        self.assertEqual(False, bounded_time_interval.is_ongoing())
-        self.assertRaises(AttributeError, lambda: bounded_time_interval.intersection_with(BoundedTimeInterval()))
-
-    def test_intersection_with_and_is_ongoing_case_10(self):
-        bounded_time_interval = BoundedTimeInterval()
-        self.assertEqual(False, bounded_time_interval.is_ongoing())
-        self.assertRaises(AttributeError, lambda: bounded_time_interval.intersection_with(BoundedTimeInterval()))
-
-    def test_intersection_with_and_is_ongoing_case_11(self):
-        bounded_time_interval = BoundedTimeInterval()
-        self.assertEqual(False, bounded_time_interval.is_ongoing())
-        self.assertRaises(AttributeError, lambda: bounded_time_interval.intersection_with(BoundedTimeInterval()))
-
-    def test_intersection_with_and_is_ongoing_case_12(self):
-        bounded_time_interval = BoundedTimeInterval()
-        self.assertEqual(False, bounded_time_interval.is_ongoing())
-        self.assertRaises(AttributeError, lambda: bounded_time_interval.intersection_with(BoundedTimeInterval()))
-
-    def test_intersection_with_and_is_ongoing_case_13(self):
-        bounded_time_interval = BoundedTimeInterval()
-        self.assertEqual(False, bounded_time_interval.is_ongoing())
-        self.assertRaises(AttributeError, lambda: bounded_time_interval.intersection_with(BoundedTimeInterval()))
-
-    def test_intersection_with_and_is_ongoing_case_14(self):
-        bounded_time_interval = BoundedTimeInterval()
-        self.assertEqual(False, bounded_time_interval.is_ongoing())
-        self.assertRaises(AttributeError, lambda: bounded_time_interval.intersection_with(BoundedTimeInterval()))
-
-    def test_intersection_with_and_is_ongoing_case_15(self):
-        bounded_time_interval = BoundedTimeInterval()
-        self.assertEqual(False, bounded_time_interval.is_ongoing())
-        self.assertRaises(AttributeError, lambda: bounded_time_interval.intersection_with(BoundedTimeInterval()))
-
-    def test_intersection_with_and_is_ongoing_case_16(self):
-        bounded_time_interval = BoundedTimeInterval()
-        self.assertEqual(False, bounded_time_interval.is_ongoing())
-        self.assertRaises(AttributeError, lambda: bounded_time_interval.intersection_with(BoundedTimeInterval()))
-
-    def test_intersection_with_and_is_ongoing_case_17(self):
-        bounded_time_interval = BoundedTimeInterval()
-        self.assertEqual(False, bounded_time_interval.is_ongoing())
-        self.assertRaises(AttributeError, lambda: bounded_time_interval.intersection_with(BoundedTimeInterval()))
-
-    def test_intersection_with_and_is_ongoing_case_18(self):
-        bounded_time_interval = BoundedTimeInterval()
-        self.assertEqual(False, bounded_time_interval.is_ongoing())
-        self.assertRaises(AttributeError, lambda: bounded_time_interval.intersection_with(BoundedTimeInterval()))
-
-    def test_intersection_with_and_is_ongoing_case_19(self):
-        bounded_time_interval = BoundedTimeInterval()
-        self.assertEqual(False, bounded_time_interval.is_ongoing())
-        self.assertRaises(AttributeError, lambda: bounded_time_interval.intersection_with(BoundedTimeInterval()))
-
-    def test_intersection_with_and_is_ongoing_case_20(self):
-        bounded_time_interval = BoundedTimeInterval()
-        self.assertEqual(False, bounded_time_interval.is_ongoing())
-        self.assertRaises(AttributeError, lambda: bounded_time_interval.intersection_with(BoundedTimeInterval()))
-
-    def test_intersection_with_and_is_ongoing_case_21(self):
-        bounded_time_interval = BoundedTimeInterval()
-        self.assertEqual(False, bounded_time_interval.is_ongoing())
-        self.assertRaises(AttributeError, lambda: bounded_time_interval.intersection_with(BoundedTimeInterval()))
-
-    def test_intersection_with_and_is_ongoing_case_22(self):
-        bounded_time_interval = BoundedTimeInterval()
-        self.assertEqual(False, bounded_time_interval.is_ongoing())
-        self.assertRaises(AttributeError, lambda: bounded_time_interval.intersection_with(BoundedTimeInterval()))
-
-    def test_intersection_with_and_is_ongoing_case_23(self):
-        bounded_time_interval = BoundedTimeInterval()
-        self.assertEqual(False, bounded_time_interval.is_ongoing())
-        self.assertRaises(AttributeError, lambda: bounded_time_interval.intersection_with(BoundedTimeInterval()))
-
-    def test_intersection_with_and_is_ongoing_case_24(self):
-        bounded_time_interval = BoundedTimeInterval()
-        self.assertEqual(False, bounded_time_interval.is_ongoing())
-        self.assertRaises(AttributeError, lambda: bounded_time_interval.intersection_with(BoundedTimeInterval()))
-
-    def test_intersection_with_and_is_ongoing_case_25(self):
-        bounded_time_interval = BoundedTimeInterval()
-        self.assertEqual(False, bounded_time_interval.is_ongoing())
-        self.assertRaises(AttributeError, lambda: bounded_time_interval.intersection_with(BoundedTimeInterval()))
-
-    def test_intersection_with_and_is_ongoing_case_26(self):
-        bounded_time_interval = BoundedTimeInterval()
-        self.assertEqual(False, bounded_time_interval.is_ongoing())
-        self.assertRaises(AttributeError, lambda: bounded_time_interval.intersection_with(BoundedTimeInterval()))
-
-    def test_intersection_with_and_is_ongoing_case_27(self):
-        bounded_time_interval = BoundedTimeInterval()
-        self.assertEqual(False, bounded_time_interval.is_ongoing())
-        self.assertRaises(AttributeError, lambda: bounded_time_interval.intersection_with(BoundedTimeInterval()))
-
-    def test_intersection_with_and_is_ongoing_case_28(self):
-        bounded_time_interval = BoundedTimeInterval()
-        self.assertEqual(False, bounded_time_interval.is_ongoing())
-        self.assertRaises(AttributeError, lambda: bounded_time_interval.intersection_with(BoundedTimeInterval()))
-
-    def test_intersection_with_and_is_ongoing_case_29(self):
-        bounded_time_interval = BoundedTimeInterval()
-        self.assertEqual(False, bounded_time_interval.is_ongoing())
-        self.assertRaises(AttributeError, lambda: bounded_time_interval.intersection_with(BoundedTimeInterval()))
-
-    def test_intersection_with_and_is_ongoing_case_30(self):
-        bounded_time_interval = BoundedTimeInterval()
-        self.assertEqual(False, bounded_time_interval.is_ongoing())
-        self.assertRaises(AttributeError, lambda: bounded_time_interval.intersection_with(BoundedTimeInterval()))
-
-    def test_intersection_with_and_is_ongoing_case_31(self):
-        bounded_time_interval = BoundedTimeInterval()
-        self.assertEqual(False, bounded_time_interval.is_ongoing())
-        self.assertRaises(AttributeError, lambda: bounded_time_interval.intersection_with(BoundedTimeInterval()))
-
-    def test_intersection_with_and_is_ongoing_case_32(self):
-        bounded_time_interval = BoundedTimeInterval()
-        self.assertEqual(False, bounded_time_interval.is_ongoing())
-        self.assertRaises(AttributeError, lambda: bounded_time_interval.intersection_with(BoundedTimeInterval()))
-
-    def test_intersection_with_and_is_ongoing_case_33(self):
-        bounded_time_interval = BoundedTimeInterval()
-        self.assertEqual(False, bounded_time_interval.is_ongoing())
-        self.assertRaises(AttributeError, lambda: bounded_time_interval.intersection_with(BoundedTimeInterval()))
-
-    def test_intersection_with_and_is_ongoing_case_34(self):
-        bounded_time_interval = BoundedTimeInterval()
-        self.assertEqual(False, bounded_time_interval.is_ongoing())
-        self.assertRaises(AttributeError, lambda: bounded_time_interval.intersection_with(BoundedTimeInterval()))
-
-    def test_intersection_with_and_is_ongoing_case_35(self):
-        bounded_time_interval = BoundedTimeInterval()
-        self.assertEqual(False, bounded_time_interval.is_ongoing())
-        self.assertRaises(AttributeError, lambda: bounded_time_interval.intersection_with(BoundedTimeInterval()))
-
-    def test_intersection_with_and_is_ongoing_case_36(self):
-        bounded_time_interval = BoundedTimeInterval()
-        self.assertEqual(False, bounded_time_interval.is_ongoing())
-        self.assertRaises(AttributeError, lambda: bounded_time_interval.intersection_with(BoundedTimeInterval()))
-
-    def test_intersection_with_and_is_ongoing_case_37(self):
-        bounded_time_interval = BoundedTimeInterval()
-        self.assertEqual(False, bounded_time_interval.is_ongoing())
-        self.assertRaises(AttributeError, lambda: bounded_time_interval.intersection_with(BoundedTimeInterval()))
-
-    def test_intersection_with_and_is_ongoing_case_38(self):
-        bounded_time_interval = BoundedTimeInterval()
-        self.assertEqual(False, bounded_time_interval.is_ongoing())
-        self.assertRaises(AttributeError, lambda: bounded_time_interval.intersection_with(BoundedTimeInterval()))
-
-    def test_intersection_with_and_is_ongoing_case_39(self):
-        bounded_time_interval = BoundedTimeInterval()
-        self.assertEqual(False, bounded_time_interval.is_ongoing())
-        self.assertRaises(AttributeError, lambda: bounded_time_interval.intersection_with(BoundedTimeInterval()))
-
-    def test_intersection_with_and_is_ongoing_case_40(self):
-        bounded_time_interval = BoundedTimeInterval()
-        self.assertEqual(False, bounded_time_interval.is_ongoing())
-        self.assertRaises(AttributeError, lambda: bounded_time_interval.intersection_with(BoundedTimeInterval()))
-
-    def test_intersection_with_and_is_ongoing_case_41(self):
-        bounded_time_interval = BoundedTimeInterval()
-        self.assertEqual(False, bounded_time_interval.is_ongoing())
-        self.assertRaises(AttributeError, lambda: bounded_time_interval.intersection_with(BoundedTimeInterval()))
-
-    def test_intersection_with_and_is_ongoing_case_42(self):
-        bounded_time_interval = BoundedTimeInterval()
-        self.assertEqual(False, bounded_time_interval.is_ongoing())
-        self.assertRaises(AttributeError, lambda: bounded_time_interval.intersection_with(BoundedTimeInterval()))
-
-    def test_intersection_with_and_is_ongoing_case_43(self):
-        bounded_time_interval = BoundedTimeInterval()
-        self.assertEqual(False, bounded_time_interval.is_ongoing())
-        self.assertRaises(AttributeError, lambda: bounded_time_interval.intersection_with(BoundedTimeInterval()))
-
-    def test_intersection_with_and_is_ongoing_case_44(self):
-        bounded_time_interval = BoundedTimeInterval()
-        self.assertEqual(False, bounded_time_interval.is_ongoing())
-        self.assertRaises(AttributeError, lambda: bounded_time_interval.intersection_with(BoundedTimeInterval()))
-
-    def test_intersection_with_and_is_ongoing_case_45(self):
-        bounded_time_interval = BoundedTimeInterval()
-        self.assertEqual(False, bounded_time_interval.is_ongoing())
-        self.assertRaises(AttributeError, lambda: bounded_time_interval.intersection_with(BoundedTimeInterval()))
 
     def test_intersection_with_raises_attribute_error_for_20130225_0000000500__20130225_2359599999990500(self):
         bounded_time_interval = BoundedTimeInterval()
@@ -1400,269 +1194,105 @@ class TestBoundedTimeInterval(unittest.TestCase):
         bounded_time_interval = BoundedTimeInterval()
         self.assertEqual(False, bounded_time_interval.is_ongoing())
 
-    def test_is_ongoing_returns_false_case_2(self):
-        bounded_time_interval = BoundedTimeInterval()
-        self.assertEqual(False, bounded_time_interval.is_ongoing())
 
-    def test_is_ongoing_returns_false_case_3(self):
-        bounded_time_interval = BoundedTimeInterval()
-        self.assertEqual(False, bounded_time_interval.is_ongoing())
-
-    def test_is_ongoing_returns_false_case_4(self):
-        bounded_time_interval = BoundedTimeInterval()
-        self.assertEqual(False, bounded_time_interval.is_ongoing())
-
-    def test_is_ongoing_returns_false_case_5(self):
-        bounded_time_interval = BoundedTimeInterval()
-        self.assertEqual(False, bounded_time_interval.is_ongoing())
-
-    def test_is_ongoing_returns_false_case_6(self):
-        bounded_time_interval = BoundedTimeInterval()
-        self.assertEqual(False, bounded_time_interval.is_ongoing())
-
-    def test_is_ongoing_returns_false_case_7(self):
-        bounded_time_interval = BoundedTimeInterval()
-        self.assertEqual(False, bounded_time_interval.is_ongoing())
-
-    def test_is_ongoing_returns_false_case_8(self):
-        bounded_time_interval = BoundedTimeInterval()
-        self.assertEqual(False, bounded_time_interval.is_ongoing())
-
-    def test_is_ongoing_returns_false_case_9(self):
-        bounded_time_interval = BoundedTimeInterval()
-        self.assertEqual(False, bounded_time_interval.is_ongoing())
-
-    def test_is_ongoing_returns_false_case_10(self):
-        bounded_time_interval = BoundedTimeInterval()
-        self.assertEqual(False, bounded_time_interval.is_ongoing())
-
-    def test_is_ongoing_returns_false_case_11(self):
-        bounded_time_interval = BoundedTimeInterval()
-        self.assertEqual(False, bounded_time_interval.is_ongoing())
-
-    def test_is_ongoing_returns_false_case_12(self):
-        bounded_time_interval = BoundedTimeInterval()
-        self.assertEqual(False, bounded_time_interval.is_ongoing())
-
-    def test_is_ongoing_returns_false_case_13(self):
-        bounded_time_interval = BoundedTimeInterval()
-        self.assertEqual(False, bounded_time_interval.is_ongoing())
-
-    def test_is_ongoing_returns_false_case_14(self):
-        bounded_time_interval = BoundedTimeInterval()
-        self.assertEqual(False, bounded_time_interval.is_ongoing())
-
-    def test_is_ongoing_returns_false_case_15(self):
-        bounded_time_interval = BoundedTimeInterval()
-        self.assertEqual(False, bounded_time_interval.is_ongoing())
-
-    def test_is_ongoing_returns_false_case_16(self):
-        bounded_time_interval = BoundedTimeInterval()
-        self.assertEqual(False, bounded_time_interval.is_ongoing())
-
-    def test_is_ongoing_returns_false_case_17(self):
-        bounded_time_interval = BoundedTimeInterval()
-        self.assertEqual(False, bounded_time_interval.is_ongoing())
-
-    def test_is_ongoing_returns_false_case_18(self):
-        bounded_time_interval = BoundedTimeInterval()
-        self.assertEqual(False, bounded_time_interval.is_ongoing())
-
-    def test_is_ongoing_returns_false_case_19(self):
-        bounded_time_interval = BoundedTimeInterval()
-        self.assertEqual(False, bounded_time_interval.is_ongoing())
-
-    def test_is_ongoing_returns_false_case_20(self):
-        bounded_time_interval = BoundedTimeInterval()
-        self.assertEqual(False, bounded_time_interval.is_ongoing())
-
-    def test_is_ongoing_returns_false_case_21(self):
-        bounded_time_interval = BoundedTimeInterval()
-        self.assertEqual(False, bounded_time_interval.is_ongoing())
-
-    def test_is_ongoing_returns_false_case_22(self):
-        bounded_time_interval = BoundedTimeInterval()
-        self.assertEqual(False, bounded_time_interval.is_ongoing())
-
-    def test_is_ongoing_returns_false_case_23(self):
-        bounded_time_interval = BoundedTimeInterval()
-        self.assertEqual(False, bounded_time_interval.is_ongoing())
-
-    def test_is_ongoing_returns_false_case_24(self):
-        bounded_time_interval = BoundedTimeInterval()
-        self.assertEqual(False, bounded_time_interval.is_ongoing())
-
-    def test_is_ongoing_returns_false_case_25(self):
-        bounded_time_interval = BoundedTimeInterval()
-        self.assertEqual(False, bounded_time_interval.is_ongoing())
-
-    def test_is_ongoing_returns_false_case_26(self):
-        bounded_time_interval = BoundedTimeInterval()
-        self.assertEqual(False, bounded_time_interval.is_ongoing())
-
-    def test_is_ongoing_returns_false_case_27(self):
-        bounded_time_interval = BoundedTimeInterval()
-        self.assertEqual(False, bounded_time_interval.is_ongoing())
-
-    def test_is_ongoing_returns_false_case_28(self):
-        bounded_time_interval = BoundedTimeInterval()
-        self.assertEqual(False, bounded_time_interval.is_ongoing())
-
-    def test_is_ongoing_returns_false_case_29(self):
-        bounded_time_interval = BoundedTimeInterval()
-        self.assertEqual(False, bounded_time_interval.is_ongoing())
-
-    def test_is_ongoing_returns_false_case_30(self):
-        bounded_time_interval = BoundedTimeInterval()
-        self.assertEqual(False, bounded_time_interval.is_ongoing())
-
-    def test_is_ongoing_returns_false_case_31(self):
-        bounded_time_interval = BoundedTimeInterval()
-        self.assertEqual(False, bounded_time_interval.is_ongoing())
-
-    def test_is_ongoing_returns_false_case_32(self):
-        bounded_time_interval = BoundedTimeInterval()
-        self.assertEqual(False, bounded_time_interval.is_ongoing())
-
-    def test_is_ongoing_returns_false_case_33(self):
-        bounded_time_interval = BoundedTimeInterval()
-        self.assertEqual(False, bounded_time_interval.is_ongoing())
-
-    def test_is_ongoing_returns_false_case_34(self):
-        bounded_time_interval = BoundedTimeInterval()
-        self.assertEqual(False, bounded_time_interval.is_ongoing())
-
-    def test_is_ongoing_returns_false_case_35(self):
-        bounded_time_interval = BoundedTimeInterval()
-        self.assertEqual(False, bounded_time_interval.is_ongoing())
-
-    def test_is_ongoing_returns_false_case_36(self):
-        bounded_time_interval = BoundedTimeInterval()
-        self.assertEqual(False, bounded_time_interval.is_ongoing())
-
-    def test_is_ongoing_returns_false_case_37(self):
-        bounded_time_interval = BoundedTimeInterval()
-        self.assertEqual(False, bounded_time_interval.is_ongoing())
-
-    def test_is_ongoing_returns_false_case_38(self):
-        bounded_time_interval = BoundedTimeInterval()
-        self.assertEqual(False, bounded_time_interval.is_ongoing())
-
-    def test_is_ongoing_returns_false_case_39(self):
-        bounded_time_interval = BoundedTimeInterval()
-        self.assertEqual(False, bounded_time_interval.is_ongoing())
-
-    def test_is_ongoing_returns_false_case_40(self):
-        bounded_time_interval = BoundedTimeInterval()
-        self.assertEqual(False, bounded_time_interval.is_ongoing())
-
-    def test_is_ongoing_returns_false_case_41(self):
-        bounded_time_interval = BoundedTimeInterval()
-        self.assertEqual(False, bounded_time_interval.is_ongoing())
-
-    def test_is_ongoing_returns_false_case_42(self):
-        bounded_time_interval = BoundedTimeInterval()
-        self.assertEqual(False, bounded_time_interval.is_ongoing())
-
-    def test_is_ongoing_returns_false_case_43(self):
-        bounded_time_interval = BoundedTimeInterval()
-        self.assertEqual(False, bounded_time_interval.is_ongoing())
-
-    def test_is_ongoing_returns_false_case_44(self):
-        bounded_time_interval = BoundedTimeInterval()
-        self.assertEqual(False, bounded_time_interval.is_ongoing())
-
-    def test_is_ongoing_returns_false_case_45(self):
-        bounded_time_interval = BoundedTimeInterval()
-        self.assertEqual(False, bounded_time_interval.is_ongoing())
-
-    def test_is_ongoing_returns_false_case_46(self):
-        bounded_time_interval = BoundedTimeInterval()
-        self.assertEqual(False, bounded_time_interval.is_ongoing())
-
+    @unittest.expectedFailure
     def test_subinterval_before(self):
         # bounded_time_interval = BoundedTimeInterval(first, last)
         # self.assertEqual(expected, bounded_time_interval.subinterval_before(a_datetime))
-        assert False # TODO: implement your test here
-
+        self.assertTrue(False, "Haven't implemented this test yet") 
+        # TODO: implement your test here
+    @unittest.expectedFailure
     def test_subinterval_starting_at_or_after(self):
         # bounded_time_interval = BoundedTimeInterval(first, last)
         # self.assertEqual(expected, bounded_time_interval.subinterval_starting_at_or_after(a_datetime))
-        assert False # TODO: implement your test here
-
+        self.assertTrue(False, "Haven't implemented this test yet") 
+        # TODO: implement your test here
 class TestOngoingTimeInterval(unittest.TestCase):
+    @unittest.expectedFailure
     def test___new__(self):
         # ongoing_time_interval = OngoingTimeInterval(first)
-        assert False # TODO: implement your test here
-
+        self.assertTrue(False, "Haven't implemented this test yet") 
+        # TODO: implement your test here
     def test___repr___returns_20130225_0016250500__Ongoing(self):
         ongoing_time_interval = OngoingTimeInterval()
         self.assertEqual('2013-02-25 00:16:25-05:00 - Ongoing', ongoing_time_interval.__repr__())
 
+    @unittest.expectedFailure
     def test_contains(self):
         # ongoing_time_interval = OngoingTimeInterval(first)
         # self.assertEqual(expected, ongoing_time_interval.contains(a_datetime))
-        assert False # TODO: implement your test here
-
+        self.assertTrue(False, "Haven't implemented this test yet") 
+        # TODO: implement your test here
+    @unittest.expectedFailure
     def test_intersection_with(self):
         # ongoing_time_interval = OngoingTimeInterval(first)
         # self.assertEqual(expected, ongoing_time_interval.intersection_with(a_TimeInterval))
-        assert False # TODO: implement your test here
-
+        self.assertTrue(False, "Haven't implemented this test yet") 
+        # TODO: implement your test here
     def test_is_ongoing_returns_true(self):
         ongoing_time_interval = OngoingTimeInterval()
         self.assertEqual(True, ongoing_time_interval.is_ongoing())
 
+    @unittest.expectedFailure
     def test_subinterval_before(self):
         # ongoing_time_interval = OngoingTimeInterval(first)
         # self.assertEqual(expected, ongoing_time_interval.subinterval_before(a_datetime))
-        assert False # TODO: implement your test here
-
+        self.assertTrue(False, "Haven't implemented this test yet") 
+        # TODO: implement your test here
+    @unittest.expectedFailure
     def test_subinterval_starting_at_or_after(self):
         # ongoing_time_interval = OngoingTimeInterval(first)
         # self.assertEqual(expected, ongoing_time_interval.subinterval_starting_at_or_after(a_datetime))
-        assert False # TODO: implement your test here
-
+        self.assertTrue(False, "Haven't implemented this test yet") 
+        # TODO: implement your test here
 class TestIncompatibleAPIVersionException(unittest.TestCase):
+    @unittest.expectedFailure
     def test___init__(self):
         # incompatible_api_version_exception = IncompatibleAPIVersionException(api_min_ver, api_supp_ver)
-        assert False # TODO: implement your test here
-
+        self.assertTrue(False, "Haven't implemented this test yet") 
+        # TODO: implement your test here
 class TestCaseAttribute(unittest.TestCase):
+    @unittest.expectedFailure
     def test___init__(self):
         # case_attribute = CaseAttribute(name, sample_data, description)
-        assert False # TODO: implement your test here
-
+        self.assertTrue(False, "Haven't implemented this test yet") 
+        # TODO: implement your test here
+    @unittest.expectedFailure
     def test_all(self):
         # case_attribute = CaseAttribute(name, sample_data, description)
         # self.assertEqual(expected, case_attribute.all())
-        assert False # TODO: implement your test here
-
+        self.assertTrue(False, "Haven't implemented this test yet") 
+        # TODO: implement your test here
+    @unittest.expectedFailure
     def test_from_name(self):
         # case_attribute = CaseAttribute(name, sample_data, description)
         # self.assertEqual(expected, case_attribute.from_name(name))
-        assert False # TODO: implement your test here
-
+        self.assertTrue(False, "Haven't implemented this test yet") 
+        # TODO: implement your test here
 class TestUnparsedCaseValue(unittest.TestCase):
+    @unittest.expectedFailure
     def test___init__(self):
         # unparsed_case_value = UnparsedCaseValue(attribute, text)
-        assert False # TODO: implement your test here
-
+        self.assertTrue(False, "Haven't implemented this test yet") 
+        # TODO: implement your test here
 class TestCase(unittest.TestCase):
+    @unittest.expectedFailure
     def test___init__(self):
         # case = Case(root)
-        assert False # TODO: implement your test here
-
+        self.assertTrue(False, "Haven't implemented this test yet") 
+        # TODO: implement your test here
 class TestLoginException(unittest.TestCase):
+    @unittest.expectedFailure
     def test___init__(self):
         # login_exception = LoginException(xml)
-        assert False # TODO: implement your test here
-
+        self.assertTrue(False, "Haven't implemented this test yet") 
+        # TODO: implement your test here
 class TestSession(unittest.TestCase):
+    @unittest.expectedFailure
     def test_isLoggedIn(self):
         # session = Session()
         # self.assertEqual(expected, session.isLoggedIn())
-        assert False # TODO: implement your test here
-
+        self.assertTrue(False, "Haven't implemented this test yet") 
+        # TODO: implement your test here
 if __name__ == '__main__':
     unittest.main()
