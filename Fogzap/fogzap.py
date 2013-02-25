@@ -74,7 +74,8 @@ def split_into_days( a_TimeInterval ):
             last_day = time_interval_for_day_containing( 
                 remaining.last, localtz )
             overlap = remaining.intersection_with(last_day)
-            result.extend(overlap)
+            #sys.stderr.write('Overlap: {}\n'.format(repr(overlap)))
+            result.append(overlap)
             # Update remaining to include everything before the first
             # instant of the last day.
             remaining = remaining.subinterval_before(last_day.first)
@@ -97,15 +98,18 @@ def summarize_intervals_by_day(intervals):
         determined by the local timezone.
     """
     # Make a list of intervals split so they don't overlap a day boundary
-    intervals = [i for i in intervals if not i.deleted]
-    split_intervals_l = [split_into_days(i.time_interval) for i in intervals]
-    split_intervals = (i for sublist in split_intervals_l for i in sublist)
+    extant = [i for i in intervals if not i.deleted]
+    print('Extant\n',extant)
+    split_intervals_l = [split_into_days(i.time_interval) for i in extant]
+    print('Split_l\n',split_intervals_l)
+    split_intervals = [i for sublist in split_intervals_l for i in sublist]
+    print('Split\n',split_intervals)
     
     # For each interval, add its duration to the day in which it falls
     days = {}
     for i in split_intervals:
-        start_day = start.date()
-        end_day = end.date()
+        start_day = i.first.date()
+        end_day = i.last.date()
             
         assert( start_day == end_day) # Make sure the splitting workede
 

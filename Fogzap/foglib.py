@@ -961,7 +961,7 @@ class Case(object):
         for child in root:
             name = child.tag
             attr = CaseAttribute.from_name(name)
-            self.unparsed.extend(UnparsedCaseValue(attr, child.tostring()))
+            self.unparsed.append(UnparsedCaseValue(attr, child.tostring()))
             if   'ixBug' == name:
                 self.id = int(child.text)
             elif 'ixBugParent' == name:
