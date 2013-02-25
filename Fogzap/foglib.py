@@ -434,7 +434,7 @@ class BoundedTimeInterval(collections.namedtuple("BoundedTimeInterval", ["first"
         elif hasattr(a_TimeInterval, 'first'): #Assume BoundedTimeInterval
             if ( # The two intervals overlap
                      a_TimeInterval.first <= self.last and 
-                     self.first <= TimeInterval.last): 
+                     self.first <= a_TimeInterval.last): 
                 return BoundedTimeInterval(
                     max(self.first, a_TimeInterval.first),
                     min(self.last, a_TimeInterval.last))
