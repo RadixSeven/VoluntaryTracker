@@ -342,7 +342,7 @@ all_commands[
 #
 #################
 
-def run_fogzap()
+def run_fogzap():
     username, password, address, last_upload_date = read_configuration_variables()
 
     # Handle command line arguments
