@@ -261,7 +261,9 @@ def list_unshared_intervals(session, last_upload_date, args):
     parser = argparse.ArgumentParser(prog = 'list_unshared_intervals')
     a = parser.parse_args(args=args)
 
-    intervals = session.list_intervals_since(last_upload_date)
+    first_listed = last_upload_date.replace(
+        hour=0, minute=0, second=0, microsecond=0) + datetime.timedelta(days=1)
+    intervals = session.list_intervals_since(first_listed)
     
     for i in intervals:
         print(i)
@@ -288,7 +290,9 @@ def list_unshared_work_times(session, last_upload_date, args):
     parser = argparse.ArgumentParser(prog = 'list_unshared_work_times')
     a = parser.parse_args(args=args)
 
-    intervals = session.list_intervals_since(last_upload_date)
+    first_listed = last_upload_date.replace(
+        hour=0, minute=0, second=0, microsecond=0) + datetime.timedelta(days=1)
+    intervals = session.list_intervals_since(first_listed)
 
     days = summarize_intervals_by_day(intervals)
     
@@ -319,7 +323,9 @@ def share_work_times(session, last_upload_date, args):
     parser = argparse.ArgumentParser(prog = 'list_unshared_work_times')
     a = parser.parse_args(args=args)
 
-    intervals = session.list_intervals_since(last_upload_date)
+    first_listed = last_upload_date.replace(
+        hour=0, minute=0, second=0, microsecond=0) + datetime.timedelta(days=1)
+    intervals = session.list_intervals_since(first_listed)
     
     days = summarize_intervals_by_day(intervals)
     
@@ -331,16 +337,35 @@ def share_work_times(session, last_upload_date, args):
     day_end_delta = ( datetime.timedelta(days=1)-
                       datetime.timedelta(microseconds=1) )
 
-    for day in sorted(days.keys()):
-        if day.date() < today:
-            fbconsole.post( 
-                '/me/fogzap_app:spend_time',
-                {'activity':('https://uri.insightnotnumbers.com/'
-                             'fogzap/2013-02Feb-23/activity/Working'),
-                 'duration':str(days[day]/3600),
-                 'start_time':day.isoformat(),
-                 'end_time':(day+day_end_delta).isoformat()
-                 } )
+    to_upload = sorted([day for day in days.keys() if day.date() < today])
+    for day in to_upload:
+        assert(day.date() < today)
+        fbconsole.post( 
+            '/me/fogzap_app:spend_time',
+            {'activity':('https://uri.insightnotnumbers.com/'
+                         'fogzap/2013-02Feb-23/activity/Working'),
+             'duration':str(days[day]/3600),
+             'start_time':day.isoformat(),
+             'end_time':(day+day_end_delta).isoformat()
+             } )
+
+    # If we got here without throwing exceptions we successfully
+    # uploaded (if there was anything to upload), so it is time to
+    # update the successful upload record pickle
+    if len(to_upload) > 0:
+        last_uploaded = max(to_upload).astimezone(LocalTimezone())
+        try:
+            with open(config_file.last_upload_date_loc, 'wb') as f:
+                pickle.dump(last_uploaded, f)
+        except IOError as e:
+            # Just let it return after printing a warning, being
+            # unable to update the last date is not fatal
+            stderr.write(
+                'Could not update last successful upload '
+                'time (error writing to {}): {}\n'.
+                format(config_file.last_upload_date_loc, str(e)))
+
+        
 
 all_commands[
     'share_work_times'] = Command('share_work_times',
