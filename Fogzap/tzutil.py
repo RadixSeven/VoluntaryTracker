@@ -46,11 +46,13 @@ class LocalTimezone(datetime.tzinfo):
         tt = _time.localtime(stamp)
         return tt.tm_isdst > 0
 
-    def now(self):
-        """Return a timezone aware datetime.datetime that represents the current microsecond"""
+    @staticmethod
+    def now():
+        """Return a timezone aware datetime.datetime that represents the current microsecond in the local timezone"""
         return datetime.datetime.now(LocalTimezone())
 
-    def in_future(self, a_datetime):
+    @staticmethod
+    def in_future(a_datetime):
         """Return true if a_datetime comes strictly after the current microsecond.
         
         a_datetime must be a timezone aware datetime.datetime object
@@ -66,7 +68,7 @@ class LocalTimezone(datetime.tzinfo):
         warned.
 
         """
-        return a_datetime > self.now()
+        return a_datetime > LocalTimezone.now()
 
 class UTC(datetime.tzinfo):
     """UTC class from the tzinfo documentation quoted in: http://stackoverflow.com/questions/2331592/datetime-datetime-utcnow-why-no-tzinfo"""
