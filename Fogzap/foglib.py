@@ -4,7 +4,7 @@ Library providing access to the fogbugz API
 
 """
 from __future__ import print_function
-import os.path, datetime, sys, pickle
+import os.path, datetime, sys, pickle, collections
 import requests
 import xml.etree.ElementTree as ET
 from tzutil import UTC,LocalTimezone
@@ -29,6 +29,8 @@ def fogbugz_datetime(date_str):
 class Interval(object):
     """Represents an interval recorded by the time-tracking parts of Fogbugz.
 
+    There are two subclasses: CompletedInterval and OngoingInterval
+
     Members:
 
         interval_id - The id number of this interval
@@ -39,17 +41,28 @@ class Interval(object):
         case_id - The id number of the case being worked on in this
               interval
 
-        start - A datetime object giving the start of the interval (or
-              None because I used the same code as for end)
+        time_interval - An instance of TimeInterval giving the time
+              accounted to this fogbugz tracked interval
 
-        end - A datetime object giving the end of the interval (or
-              None if the interval is still ongoing)
-
-        deleted Whether this interval was deleted after its creation
+        deleted - Whether this interval was deleted after its creation
 
         title The title of the case being worked on in this interval
     """
-    def __init__(self, interval_element):
+    def __init__(self, interval_id, person_id, case_id, time_interval, 
+        deleted, title):
+        """Set the cooresponding members to the provided values
+
+        (See class docstring for member description)
+        """
+        self.interval_id = interval_id
+        self.person_id = person_id
+        self.case_id = case_id
+        self.time_interval = time_interval
+        self.deleted = deleted
+        self.title = title
+
+    @staticmethod
+    def from_xml(interval_element):
         """Takes an xml interval element (xml.etree.ElementTree.Element) and constructs an Interval object containing all its data
 
         It is assumed that the the interval element is the root of a
@@ -66,25 +79,414 @@ class Interval(object):
 
         It is assumed that there is exactly one of each child and the
         code will die horribly if you violate its
-        assumptions. (Actually, the start and the endpoints can be
-        missing. If they are, instead of datetime objects, the
-        contents of self.start and self.end will be None respectively)
+        assumptions. (Actually, the end point can be
+        missing. If it is, self.end will be None)
         """
+        # Check that should operate like an interval_element (I'd
+        # rather there were some kind of contract I could check, but
+        # this will at least distinguish the expected bug where
+        # someone passes in an xml string)
+        assert(hasattr(interval_element, 'find'), "Interval.from_xml "
+               "is designed to take an xml.etree.ElementTree.Element "
+               "and needs an equivalently functioning find method.")
+        assert(hasattr(interval_element, 'text'), "Interval.from_xml "
+               "is designed to take an xml.etree.ElementTree.Element "
+               "and needs an equivalently functioning text method.")
         # Extract from xml tree
-        self.interval_id = int(interval_element.find('ixInterval').text)
-        self.person_id = int(interval_element.find('ixPerson').text)
-        self.case_id = int(interval_element.find('ixBug').text)
-        self.start = fogbugz_datetime(interval_element.find('dtStart').text)
-        self.end = fogbugz_datetime(interval_element.find('dtEnd').text)
-        self.deleted = interval_element.find('fDeleted').text == 'true'
-        self.title = interval_element.find('sTitle').text
+        interval_id = int(interval_element.find('ixInterval').text),
+        person_id = int(interval_element.find('ixPerson').text),
+        case_id = int(interval_element.find('ixBug').text),
+        start = fogbugz_datetime(interval_element.find('dtStart').text),
+        end = fogbugz_datetime(interval_element.find('dtEnd').text),
+        deleted = interval_element.find('fDeleted').text == 'true',
+        title = interval_element.find('sTitle').text)
 
+        if not start:
+            raise ValueError('The xml element from which a foglib.Interval '
+                'is constructed must have a start field.')
+        
         # Adjust start and endpoints to local time zone if they are not None
-        local = LocalTimezone();
-        if self.start:
-            self.start = self.start.astimezone(local);
-        if self.end:
-            self.end = self.end.astimezone(local);
+        local = LocalTimezone()
+        start = start.astimezone(local)
+        if end:
+            end = end.astimezone(local)
+
+        if end and end < start:
+                raise ValueError('The start data from which a foglib.Interval '
+                    'is constructed cannot have the end occurring before the '
+                    'start.')
+
+        # Construct the Interval objects
+        if end:
+            return Interval( interval_id = interval_id,
+                             person_id = person_id,
+                             case_id = case_id,
+                             BoundedTimeInterval(start, end),
+                             deleted = deleted,
+                             title = title )
+        else:
+            return Interval( interval_id = interval_id,
+                             person_id = person_id,
+                             case_id = case_id,
+                             OngoingTimeInterval(start),
+                             deleted = deleted,
+                             title = title )
+
+    def __str__(self):
+        return repr(self)
+
+    def __repr__(self):
+        return ''.join(['<',
+                 'ID:',      str(self.interval_id),' ',
+                 'Person:',  str(self.person_id),' ',
+                 'Case:',    str(self.case_id),' ',
+                 repr(self.interval), ' ',
+                 '(deleted)' if self.deleted else '(not deleted)','>']);
+
+class TimeInterval(object)
+    """Represents an interval in time
+
+    TimeIntervals are immutable. Any member datetime objects are
+    copied when new instances are made from old.
+
+    Subclasses must define six methods:
+
+    contains( self, a_datetime ) - which returns True iff the interval
+        includes the microsecond represented by a_datetime
+
+    intersection_with ( self, a_TimeInterval ) - which returns an
+        interval representing the times that are in both this interval
+        and a_TimeInterval
+
+        NOTE: this is currently implemented in a fragile way. If you
+            add any TimeInterval subclasses, you need to go through
+            and check that each subclass intersection_with method
+            specializes checks for members of your subclass and does
+            the intersection correctly. Since I don't expect any new
+            direct TimeInterval subclasses this seems the least
+            complex way of implementing it. However, if you are
+            considering implementing one, I was obviously wrong and I
+            apologize.
+
+    is_ongoing ( self ) - which returns True iff the interval includes
+        the present time but the endpoint is unknown
+
+    subinterval_before (self, a_datetime ) - which returns the
+        intersection between this TimeInterval and the interval
+        containing all time up to but not including the microsecond
+        represented by a_datetime (which must be a timezone aware
+        datetime object) Raises a ValueError when a_datetime is in the
+        future and is_ongoing is true.
+
+    subinterval_starting_at_or_after (self, a_datetime ) - which returns the
+        intersection between this TimeInterval and the interval which
+        includes the microsecond represented by a_datetime and all
+        time after it. (a_datetime which must be a timezone aware
+        datetime object) Raises a ValueError when a_datetime is in the
+        future and is_ongoing is true.
+
+    __repr__( self ) - just as usual
+
+    """
+    def __str__(self):
+        return repr(self)
+
+class EmptyTimeInterval(TimeInterval):
+    """Represents an interval which contains no time"""
+
+    def contains( self, a_datetime ):
+        """Return True iff the interval includes the microsecond represented by a_datetime
+
+        The empty interval never contains any time
+
+        """
+        return False
+
+    def intersection_with( self, a_TimeInterval ):
+        """Returns an interval representing the times that are in both this interval and a_TimeInterval
+
+        Always an EmptyTimeInterval
+
+        """
+        return EmptyTimeInterval()
+
+    def is_ongoing ( self ):
+        """Returns True iff the interval includes the present time but
+        the endpoint is unknown
+
+        The empty interval never includes the present
+
+        """
+        return False
+
+    def subinterval_before( self, a_datetime ):
+        """Returns the intersection between this TimeInterval and the
+        interval containing all time up to but not including the
+        microsecond represented by a_datetime
+
+        Raises a ValueError when a_datetime is in the future and
+        is_ongoing is true.
+
+        a_datetime - a timezone aware datetime object
+
+        """
+        return EmptyTimeInterval()
+
+    def subinterval_starting_at_or_after( self, a_datetime ):
+        """Returns the intersection between this TimeInterval and the
+        interval which includes the microsecond represented by
+        a_datetime and all time after it.
+
+        Raises a ValueError when a_datetime is in the future and
+        is_ongoing is true.
+
+        a_datetime - a timezone aware datetime object
+
+        """
+        return EmptyTimeInterval()
+
+    def __repr__(self):
+        return "Empty time interval"
+
+
+class BoundedTimeInterval(collections.namedtuple("BoundedTimeInterval", ["first", "last"]),TimeInterval): 
+    """Represents a closed interval in time with a known start and endpoint
+
+    first - A timezone aware datetime object giving the first
+        microsecond contained in the interval. Cannot be None. Must
+        come at or before end.
+
+    last - A timezone aware datetime object giving the last
+        microsecond contained in this interval. Cannot be None. Must
+        come at or after end.
+
+    It is subclassed from namedtuple because that was the way
+    stackoverflow recommended doing immutability. 
+
+    Copies of the input datetime objects are contained in the
+    constructed BoundedTimeInterval object.
+
+    """
+    def __new__(cls, first, last):
+        """Set the cooresponding members to the provided values
+
+        (See class docstring for member description)
+        """
+
+        if last is None:
+            raise ValueError("The ending time of a fogbugz "
+                             "BoundedTimeInterval must be defined.")
+
+        if tzutil.is_naive(last):
+            raise ValueError("Ending time of a fogbugz "
+               "CompletedInterval must be timezone aware")
+
+        if first is None:
+            raise ValueError("The starting time of a fogbugz "
+                             "BoundedTimeInterval must be defined.")
+
+        if tzutil.is_naive(first):
+            raise ValueError("Starting time of a fogbugz "
+               "CompletedInterval must be timezone aware")
+        
+        return cls.__bases__[0].__new__(cls, copy(first), copy(last))
+
+
+    def is_ongoing ( self ):
+        """Returns True iff the interval includes the present time but
+        the endpoint is unknown
+
+        The endpoint of a BoundedTimeInterval is always known, so it
+        returns False
+
+        """
+        return False
+
+
+    def subinterval_before(self, a_datetime):
+        """Returns the intersection between this TimeInterval and the
+        interval containing all time up to but not including the
+        microsecond represented by a_datetime
+
+        Raises a ValueError when a_datetime is in the future and
+        is_ongoing is true.
+
+        a_datetime - a timezone aware datetime object
+
+        """
+
+        if not self.contains(a_datetime):
+            return EmptyTimeInterval()
+        
+        microsec_before_a_datetime = (
+            a_datetime - datetime.timedelta(microseconds=1))
+        if self.last <= microsec_before_a_datetime
+            new_last = self.last
+        else:
+            new_last = microsec_before_a_datetime
+
+        if self.first <= new_last:
+            return BoundedTimeInterval(self.first, new_last)
+        else:
+            return EmptyTimeInterval()
+        
+    def subinterval_starting_at_or_after( self, a_datetime ):
+        """Returns the intersection between this TimeInterval and the
+        interval which includes the microsecond represented by
+        a_datetime and all time after it.
+
+        Raises a ValueError when a_datetime is in the future and
+        is_ongoing is true.
+
+        a_datetime - a timezone aware datetime object
+
+        The new first instant will be the later of a_datetime and self.first
+        """
+        if not self.contains(a_datetime):
+            return EmptyTimeInterval()
+        
+        if self.first <= a_datetime:
+            new_first = a_datetime
+        else:
+            new_first = self.first
+
+        assert(new_first <= self.last )
+        # I believe this is true because self.first <= self.last and
+        # a_datetime <= self.last (since a_datetime is contained in
+        # the interval). new_first can only be a_datetime or
+        # self.first, so the relation has to hold. However, this is
+        # complicated reasoning, so I'm adding an assert as defensive
+        # programming.
+
+        return BoundedTimeInterval(new_first, self.last)
+
+    def contains( self, a_datetime ):
+        """Return True iff the interval includes the microsecond represented by a_datetime
+
+        True iff first <= a_datetime <= last
+
+        """
+        return self.first <= a_datetime && a_datetime <= self.last
+
+    def intersection_with( self, a_TimeInterval ):
+        """Returns an interval representing the times that are in both this interval and a_TimeInterval
+
+        Note: this is fragile and depends on knowing what all the
+           subclasses of TimeInterval are (see my note on this method
+           in the TimeInterval docstring)
+
+        Raises a ValueError when this time interval contains instants
+        in the future and a_TimeInterval is ongoing (since you don't
+        know when the ongoing interval will stop.)
+
+        """
+        # Detect if someone has implemented a subclass not known at
+        # the time of this writing and tried to find the
+        # intersection. Fail so this will be caught in testing.
+        assert(isinstance(
+            a_TimeInterval, 
+            (EmptyTimeInterval, BoundedTimeInterval, OngoingTimeInterval)))
+
+        if a_TimeInterval.is_ongoing():
+            if LocalTimezone.in_future(self.last):
+                raise ValueError(
+                    "Cannot determine the intersection between {} and {} "
+                    "because the first includes the future and the second is "
+                    "ongoing, so we don't know when it will stop.".format(
+                        self, a_TimeInterval))
+            else:
+                # Here I assume that all objects with is_ongoing true
+                # have a first member
+                return (intersection_with(
+                    self, BoundedTimeInterval(
+                        a_TimeInterval.first, LocalTimezone.now()
+                        )))
+        elif hasattr(a_TimeInterval, 'first'): #Assume BoundedTimeInterval
+            if ( # The two intervals overlap
+                     a_TimeInterval.first <= self.last and 
+                     self.first <= TimeInterval.last): 
+                return BoundedTimeInterval(
+                    max(self.first, a_TimeInterval.first),
+                    min(self.last, a_TimeInterval.last))
+            else:
+                return EmptyTimeInterval()
+        else: # We can assume EmptyTimeInterval due to the assert at the
+              # beginning of the method
+            return EmptyTimeInterval()
+
+    def __repr__(self):
+        return ''.join([str(self.first), ' - ', str(last)])
+
+
+
+class OngoingTimeInterval(collections.namedtuple("BoundedTimeInterval", ["first"]),TimeInterval): #TODO: finish
+    """Represents an interval recorded by the time-tracking parts of Fogbugz.
+
+    There are two subclasses: CompletedInterval and OngoingInterval
+
+    Members:
+
+        interval_id - The id number of this interval
+
+        person_id - The id number of the person working during this
+              interval
+
+        case_id - The id number of the case being worked on in this
+              interval
+
+        start - A timezone aware datetime object giving the start of
+              the interval. Cannot be None.
+
+        end - A timezone aware datetime object giving the end of the
+              interval (or None if the interval is still ongoing)
+
+        deleted Whether this interval was deleted after its creation
+
+        title The title of the case being worked on in this interval
+    """
+    def __init__(self, interval_id, person_id, case_id, start, 
+        end, deleted, title):
+        """Set the cooresponding members to the provided values
+
+        (See class docstring for member description)
+        """
+        self.interval_id = interval_id
+        self.person_id = person_id
+        self.case_id = case_id
+        self.start = start
+        self.end = end
+        self.deleted = deleted
+        self.title = title
+
+        if self.start is None:
+            raise ValueError("The starting time of a fogbugz "
+                             "Interval must be defined.")
+
+        if tzutil.is_naive(self.start):
+            raise ValueError("Starting time of a fogbugz "
+               "Interval must be timezone aware")
+
+        if self.end and tzutil.is_naive(self.end):
+            raise ValueError("Ending time of a fogbugz "
+               "Interval must be timezone aware if it is defined")
+
+
+    def subinterval_before(self, instant):
+        """Returns an identical interval covering all time before instant
+
+        The returned interval is identical to the current interval
+        except end is set to the earlier of end and instant-1
+        microsecond.
+
+        instant - a timezone aware datetime object.
+        """
+
+    def lastest_time_currently_in_interval(self):
+        """Returns end or the current time instant if end is None
+
+        end being None represents that the interval is ongoing. At any given time, the latest time in the interval is 
+
+        """
 
     def __str__(self):
         return repr(self)
@@ -95,6 +497,7 @@ class Interval(object):
                  'Case:',    str(self.case_id),' ',
                  str(self.start),' - ',str(self.end), ' ',
                  '(deleted)' if self.deleted else '(not deleted)','>']);
+
 
 class IncompatibleAPIVersionException(object):
     """The API is no longer compatible with the version supported by this library
