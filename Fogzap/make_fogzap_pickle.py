@@ -1,5 +1,5 @@
 #!/usr/bin/python
-from __future__ import print_function
+#from __future__ import print_function
 import argparse, os.path, datetime, sys, pickle, errno
 import config_file
 from tzutil import LocalTimezone
@@ -24,8 +24,8 @@ def run_make_fogzap_pickle(cmd_args):
         if exc.errno == errno.EEXIST and os.path.isdir(config_file.pickle_dir):
             pass #Ignore when directory already exists
         else: 
-            print('Could not ensure that "{}" was a directory'.format(
-                    config_file.pickle_dir), file=sys.stderr)
+            stderr.write('Could not ensure that "{}" was a directory'.format(
+                    config_file.pickle_dir))
             sys.exit(0)
 
     # Read in old vlaues for the configuration variables
@@ -118,8 +118,7 @@ def run_make_fogzap_pickle(cmd_args):
             with open(config_file.fogbugz_loc, 'wb') as f:
                 pickle.dump([username, password, address], f)
         except IOError as e:
-            print('Error writing to %r' % config_file.fogbugz_loc, 
-                  file=sys.stderr)
+            stderr.write('Error writing to %r\n' % config_file.fogbugz_loc)
             sys.exit(0)
 
     # Set (and possibly write) any new values for last_upload.pickle
@@ -135,8 +134,9 @@ def run_make_fogzap_pickle(cmd_args):
             with open(config_file.last_upload_date_loc, 'wb') as f:
                 pickle.dump(last_upload_date, f)
         except IOError as e:
-            print('Error writing to %r' % config_file.last_upload_date_loc, 
-                  file=sys.stderr)
+            stderr.write('Error writing to %r\n' % 
+                         config_file.last_upload_date_loc)
+    
             sys.exit(0)
 
 if __name__ == '__main__':

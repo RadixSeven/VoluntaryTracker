@@ -1,5 +1,4 @@
 #!/usr/bin/python
-from __future__ import print_function
 import os.path, datetime, sys, pickle, argparse, textwrap, inspect
 import xml.etree.ElementTree as ET
 
@@ -176,21 +175,21 @@ class Command(object):
         try:
             session.login(username, password, address)
         except IncompatibleAPIVersionException as e:
-            print(('Fogbugz api has changed incompatibly since version {} '
-                  'where this code was written. Minimum version is now {}. '
-                   'Quitting.').format(e.api_supp_ver, e.api_min_ver),
-                  file = sys.stderr)
+            sys.stderr.write(('Fogbugz api has changed incompatibly since '
+                              'version {} where this code was written. '
+                              'Minimum version is now {}. Quitting.').
+                             format(e.api_supp_ver, e.api_min_ver))
             sys.exit(0)
         except IncompatibleAPICallFormatException:
-            print('Method of making api calls has changed - query url fragment '
-                  'no longer ends in a ?. Cannot continue until someone has '
-                  'updated the program for the new calling parameter.', 
-                  file = sys.stderr)
+            sys.stderr.write(
+                'Method of making api calls has changed - ''query url fragment '
+                'no longer ends in a ?. Cannot continue until someone has '
+                'updated the program for the new calling parameter.')
             sys.exit(0)
         except LoginException as e:
-            print(('Could not log on to fogbugz. '
-                  'Actual xml returned is {}').format(login_resp.text), 
-                  file = sys.stderr)
+            sys.stderr.write(
+                ('Could not log on to fogbugz. '
+                 'Actual xml returned is {}').format(login_resp.text))
             sys.exit(0)
         
         # Execute the function
