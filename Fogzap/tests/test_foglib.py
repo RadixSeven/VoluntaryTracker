@@ -48,550 +48,550 @@ def datetime_from_19_char_string(s):
     
 class TestFogbugzDatetime(unittest.TestCase):
     def test_fogbugz_datetime_returns_20130221_0500000000_for_20130221T050000Z(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-21T05:00:00Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-21T05:00:00Z')))
 
     def test_fogbugz_datetime_returns_20130221_0500000000_for_20130221T050000Z_case_2(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-21T05:00:00Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-21T05:00:00Z')))
 
     def test_fogbugz_datetime_returns_20130221_0606500000_for_20130221T060650Z(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-21T06:06:50Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-21T06:06:50Z')))
 
     def test_fogbugz_datetime_returns_20130221_0606500000_for_20130221T060650Z_case_2(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-21T06:06:50Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-21T06:06:50Z')))
 
     def test_fogbugz_datetime_returns_20130221_0607030000_for_20130221T060703Z(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-21T06:07:03Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-21T06:07:03Z')))
 
     def test_fogbugz_datetime_returns_20130221_0607030000_for_20130221T060703Z_case_2(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-21T06:07:03Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-21T06:07:03Z')))
 
     def test_fogbugz_datetime_returns_20130221_1025000000_for_20130221T102500Z(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-21T10:25:00Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-21T10:25:00Z')))
 
     def test_fogbugz_datetime_returns_20130221_1025000000_for_20130221T102500Z_case_2(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-21T10:25:00Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-21T10:25:00Z')))
 
     def test_fogbugz_datetime_returns_20130221_1025000000_for_20130221T102500Z_case_3(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-21T10:25:00Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-21T10:25:00Z')))
 
     def test_fogbugz_datetime_returns_20130221_1025000000_for_20130221T102500Z_case_4(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-21T10:25:00Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-21T10:25:00Z')))
 
     def test_fogbugz_datetime_returns_20130221_1051060000_for_20130221T105106Z(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-21T10:51:06Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-21T10:51:06Z')))
 
     def test_fogbugz_datetime_returns_20130221_1051060000_for_20130221T105106Z_case_2(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-21T10:51:06Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-21T10:51:06Z')))
 
     def test_fogbugz_datetime_returns_20130221_1804000000_for_20130221T180400Z(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-21T18:04:00Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-21T18:04:00Z')))
 
     def test_fogbugz_datetime_returns_20130221_1804000000_for_20130221T180400Z_case_2(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-21T18:04:00Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-21T18:04:00Z')))
 
     def test_fogbugz_datetime_returns_20130221_1825000000_for_20130221T182500Z(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-21T18:25:00Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-21T18:25:00Z')))
 
     def test_fogbugz_datetime_returns_20130221_1825000000_for_20130221T182500Z_case_2(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-21T18:25:00Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-21T18:25:00Z')))
 
     def test_fogbugz_datetime_returns_20130221_1825000000_for_20130221T182500Z_case_3(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-21T18:25:00Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-21T18:25:00Z')))
 
     def test_fogbugz_datetime_returns_20130221_1825000000_for_20130221T182500Z_case_4(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-21T18:25:00Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-21T18:25:00Z')))
 
     def test_fogbugz_datetime_returns_20130221_1831090000_for_20130221T183109Z(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-21T18:31:09Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-21T18:31:09Z')))
 
     def test_fogbugz_datetime_returns_20130221_1831090000_for_20130221T183109Z_case_2(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-21T18:31:09Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-21T18:31:09Z')))
 
     def test_fogbugz_datetime_returns_20130221_1831090000_for_20130221T183109Z_case_3(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-21T18:31:09Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-21T18:31:09Z')))
 
     def test_fogbugz_datetime_returns_20130221_1831090000_for_20130221T183109Z_case_4(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-21T18:31:09Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-21T18:31:09Z')))
 
     def test_fogbugz_datetime_returns_20130221_1845410000_for_20130221T184541Z(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-21T18:45:41Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-21T18:45:41Z')))
 
     def test_fogbugz_datetime_returns_20130221_1845410000_for_20130221T184541Z_case_2(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-21T18:45:41Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-21T18:45:41Z')))
 
     def test_fogbugz_datetime_returns_20130221_1846100000_for_20130221T184610Z(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-21T18:46:10Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-21T18:46:10Z')))
 
     def test_fogbugz_datetime_returns_20130221_1846100000_for_20130221T184610Z_case_2(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-21T18:46:10Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-21T18:46:10Z')))
 
     def test_fogbugz_datetime_returns_20130221_1907160000_for_20130221T190716Z(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-21T19:07:16Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-21T19:07:16Z')))
 
     def test_fogbugz_datetime_returns_20130221_1907160000_for_20130221T190716Z_case_2(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-21T19:07:16Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-21T19:07:16Z')))
 
     def test_fogbugz_datetime_returns_20130221_1907160000_for_20130221T190716Z_case_3(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-21T19:07:16Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-21T19:07:16Z')))
 
     def test_fogbugz_datetime_returns_20130221_1907160000_for_20130221T190716Z_case_4(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-21T19:07:16Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-21T19:07:16Z')))
 
     def test_fogbugz_datetime_returns_20130221_1932300000_for_20130221T193230Z(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-21T19:32:30Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-21T19:32:30Z')))
 
     def test_fogbugz_datetime_returns_20130221_1932300000_for_20130221T193230Z_case_2(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-21T19:32:30Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-21T19:32:30Z')))
 
     def test_fogbugz_datetime_returns_20130221_1932300000_for_20130221T193230Z_case_3(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-21T19:32:30Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-21T19:32:30Z')))
 
     def test_fogbugz_datetime_returns_20130221_1932300000_for_20130221T193230Z_case_4(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-21T19:32:30Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-21T19:32:30Z')))
 
     def test_fogbugz_datetime_returns_20130221_2032380000_for_20130221T203238Z(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-21T20:32:38Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-21T20:32:38Z')))
 
     def test_fogbugz_datetime_returns_20130221_2032380000_for_20130221T203238Z_case_2(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-21T20:32:38Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-21T20:32:38Z')))
 
     def test_fogbugz_datetime_returns_20130221_2032380000_for_20130221T203238Z_case_3(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-21T20:32:38Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-21T20:32:38Z')))
 
     def test_fogbugz_datetime_returns_20130221_2032380000_for_20130221T203238Z_case_4(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-21T20:32:38Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-21T20:32:38Z')))
 
     def test_fogbugz_datetime_returns_20130221_2130000000_for_20130221T213000Z(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-21T21:30:00Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-21T21:30:00Z')))
 
     def test_fogbugz_datetime_returns_20130221_2130000000_for_20130221T213000Z_case_2(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-21T21:30:00Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-21T21:30:00Z')))
 
     def test_fogbugz_datetime_returns_20130221_2130000000_for_20130221T213000Z_case_3(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-21T21:30:00Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-21T21:30:00Z')))
 
     def test_fogbugz_datetime_returns_20130221_2130000000_for_20130221T213000Z_case_4(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-21T21:30:00Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-21T21:30:00Z')))
 
     def test_fogbugz_datetime_returns_20130221_2146090000_for_20130221T214609Z(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-21T21:46:09Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-21T21:46:09Z')))
 
     def test_fogbugz_datetime_returns_20130221_2146090000_for_20130221T214609Z_case_2(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-21T21:46:09Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-21T21:46:09Z')))
 
     def test_fogbugz_datetime_returns_20130221_2146090000_for_20130221T214609Z_case_3(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-21T21:46:09Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-21T21:46:09Z')))
 
     def test_fogbugz_datetime_returns_20130221_2146090000_for_20130221T214609Z_case_4(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-21T21:46:09Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-21T21:46:09Z')))
 
     def test_fogbugz_datetime_returns_20130221_2236020000_for_20130221T223602Z(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-21T22:36:02Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-21T22:36:02Z')))
 
     def test_fogbugz_datetime_returns_20130221_2236020000_for_20130221T223602Z_case_2(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-21T22:36:02Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-21T22:36:02Z')))
 
     def test_fogbugz_datetime_returns_20130221_2300500000_for_20130221T230050Z(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-21T23:00:50Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-21T23:00:50Z')))
 
     def test_fogbugz_datetime_returns_20130221_2300500000_for_20130221T230050Z_case_2(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-21T23:00:50Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-21T23:00:50Z')))
 
     def test_fogbugz_datetime_returns_20130221_2302110000_for_20130221T230211Z(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-21T23:02:11Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-21T23:02:11Z')))
 
     def test_fogbugz_datetime_returns_20130221_2302110000_for_20130221T230211Z_case_2(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-21T23:02:11Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-21T23:02:11Z')))
 
     def test_fogbugz_datetime_returns_20130221_2302110000_for_20130221T230211Z_case_3(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-21T23:02:11Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-21T23:02:11Z')))
 
     def test_fogbugz_datetime_returns_20130221_2302110000_for_20130221T230211Z_case_4(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-21T23:02:11Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-21T23:02:11Z')))
 
     def test_fogbugz_datetime_returns_20130221_2311080000_for_20130221T231108Z(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-21T23:11:08Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-21T23:11:08Z')))
 
     def test_fogbugz_datetime_returns_20130221_2311080000_for_20130221T231108Z_case_2(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-21T23:11:08Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-21T23:11:08Z')))
 
     def test_fogbugz_datetime_returns_20130221_2311080000_for_20130221T231108Z_case_3(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-21T23:11:08Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-21T23:11:08Z')))
 
     def test_fogbugz_datetime_returns_20130221_2311080000_for_20130221T231108Z_case_4(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-21T23:11:08Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-21T23:11:08Z')))
 
     def test_fogbugz_datetime_returns_20130221_2314570000_for_20130221T231457Z(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-21T23:14:57Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-21T23:14:57Z')))
 
     def test_fogbugz_datetime_returns_20130221_2314570000_for_20130221T231457Z_case_2(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-21T23:14:57Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-21T23:14:57Z')))
 
     def test_fogbugz_datetime_returns_20130221_2314570000_for_20130221T231457Z_case_3(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-21T23:14:57Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-21T23:14:57Z')))
 
     def test_fogbugz_datetime_returns_20130221_2314570000_for_20130221T231457Z_case_4(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-21T23:14:57Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-21T23:14:57Z')))
 
     def test_fogbugz_datetime_returns_20130222_0004110000_for_20130222T000411Z(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-22T00:04:11Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-22T00:04:11Z')))
 
     def test_fogbugz_datetime_returns_20130222_0004110000_for_20130222T000411Z_case_2(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-22T00:04:11Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-22T00:04:11Z')))
 
     def test_fogbugz_datetime_returns_20130222_0004270000_for_20130222T000427Z(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-22T00:04:27Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-22T00:04:27Z')))
 
     def test_fogbugz_datetime_returns_20130222_0004270000_for_20130222T000427Z_case_2(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-22T00:04:27Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-22T00:04:27Z')))
 
     def test_fogbugz_datetime_returns_20130222_0203300000_for_20130222T020330Z(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-22T02:03:30Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-22T02:03:30Z')))
 
     def test_fogbugz_datetime_returns_20130222_0203300000_for_20130222T020330Z_case_2(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-22T02:03:30Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-22T02:03:30Z')))
 
     def test_fogbugz_datetime_returns_20130222_0203300000_for_20130222T020330Z_case_3(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-22T02:03:30Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-22T02:03:30Z')))
 
     def test_fogbugz_datetime_returns_20130222_0203300000_for_20130222T020330Z_case_4(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-22T02:03:30Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-22T02:03:30Z')))
 
     def test_fogbugz_datetime_returns_20130222_0229260000_for_20130222T022926Z(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-22T02:29:26Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-22T02:29:26Z')))
 
     def test_fogbugz_datetime_returns_20130222_0229260000_for_20130222T022926Z_case_2(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-22T02:29:26Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-22T02:29:26Z')))
 
     def test_fogbugz_datetime_returns_20130222_0229260000_for_20130222T022926Z_case_3(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-22T02:29:26Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-22T02:29:26Z')))
 
     def test_fogbugz_datetime_returns_20130222_0229260000_for_20130222T022926Z_case_4(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-22T02:29:26Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-22T02:29:26Z')))
 
     def test_fogbugz_datetime_returns_20130222_0252300000_for_20130222T025230Z(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-22T02:52:30Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-22T02:52:30Z')))
 
     def test_fogbugz_datetime_returns_20130222_0252300000_for_20130222T025230Z_case_2(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-22T02:52:30Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-22T02:52:30Z')))
 
     def test_fogbugz_datetime_returns_20130222_1559000000_for_20130222T155900Z(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-22T15:59:00Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-22T15:59:00Z')))
 
     def test_fogbugz_datetime_returns_20130222_1559000000_for_20130222T155900Z_case_2(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-22T15:59:00Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-22T15:59:00Z')))
 
     def test_fogbugz_datetime_returns_20130222_1803000000_for_20130222T180300Z(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-22T18:03:00Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-22T18:03:00Z')))
 
     def test_fogbugz_datetime_returns_20130222_1803000000_for_20130222T180300Z_case_2(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-22T18:03:00Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-22T18:03:00Z')))
 
     def test_fogbugz_datetime_returns_20130222_1803000000_for_20130222T180300Z_case_3(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-22T18:03:00Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-22T18:03:00Z')))
 
     def test_fogbugz_datetime_returns_20130222_1803000000_for_20130222T180300Z_case_4(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-22T18:03:00Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-22T18:03:00Z')))
 
     def test_fogbugz_datetime_returns_20130222_1837000000_for_20130222T183700Z(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-22T18:37:00Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-22T18:37:00Z')))
 
     def test_fogbugz_datetime_returns_20130222_1837000000_for_20130222T183700Z_case_2(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-22T18:37:00Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-22T18:37:00Z')))
 
     def test_fogbugz_datetime_returns_20130222_1837000000_for_20130222T183700Z_case_3(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-22T18:37:00Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-22T18:37:00Z')))
 
     def test_fogbugz_datetime_returns_20130222_1837000000_for_20130222T183700Z_case_4(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-22T18:37:00Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-22T18:37:00Z')))
 
     def test_fogbugz_datetime_returns_20130222_1847000000_for_20130222T184700Z(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-22T18:47:00Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-22T18:47:00Z')))
 
     def test_fogbugz_datetime_returns_20130222_1847000000_for_20130222T184700Z_case_2(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-22T18:47:00Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-22T18:47:00Z')))
 
     def test_fogbugz_datetime_returns_20130222_1847000000_for_20130222T184700Z_case_3(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-22T18:47:00Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-22T18:47:00Z')))
 
     def test_fogbugz_datetime_returns_20130222_1847000000_for_20130222T184700Z_case_4(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-22T18:47:00Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-22T18:47:00Z')))
 
     def test_fogbugz_datetime_returns_20130222_2123000000_for_20130222T212300Z(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-22T21:23:00Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-22T21:23:00Z')))
 
     def test_fogbugz_datetime_returns_20130222_2123000000_for_20130222T212300Z_case_2(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-22T21:23:00Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-22T21:23:00Z')))
 
     def test_fogbugz_datetime_returns_20130222_2123000000_for_20130222T212300Z_case_3(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-22T21:23:00Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-22T21:23:00Z')))
 
     def test_fogbugz_datetime_returns_20130222_2123000000_for_20130222T212300Z_case_4(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-22T21:23:00Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-22T21:23:00Z')))
 
     def test_fogbugz_datetime_returns_20130222_2130000000_for_20130222T213000Z(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-22T21:30:00Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-22T21:30:00Z')))
 
     def test_fogbugz_datetime_returns_20130222_2130000000_for_20130222T213000Z_case_2(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-22T21:30:00Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-22T21:30:00Z')))
 
     def test_fogbugz_datetime_returns_20130222_2130000000_for_20130222T213000Z_case_3(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-22T21:30:00Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-22T21:30:00Z')))
 
     def test_fogbugz_datetime_returns_20130222_2130000000_for_20130222T213000Z_case_4(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-22T21:30:00Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-22T21:30:00Z')))
 
     def test_fogbugz_datetime_returns_20130222_2319000000_for_20130222T231900Z(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-22T23:19:00Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-22T23:19:00Z')))
 
     def test_fogbugz_datetime_returns_20130222_2319000000_for_20130222T231900Z_case_2(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-22T23:19:00Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-22T23:19:00Z')))
 
     def test_fogbugz_datetime_returns_20130222_2319000000_for_20130222T231900Z_case_3(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-22T23:19:00Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-22T23:19:00Z')))
 
     def test_fogbugz_datetime_returns_20130222_2319000000_for_20130222T231900Z_case_4(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-22T23:19:00Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-22T23:19:00Z')))
 
     def test_fogbugz_datetime_returns_20130222_2321000000_for_20130222T232100Z(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-22T23:21:00Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-22T23:21:00Z')))
 
     def test_fogbugz_datetime_returns_20130222_2321000000_for_20130222T232100Z_case_2(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-22T23:21:00Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-22T23:21:00Z')))
 
     def test_fogbugz_datetime_returns_20130222_2321000000_for_20130222T232100Z_case_3(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-22T23:21:00Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-22T23:21:00Z')))
 
     def test_fogbugz_datetime_returns_20130222_2321000000_for_20130222T232100Z_case_4(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-22T23:21:00Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-22T23:21:00Z')))
 
     def test_fogbugz_datetime_returns_20130222_2324000000_for_20130222T232400Z(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-22T23:24:00Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-22T23:24:00Z')))
 
     def test_fogbugz_datetime_returns_20130222_2324000000_for_20130222T232400Z_case_2(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-22T23:24:00Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-22T23:24:00Z')))
 
     def test_fogbugz_datetime_returns_20130222_2324260000_for_20130222T232426Z(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-22T23:24:26Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-22T23:24:26Z')))
 
     def test_fogbugz_datetime_returns_20130222_2324260000_for_20130222T232426Z_case_2(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-22T23:24:26Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-22T23:24:26Z')))
 
     def test_fogbugz_datetime_returns_20130222_2353030000_for_20130222T235303Z(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-22T23:53:03Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-22T23:53:03Z')))
 
     def test_fogbugz_datetime_returns_20130222_2353030000_for_20130222T235303Z_case_2(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-22T23:53:03Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-22T23:53:03Z')))
 
     def test_fogbugz_datetime_returns_20130223_0247000000_for_20130223T024700Z(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-23T02:47:00Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-23T02:47:00Z')))
 
     def test_fogbugz_datetime_returns_20130223_0247000000_for_20130223T024700Z_case_2(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-23T02:47:00Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-23T02:47:00Z')))
 
     def test_fogbugz_datetime_returns_20130223_0251000000_for_20130223T025100Z(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-23T02:51:00Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-23T02:51:00Z')))
 
     def test_fogbugz_datetime_returns_20130223_0251000000_for_20130223T025100Z_case_2(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-23T02:51:00Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-23T02:51:00Z')))
 
     def test_fogbugz_datetime_returns_20130223_0321540000_for_20130223T032154Z(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-23T03:21:54Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-23T03:21:54Z')))
 
     def test_fogbugz_datetime_returns_20130223_0321540000_for_20130223T032154Z_case_2(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-23T03:21:54Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-23T03:21:54Z')))
 
     def test_fogbugz_datetime_returns_20130223_0344000000_for_20130223T034400Z(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-23T03:44:00Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-23T03:44:00Z')))
 
     def test_fogbugz_datetime_returns_20130223_0344000000_for_20130223T034400Z_case_2(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-23T03:44:00Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-23T03:44:00Z')))
 
     def test_fogbugz_datetime_returns_20130223_0344000000_for_20130223T034400Z_case_3(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-23T03:44:00Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-23T03:44:00Z')))
 
     def test_fogbugz_datetime_returns_20130223_0344000000_for_20130223T034400Z_case_4(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-23T03:44:00Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-23T03:44:00Z')))
 
     def test_fogbugz_datetime_returns_20130223_0401180000_for_20130223T040118Z(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-23T04:01:18Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-23T04:01:18Z')))
 
     def test_fogbugz_datetime_returns_20130223_0401180000_for_20130223T040118Z_case_2(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-23T04:01:18Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-23T04:01:18Z')))
 
     def test_fogbugz_datetime_returns_20130223_0523000000_for_20130223T052300Z(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-23T05:23:00Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-23T05:23:00Z')))
 
     def test_fogbugz_datetime_returns_20130223_0523000000_for_20130223T052300Z_case_2(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-23T05:23:00Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-23T05:23:00Z')))
 
     def test_fogbugz_datetime_returns_20130223_0606030000_for_20130223T060603Z(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-23T06:06:03Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-23T06:06:03Z')))
 
     def test_fogbugz_datetime_returns_20130223_0606030000_for_20130223T060603Z_case_2(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-23T06:06:03Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-23T06:06:03Z')))
 
     def test_fogbugz_datetime_returns_20130223_0606130000_for_20130223T060613Z(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-23T06:06:13Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-23T06:06:13Z')))
 
     def test_fogbugz_datetime_returns_20130223_0606130000_for_20130223T060613Z_case_2(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-23T06:06:13Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-23T06:06:13Z')))
 
     def test_fogbugz_datetime_returns_20130223_0842000000_for_20130223T084200Z(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-23T08:42:00Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-23T08:42:00Z')))
 
     def test_fogbugz_datetime_returns_20130223_0842000000_for_20130223T084200Z_case_2(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-23T08:42:00Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-23T08:42:00Z')))
 
     def test_fogbugz_datetime_returns_20130223_0842000000_for_20130223T084200Z_case_3(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-23T08:42:00Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-23T08:42:00Z')))
 
     def test_fogbugz_datetime_returns_20130223_0842000000_for_20130223T084200Z_case_4(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-23T08:42:00Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-23T08:42:00Z')))
 
     def test_fogbugz_datetime_returns_20130223_0916000000_for_20130223T091600Z(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-23T09:16:00Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-23T09:16:00Z')))
 
     def test_fogbugz_datetime_returns_20130223_0916000000_for_20130223T091600Z_case_2(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-23T09:16:00Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-23T09:16:00Z')))
 
     def test_fogbugz_datetime_returns_20130223_0916000000_for_20130223T091600Z_case_3(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-23T09:16:00Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-23T09:16:00Z')))
 
     def test_fogbugz_datetime_returns_20130223_0916000000_for_20130223T091600Z_case_4(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-23T09:16:00Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-23T09:16:00Z')))
 
     def test_fogbugz_datetime_returns_20130223_0920410000_for_20130223T092041Z(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-23T09:20:41Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-23T09:20:41Z')))
 
     def test_fogbugz_datetime_returns_20130223_0920410000_for_20130223T092041Z_case_2(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-23T09:20:41Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-23T09:20:41Z')))
 
     def test_fogbugz_datetime_returns_20130223_1743000000_for_20130223T174300Z(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-23T17:43:00Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-23T17:43:00Z')))
 
     def test_fogbugz_datetime_returns_20130223_1743000000_for_20130223T174300Z_case_2(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-23T17:43:00Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-23T17:43:00Z')))
 
     def test_fogbugz_datetime_returns_20130223_1823510000_for_20130223T182351Z(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-23T18:23:51Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-23T18:23:51Z')))
 
     def test_fogbugz_datetime_returns_20130223_1823510000_for_20130223T182351Z_case_2(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-23T18:23:51Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-23T18:23:51Z')))
 
     def test_fogbugz_datetime_returns_20130223_1823510000_for_20130223T182351Z_case_3(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-23T18:23:51Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-23T18:23:51Z')))
 
     def test_fogbugz_datetime_returns_20130223_1823510000_for_20130223T182351Z_case_4(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-23T18:23:51Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-23T18:23:51Z')))
 
     def test_fogbugz_datetime_returns_20130223_1825160000_for_20130223T182516Z(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-23T18:25:16Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-23T18:25:16Z')))
 
     def test_fogbugz_datetime_returns_20130223_1825160000_for_20130223T182516Z_case_2(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-23T18:25:16Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-23T18:25:16Z')))
 
     def test_fogbugz_datetime_returns_20130223_1825160000_for_20130223T182516Z_case_3(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-23T18:25:16Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-23T18:25:16Z')))
 
     def test_fogbugz_datetime_returns_20130223_1825160000_for_20130223T182516Z_case_4(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-23T18:25:16Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-23T18:25:16Z')))
 
     def test_fogbugz_datetime_returns_20130223_1922040000_for_20130223T192204Z(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-23T19:22:04Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-23T19:22:04Z')))
 
     def test_fogbugz_datetime_returns_20130223_1922040000_for_20130223T192204Z_case_2(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-23T19:22:04Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-23T19:22:04Z')))
 
     def test_fogbugz_datetime_returns_20130223_1934180000_for_20130223T193418Z(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-23T19:34:18Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-23T19:34:18Z')))
 
     def test_fogbugz_datetime_returns_20130223_1934180000_for_20130223T193418Z_case_2(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-23T19:34:18Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-23T19:34:18Z')))
 
     def test_fogbugz_datetime_returns_20130224_0052310000_for_20130224T005231Z(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-24T00:52:31Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-24T00:52:31Z')))
 
     def test_fogbugz_datetime_returns_20130224_0052310000_for_20130224T005231Z_case_2(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-24T00:52:31Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-24T00:52:31Z')))
 
     def test_fogbugz_datetime_returns_20130224_0133460000_for_20130224T013346Z(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-24T01:33:46Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-24T01:33:46Z')))
 
     def test_fogbugz_datetime_returns_20130224_0133460000_for_20130224T013346Z_case_2(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-24T01:33:46Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-24T01:33:46Z')))
 
     def test_fogbugz_datetime_returns_20130224_0400060000_for_20130224T040006Z(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-24T04:00:06Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-24T04:00:06Z')))
 
     def test_fogbugz_datetime_returns_20130224_0400060000_for_20130224T040006Z_case_2(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-24T04:00:06Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-24T04:00:06Z')))
 
     def test_fogbugz_datetime_returns_20130224_1931160000_for_20130224T193116Z(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-24T19:31:16Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-24T19:31:16Z')))
 
     def test_fogbugz_datetime_returns_20130224_1931160000_for_20130224T193116Z_case_2(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-24T19:31:16Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-24T19:31:16Z')))
 
     def test_fogbugz_datetime_returns_20130224_2019390000_for_20130224T201939Z(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-24T20:19:39Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-24T20:19:39Z')))
 
     def test_fogbugz_datetime_returns_20130224_2019390000_for_20130224T201939Z_case_2(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-24T20:19:39Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-24T20:19:39Z')))
 
     def test_fogbugz_datetime_returns_20130224_2056000000_for_20130224T205600Z(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-24T20:56:00Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-24T20:56:00Z')))
 
     def test_fogbugz_datetime_returns_20130224_2056000000_for_20130224T205600Z_case_2(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-24T20:56:00Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-24T20:56:00Z')))
 
     def test_fogbugz_datetime_returns_20130225_0459000000_for_20130225T045900Z(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-25T04:59:00Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-25T04:59:00Z')))
 
     def test_fogbugz_datetime_returns_20130225_0459000000_for_20130225T045900Z_case_2(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-25T04:59:00Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-25T04:59:00Z')))
 
     def test_fogbugz_datetime_returns_20130225_0500000000_for_20130225T050000Z(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-25T05:00:00Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-25T05:00:00Z')))
 
     def test_fogbugz_datetime_returns_20130225_0500000000_for_20130225T050000Z_case_2(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-25T05:00:00Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-25T05:00:00Z')))
 
     def test_fogbugz_datetime_returns_20130225_0512000000_for_20130225T051200Z(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-25T05:12:00Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-25T05:12:00Z')))
 
     def test_fogbugz_datetime_returns_20130225_0512000000_for_20130225T051200Z_case_2(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-25T05:12:00Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-25T05:12:00Z')))
 
     def test_fogbugz_datetime_returns_20130225_0512460000_for_20130225T051246Z(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-25T05:12:46Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-25T05:12:46Z')))
 
     def test_fogbugz_datetime_returns_20130225_0512460000_for_20130225T051246Z_case_2(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-25T05:12:46Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-25T05:12:46Z')))
 
     def test_fogbugz_datetime_returns_20130225_0514540000_for_20130225T051454Z(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-25T05:14:54Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-25T05:14:54Z')))
 
     def test_fogbugz_datetime_returns_20130225_0514540000_for_20130225T051454Z_case_2(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-25T05:14:54Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-25T05:14:54Z')))
 
     def test_fogbugz_datetime_returns_20130225_0514540000_for_20130225T051454Z_case_3(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-25T05:14:54Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-25T05:14:54Z')))
 
     def test_fogbugz_datetime_returns_20130225_0514540000_for_20130225T051454Z_case_4(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-25T05:14:54Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-25T05:14:54Z')))
 
     def test_fogbugz_datetime_returns_20130225_0516250000_for_20130225T051625Z(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-25T05:16:25Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-25T05:16:25Z')))
 
     def test_fogbugz_datetime_returns_20130225_0516250000_for_20130225T051625Z_case_2(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-25T05:16:25Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-25T05:16:25Z')))
 
     def test_fogbugz_datetime_returns_20130225_0516250000_for_20130225T051625Z_case_3(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-25T05:16:25Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-25T05:16:25Z')))
 
     def test_fogbugz_datetime_returns_20130225_0516250000_for_20130225T051625Z_case_4(self):
-        self.assertEqual(datetime, type(fogbugz_datetime('2013-02-25T05:16:25Z')))
+        self.assertEqual(datetime.datetime, type(fogbugz_datetime('2013-02-25T05:16:25Z')))
 
     def test_fogbugz_datetime_returns_date_str_for_date_str_equal_None(self):
         self.assertEqual(None, fogbugz_datetime(None))
