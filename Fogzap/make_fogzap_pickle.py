@@ -3,6 +3,7 @@ from __future__ import print_function
 import argparse, os.path, datetime, sys, pickle, errno
 import config_file
 from tzutil import LocalTimezone
+import tzutil
 
 # Utility function used by the command line arguments to parse a date
 def day_month_year_date(date_string):
@@ -72,7 +73,7 @@ def run_make_fogzap_pickle(cmd_args):
                         help = "Just display the current values without "
                         "changing them")   
 
-    args = parser.parse_args(cmd_args)
+    args = parser.parse_args(cmd_args[1:])
     if not (args.address or args.username or args.password or 
             args.last_upload_date or args.display):
         parser.print_help()
@@ -139,5 +140,4 @@ def run_make_fogzap_pickle(cmd_args):
             sys.exit(0)
 
 if __name__ == '__main__':
-    import sys
     run_make_fogzap_pickle(sys.argv)

@@ -344,7 +344,6 @@ all_commands[
 
 def run_fogzap(cmd_args):
     username, password, address, last_upload_date = read_configuration_variables()
-
     # Handle command line arguments
     parser = argparse.ArgumentParser(description='Miscelaneous utilities for '
                                      'interacting with fogbugz');
@@ -354,7 +353,7 @@ def run_fogzap(cmd_args):
                         'the commands with a short description.');
     parser.add_argument('arguments', nargs=argparse.REMAINDER, 
                         help='All arguments to the command');
-    args = parser.parse_args(cmd_args)
+    args = parser.parse_args(args = cmd_args[1:])
 
 
 
@@ -367,5 +366,4 @@ def run_fogzap(cmd_args):
 
 
 if __name__ == '__main__':
-    import sys
     run_fogzap(sys.argv)
