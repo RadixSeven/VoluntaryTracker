@@ -61,7 +61,7 @@ def split_into_days( a_TimeInterval ):
 
     # Deal with ongoing intervals by bounding them at the present
     if a_TimeInterval.is_ongoing():
-       remaining = new BoundedTimeInterval(
+       remaining = foglib.BoundedTimeInterval(
            a_TimeInterval.first, LocalTimezone.now())
     else:
         remaining = a_TimeInterval

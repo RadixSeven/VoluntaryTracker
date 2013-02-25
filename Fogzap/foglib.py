@@ -84,20 +84,21 @@ class Interval(object):
         # rather there were some kind of contract I could check, but
         # this will at least distinguish the expected bug where
         # someone passes in an xml string)
-        assert(hasattr(interval_element, 'find'), "Interval.from_xml "
+        assert hasattr(interval_element, 'find'), ("Interval.from_xml "
                "is designed to take an xml.etree.ElementTree.Element "
                "and needs an equivalently functioning find method.")
-        assert(hasattr(interval_element, 'text'), "Interval.from_xml "
+        assert hasattr(interval_element, 'text'), ("Interval.from_xml "
                "is designed to take an xml.etree.ElementTree.Element "
                "and needs an equivalently functioning text method.")
+
         # Extract from xml tree
-        interval_id = int(interval_element.find('ixInterval').text),
-        person_id = int(interval_element.find('ixPerson').text),
-        case_id = int(interval_element.find('ixBug').text),
-        start = fogbugz_datetime(interval_element.find('dtStart').text),
-        end = fogbugz_datetime(interval_element.find('dtEnd').text),
-        deleted = interval_element.find('fDeleted').text == 'true',
-        title = interval_element.find('sTitle').text)
+        interval_id = int(interval_element.find('ixInterval').text)
+        person_id = int(interval_element.find('ixPerson').text)
+        case_id = int(interval_element.find('ixBug').text)
+        start = fogbugz_datetime(interval_element.find('dtStart').text)
+        end = fogbugz_datetime(interval_element.find('dtEnd').text)
+        deleted = interval_element.find('fDeleted').text == 'true'
+        title = interval_element.find('sTitle').text
 
         if not start:
             raise ValueError('The xml element from which a foglib.Interval '
@@ -119,14 +120,14 @@ class Interval(object):
             return Interval( interval_id = interval_id,
                              person_id = person_id,
                              case_id = case_id,
-                             BoundedTimeInterval(start, end),
+                             time_interval = BoundedTimeInterval(start, end),
                              deleted = deleted,
                              title = title )
         else:
             return Interval( interval_id = interval_id,
                              person_id = person_id,
                              case_id = case_id,
-                             OngoingTimeInterval(start),
+                             time_interval = OngoingTimeInterval(start),
                              deleted = deleted,
                              title = title )
 
@@ -141,7 +142,7 @@ class Interval(object):
                  repr(self.interval), ' ',
                  '(deleted)' if self.deleted else '(not deleted)','>']);
 
-class TimeInterval(object)
+class TimeInterval(object):
     """Represents an interval in time
 
     TimeIntervals are immutable. Any member datetime objects are
@@ -348,7 +349,7 @@ class BoundedTimeInterval(collections.namedtuple("BoundedTimeInterval", ["first"
         
         microsec_before_a_datetime = (
             a_datetime - datetime.timedelta(microseconds=1))
-        if self.last <= microsec_before_a_datetime
+        if self.last <= microsec_before_a_datetime:
             new_last = self.last
         else:
             new_last = microsec_before_a_datetime
@@ -394,7 +395,7 @@ class BoundedTimeInterval(collections.namedtuple("BoundedTimeInterval", ["first"
         True iff first <= a_datetime <= last
 
         """
-        return self.first <= a_datetime && a_datetime <= self.last
+        return self.first <= a_datetime and a_datetime <= self.last
 
     def intersection_with( self, a_TimeInterval ):
         """Returns an interval representing the times that are in both this interval and a_TimeInterval
