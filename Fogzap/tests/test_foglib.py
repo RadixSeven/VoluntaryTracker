@@ -6,6 +6,46 @@ from foglib import BoundedTimeInterval
 from foglib import OngoingTimeInterval
 from foglib import Session
 
+import tzutil
+import datetime
+
+def datetime_from_19_char_string(s):
+    """String in format: '20130221_0107030500'
+                          YYYYMMDD_HHmmSStimz
+                          0123456789012345678
+                                    111111111
+
+    The time zone is negative so 0500 would -5 hours and 0 minutes
+
+    """
+    year = int(s[0:4])
+    month = int(s[4:6])
+    day = int(s[6:8])
+    hour = int(s[9:11])
+    minute = int(s[11:13])
+    second = int(s[13:15])
+    tz_hour = -int(s[15:17])
+    tz_min  = -int(s[17:19])
+
+    class tz(datetime.tzinfo):
+        def utcoffset(self, dt):
+            return datetime.timedelta(hours = tz_hour, minutes = tz_min)
+
+        def dst(self, dt):
+            return timedelta(0)
+
+        def tzname(self, dt):
+            return None
+    
+    try:
+        return datetime.datetime(year, month, day, hour, minute, 
+                                 second, 0, tz())
+    except ValueError as e:
+        raise ValueError("Original message: '{}' params: {} {} {} {} {} {}"
+                         .format(str(e), year, month, day, hour, minute, second)
+                         )
+
+    
 class TestFogbugzDatetime(unittest.TestCase):
     def test_fogbugz_datetime_returns_20130221_0500000000_for_20130221T050000Z(self):
         self.assertEqual(datetime, type(fogbugz_datetime('2013-02-21T05:00:00Z')))
@@ -989,183 +1029,273 @@ class TestBoundedTimeInterval(unittest.TestCase):
         self.assertTrue(False, "Haven't implemented this test yet") 
         # TODO: implement your test here
     def test___repr___returns_20130221_0000000500__20130221_0106500500(self):
-        bounded_time_interval = BoundedTimeInterval()
+        first = datetime_from_19_char_string('20130221_0000000500')
+        last  = datetime_from_19_char_string('20130221_0106500500')
+        bounded_time_interval = BoundedTimeInterval(first, last)
         self.assertEqual('2013-02-21 00:00:00-05:00 - 2013-02-21 01:06:50-05:00', bounded_time_interval.__repr__())
 
     def test___repr___returns_20130221_0107030500__20130221_0525000500(self):
-        bounded_time_interval = BoundedTimeInterval()
+        first = datetime_from_19_char_string('20130221_0107030500')
+        last  = datetime_from_19_char_string('20130221_0525000500')
+        bounded_time_interval = BoundedTimeInterval(first, last)
         self.assertEqual('2013-02-21 01:07:03-05:00 - 2013-02-21 05:25:00-05:00', bounded_time_interval.__repr__())
 
     def test___repr___returns_20130221_0525000500__20130221_0551060500(self):
-        bounded_time_interval = BoundedTimeInterval()
+        first = datetime_from_19_char_string('20130221_0525000500')
+        last  = datetime_from_19_char_string('20130221_0551060500')
+        bounded_time_interval = BoundedTimeInterval(first, last)
         self.assertEqual('2013-02-21 05:25:00-05:00 - 2013-02-21 05:51:06-05:00', bounded_time_interval.__repr__())
 
     def test___repr___returns_20130221_1304000500__20130221_1325000500(self):
-        bounded_time_interval = BoundedTimeInterval()
+        first = datetime_from_19_char_string('20130221_1304000500')
+        last  = datetime_from_19_char_string('20130221_1325000500')
+        bounded_time_interval = BoundedTimeInterval(first, last)
         self.assertEqual('2013-02-21 13:04:00-05:00 - 2013-02-21 13:25:00-05:00', bounded_time_interval.__repr__())
 
     def test___repr___returns_20130221_1325000500__20130221_1331090500(self):
-        bounded_time_interval = BoundedTimeInterval()
+        first = datetime_from_19_char_string('20130221_1325000500')
+        last  = datetime_from_19_char_string('20130221_1331090500')
+        bounded_time_interval = BoundedTimeInterval(first, last)
         self.assertEqual('2013-02-21 13:25:00-05:00 - 2013-02-21 13:31:09-05:00', bounded_time_interval.__repr__())
 
     def test___repr___returns_20130221_1331090500__20130221_1345410500(self):
-        bounded_time_interval = BoundedTimeInterval()
+        first = datetime_from_19_char_string('20130221_1331090500')
+        last  = datetime_from_19_char_string('20130221_1345410500')
+        bounded_time_interval = BoundedTimeInterval(first, last)
         self.assertEqual('2013-02-21 13:31:09-05:00 - 2013-02-21 13:45:41-05:00', bounded_time_interval.__repr__())
 
     def test___repr___returns_20130221_1346100500__20130221_1407160500(self):
-        bounded_time_interval = BoundedTimeInterval()
+        first = datetime_from_19_char_string('20130221_1346100500')
+        last  = datetime_from_19_char_string('20130221_1407160500')
+        bounded_time_interval = BoundedTimeInterval(first, last)
         self.assertEqual('2013-02-21 13:46:10-05:00 - 2013-02-21 14:07:16-05:00', bounded_time_interval.__repr__())
 
     def test___repr___returns_20130221_1407160500__20130221_1432300500(self):
-        bounded_time_interval = BoundedTimeInterval()
+        first = datetime_from_19_char_string('20130221_1407160500')
+        last  = datetime_from_19_char_string('20130221_1432300500')
+        bounded_time_interval = BoundedTimeInterval(first, last)
         self.assertEqual('2013-02-21 14:07:16-05:00 - 2013-02-21 14:32:30-05:00', bounded_time_interval.__repr__())
 
     def test___repr___returns_20130221_1432300500__20130221_1532380500(self):
-        bounded_time_interval = BoundedTimeInterval()
+        first = datetime_from_19_char_string('20130221_1432300500')
+        last  = datetime_from_19_char_string('20130221_1532380500')
+        bounded_time_interval = BoundedTimeInterval(first, last)
         self.assertEqual('2013-02-21 14:32:30-05:00 - 2013-02-21 15:32:38-05:00', bounded_time_interval.__repr__())
 
     def test___repr___returns_20130221_1532380500__20130221_1630000500(self):
-        bounded_time_interval = BoundedTimeInterval()
+        first = datetime_from_19_char_string('20130221_1532380500')
+        last  = datetime_from_19_char_string('20130221_1630000500')
+        bounded_time_interval = BoundedTimeInterval(first, last)
         self.assertEqual('2013-02-21 15:32:38-05:00 - 2013-02-21 16:30:00-05:00', bounded_time_interval.__repr__())
 
     def test___repr___returns_20130221_1630000500__20130221_1646090500(self):
-        bounded_time_interval = BoundedTimeInterval()
+        first = datetime_from_19_char_string('20130221_1630000500')
+        last  = datetime_from_19_char_string('20130221_1646090500')
+        bounded_time_interval = BoundedTimeInterval(first, last)
         self.assertEqual('2013-02-21 16:30:00-05:00 - 2013-02-21 16:46:09-05:00', bounded_time_interval.__repr__())
 
     def test___repr___returns_20130221_1646090500__20130221_1736020500(self):
-        bounded_time_interval = BoundedTimeInterval()
+        first = datetime_from_19_char_string('20130221_1646090500')
+        last  = datetime_from_19_char_string('20130221_1736020500')
+        bounded_time_interval = BoundedTimeInterval(first, last)
         self.assertEqual('2013-02-21 16:46:09-05:00 - 2013-02-21 17:36:02-05:00', bounded_time_interval.__repr__())
 
     def test___repr___returns_20130221_1800500500__20130221_1802110500(self):
-        bounded_time_interval = BoundedTimeInterval()
+        first = datetime_from_19_char_string('20130221_1800500500')
+        last  = datetime_from_19_char_string('20130221_1802110500')
+        bounded_time_interval = BoundedTimeInterval(first, last)
         self.assertEqual('2013-02-21 18:00:50-05:00 - 2013-02-21 18:02:11-05:00', bounded_time_interval.__repr__())
 
     def test___repr___returns_20130221_1802110500__20130221_1811080500(self):
-        bounded_time_interval = BoundedTimeInterval()
+        first = datetime_from_19_char_string('20130221_1802110500')
+        last  = datetime_from_19_char_string('20130221_1811080500')
+        bounded_time_interval = BoundedTimeInterval(first, last)
         self.assertEqual('2013-02-21 18:02:11-05:00 - 2013-02-21 18:11:08-05:00', bounded_time_interval.__repr__())
 
     def test___repr___returns_20130221_1811080500__20130221_1814570500(self):
-        bounded_time_interval = BoundedTimeInterval()
+        first = datetime_from_19_char_string('20130221_1811080500')
+        last  = datetime_from_19_char_string('20130221_1814570500')
+        bounded_time_interval = BoundedTimeInterval(first, last)
         self.assertEqual('2013-02-21 18:11:08-05:00 - 2013-02-21 18:14:57-05:00', bounded_time_interval.__repr__())
 
     def test___repr___returns_20130221_1814570500__20130221_1904110500(self):
-        bounded_time_interval = BoundedTimeInterval()
+        first = datetime_from_19_char_string('20130221_1814570500')
+        last  = datetime_from_19_char_string('20130221_1904110500')
+        bounded_time_interval = BoundedTimeInterval(first, last)
         self.assertEqual('2013-02-21 18:14:57-05:00 - 2013-02-21 19:04:11-05:00', bounded_time_interval.__repr__())
 
     def test___repr___returns_20130221_1904270500__20130221_2103300500(self):
-        bounded_time_interval = BoundedTimeInterval()
+        first = datetime_from_19_char_string('20130221_1904270500')
+        last  = datetime_from_19_char_string('20130221_2103300500')
+        bounded_time_interval = BoundedTimeInterval(first, last)
         self.assertEqual('2013-02-21 19:04:27-05:00 - 2013-02-21 21:03:30-05:00', bounded_time_interval.__repr__())
 
     def test___repr___returns_20130221_2103300500__20130221_2129260500(self):
-        bounded_time_interval = BoundedTimeInterval()
+        first = datetime_from_19_char_string('20130221_2103300500')
+        last  = datetime_from_19_char_string('20130221_2129260500')
+        bounded_time_interval = BoundedTimeInterval(first, last)
         self.assertEqual('2013-02-21 21:03:30-05:00 - 2013-02-21 21:29:26-05:00', bounded_time_interval.__repr__())
 
     def test___repr___returns_20130221_2129260500__20130221_2152300500(self):
-        bounded_time_interval = BoundedTimeInterval()
+        first = datetime_from_19_char_string('20130221_2129260500')
+        last  = datetime_from_19_char_string('20130221_2152300500')
+        bounded_time_interval = BoundedTimeInterval(first, last)
         self.assertEqual('2013-02-21 21:29:26-05:00 - 2013-02-21 21:52:30-05:00', bounded_time_interval.__repr__())
 
     def test___repr___returns_20130222_1059000500__20130222_1303000500(self):
-        bounded_time_interval = BoundedTimeInterval()
+        first = datetime_from_19_char_string('20130222_1059000500')
+        last  = datetime_from_19_char_string('20130222_1303000500')
+        bounded_time_interval = BoundedTimeInterval(first, last)
         self.assertEqual('2013-02-22 10:59:00-05:00 - 2013-02-22 13:03:00-05:00', bounded_time_interval.__repr__())
 
     def test___repr___returns_20130222_1303000500__20130222_1337000500(self):
-        bounded_time_interval = BoundedTimeInterval()
+        first = datetime_from_19_char_string('20130222_1303000500')
+        last  = datetime_from_19_char_string('20130222_1337000500')
+        bounded_time_interval = BoundedTimeInterval(first, last)
         self.assertEqual('2013-02-22 13:03:00-05:00 - 2013-02-22 13:37:00-05:00', bounded_time_interval.__repr__())
 
     def test___repr___returns_20130222_1337000500__20130222_1347000500(self):
-        bounded_time_interval = BoundedTimeInterval()
+        first = datetime_from_19_char_string('20130222_1337000500')
+        last  = datetime_from_19_char_string('20130222_1347000500')
+        bounded_time_interval = BoundedTimeInterval(first, last)
         self.assertEqual('2013-02-22 13:37:00-05:00 - 2013-02-22 13:47:00-05:00', bounded_time_interval.__repr__())
 
     def test___repr___returns_20130222_1347000500__20130222_1623000500(self):
-        bounded_time_interval = BoundedTimeInterval()
+        first = datetime_from_19_char_string('20130222_1347000500')
+        last  = datetime_from_19_char_string('20130222_1623000500')
+        bounded_time_interval = BoundedTimeInterval(first, last)
         self.assertEqual('2013-02-22 13:47:00-05:00 - 2013-02-22 16:23:00-05:00', bounded_time_interval.__repr__())
 
     def test___repr___returns_20130222_1623000500__20130222_1630000500(self):
-        bounded_time_interval = BoundedTimeInterval()
+        first = datetime_from_19_char_string('20130222_1623000500')
+        last  = datetime_from_19_char_string('20130222_1630000500')
+        bounded_time_interval = BoundedTimeInterval(first, last)
         self.assertEqual('2013-02-22 16:23:00-05:00 - 2013-02-22 16:30:00-05:00', bounded_time_interval.__repr__())
 
     def test___repr___returns_20130222_1630000500__20130222_1819000500(self):
-        bounded_time_interval = BoundedTimeInterval()
+        first = datetime_from_19_char_string('20130222_1630000500')
+        last  = datetime_from_19_char_string('20130222_1819000500')
+        bounded_time_interval = BoundedTimeInterval(first, last)
         self.assertEqual('2013-02-22 16:30:00-05:00 - 2013-02-22 18:19:00-05:00', bounded_time_interval.__repr__())
 
     def test___repr___returns_20130222_1819000500__20130222_1821000500(self):
-        bounded_time_interval = BoundedTimeInterval()
+        first = datetime_from_19_char_string('20130222_1819000500')
+        last  = datetime_from_19_char_string('20130222_1821000500')
+        bounded_time_interval = BoundedTimeInterval(first, last)
         self.assertEqual('2013-02-22 18:19:00-05:00 - 2013-02-22 18:21:00-05:00', bounded_time_interval.__repr__())
 
     def test___repr___returns_20130222_1821000500__20130222_1824000500(self):
-        bounded_time_interval = BoundedTimeInterval()
+        first = datetime_from_19_char_string('20130222_1821000500')
+        last  = datetime_from_19_char_string('20130222_1824000500')
+        bounded_time_interval = BoundedTimeInterval(first, last)
         self.assertEqual('2013-02-22 18:21:00-05:00 - 2013-02-22 18:24:00-05:00', bounded_time_interval.__repr__())
 
     def test___repr___returns_20130222_1824260500__20130222_1853030500(self):
-        bounded_time_interval = BoundedTimeInterval()
+        first = datetime_from_19_char_string('20130222_1824260500')
+        last  = datetime_from_19_char_string('20130222_1853030500')
+        bounded_time_interval = BoundedTimeInterval(first, last)
         self.assertEqual('2013-02-22 18:24:26-05:00 - 2013-02-22 18:53:03-05:00', bounded_time_interval.__repr__())
 
     def test___repr___returns_20130222_2147000500__20130222_2151000500(self):
-        bounded_time_interval = BoundedTimeInterval()
+        first = datetime_from_19_char_string('20130222_2147000500')
+        last  = datetime_from_19_char_string('20130222_2151000500')
+        bounded_time_interval = BoundedTimeInterval(first, last)
         self.assertEqual('2013-02-22 21:47:00-05:00 - 2013-02-22 21:51:00-05:00', bounded_time_interval.__repr__())
 
     def test___repr___returns_20130222_2221540500__20130222_2244000500(self):
-        bounded_time_interval = BoundedTimeInterval()
+        first = datetime_from_19_char_string('20130222_2221540500')
+        last  = datetime_from_19_char_string('20130222_2244000500')
+        bounded_time_interval = BoundedTimeInterval(first, last)
         self.assertEqual('2013-02-22 22:21:54-05:00 - 2013-02-22 22:44:00-05:00', bounded_time_interval.__repr__())
 
     def test___repr___returns_20130222_2244000500__20130222_2301180500(self):
-        bounded_time_interval = BoundedTimeInterval()
+        first = datetime_from_19_char_string('20130222_2244000500')
+        last  = datetime_from_19_char_string('20130222_2301180500')
+        bounded_time_interval = BoundedTimeInterval(first, last)
         self.assertEqual('2013-02-22 22:44:00-05:00 - 2013-02-22 23:01:18-05:00', bounded_time_interval.__repr__())
 
     def test___repr___returns_20130223_0023000500__20130223_0106030500(self):
-        bounded_time_interval = BoundedTimeInterval()
+        first = datetime_from_19_char_string('20130223_0023000500')
+        last  = datetime_from_19_char_string('20130223_0106030500')
+        bounded_time_interval = BoundedTimeInterval(first, last)
         self.assertEqual('2013-02-23 00:23:00-05:00 - 2013-02-23 01:06:03-05:00', bounded_time_interval.__repr__())
 
     def test___repr___returns_20130223_0106130500__20130223_0342000500(self):
-        bounded_time_interval = BoundedTimeInterval()
+        first = datetime_from_19_char_string('20130223_0106130500')
+        last  = datetime_from_19_char_string('20130223_0342000500')
+        bounded_time_interval = BoundedTimeInterval(first, last)
         self.assertEqual('2013-02-23 01:06:13-05:00 - 2013-02-23 03:42:00-05:00', bounded_time_interval.__repr__())
 
     def test___repr___returns_20130223_0342000500__20130223_0416000500(self):
-        bounded_time_interval = BoundedTimeInterval()
+        first = datetime_from_19_char_string('20130223_0342000500')
+        last  = datetime_from_19_char_string('20130223_0416000500')
+        bounded_time_interval = BoundedTimeInterval(first, last)
         self.assertEqual('2013-02-23 03:42:00-05:00 - 2013-02-23 04:16:00-05:00', bounded_time_interval.__repr__())
 
     def test___repr___returns_20130223_0416000500__20130223_0420410500(self):
-        bounded_time_interval = BoundedTimeInterval()
+        first = datetime_from_19_char_string('20130223_0416000500')
+        last  = datetime_from_19_char_string('20130223_0420410500')
+        bounded_time_interval = BoundedTimeInterval(first, last)
         self.assertEqual('2013-02-23 04:16:00-05:00 - 2013-02-23 04:20:41-05:00', bounded_time_interval.__repr__())
 
     def test___repr___returns_20130223_1243000500__20130223_1323510500(self):
-        bounded_time_interval = BoundedTimeInterval()
+        first = datetime_from_19_char_string('20130223_1243000500')
+        last  = datetime_from_19_char_string('20130223_1323510500')
+        bounded_time_interval = BoundedTimeInterval(first, last)
         self.assertEqual('2013-02-23 12:43:00-05:00 - 2013-02-23 13:23:51-05:00', bounded_time_interval.__repr__())
 
     def test___repr___returns_20130223_1323510500__20130223_1325160500(self):
-        bounded_time_interval = BoundedTimeInterval()
+        first = datetime_from_19_char_string('20130223_1323510500')
+        last  = datetime_from_19_char_string('20130223_1325160500')
+        bounded_time_interval = BoundedTimeInterval(first, last)
         self.assertEqual('2013-02-23 13:23:51-05:00 - 2013-02-23 13:25:16-05:00', bounded_time_interval.__repr__())
 
     def test___repr___returns_20130223_1325160500__20130223_1422040500(self):
-        bounded_time_interval = BoundedTimeInterval()
+        first = datetime_from_19_char_string('20130223_1325160500')
+        last  = datetime_from_19_char_string('20130223_1422040500')
+        bounded_time_interval = BoundedTimeInterval(first, last)
         self.assertEqual('2013-02-23 13:25:16-05:00 - 2013-02-23 14:22:04-05:00', bounded_time_interval.__repr__())
 
     def test___repr___returns_20130223_1434180500__20130223_1952310500(self):
-        bounded_time_interval = BoundedTimeInterval()
+        first = datetime_from_19_char_string('20130223_1434180500')
+        last  = datetime_from_19_char_string('20130223_1952310500')
+        bounded_time_interval = BoundedTimeInterval(first, last)
         self.assertEqual('2013-02-23 14:34:18-05:00 - 2013-02-23 19:52:31-05:00', bounded_time_interval.__repr__())
 
     def test___repr___returns_20130223_2033460500__20130223_2300060500(self):
-        bounded_time_interval = BoundedTimeInterval()
+        first = datetime_from_19_char_string('20130223_2033460500')
+        last  = datetime_from_19_char_string('20130223_2300060500')
+        bounded_time_interval = BoundedTimeInterval(first, last)
         self.assertEqual('2013-02-23 20:33:46-05:00 - 2013-02-23 23:00:06-05:00', bounded_time_interval.__repr__())
 
     def test___repr___returns_20130224_1431160500__20130224_1519390500(self):
-        bounded_time_interval = BoundedTimeInterval()
+        first = datetime_from_19_char_string('20130224_1431160500')
+        last  = datetime_from_19_char_string('20130224_1519390500')
+        bounded_time_interval = BoundedTimeInterval(first, last)
         self.assertEqual('2013-02-24 14:31:16-05:00 - 2013-02-24 15:19:39-05:00', bounded_time_interval.__repr__())
 
     def test___repr___returns_20130224_1556000500__20130224_2359000500(self):
-        bounded_time_interval = BoundedTimeInterval()
+        first = datetime_from_19_char_string('20130224_1556000500')
+        last  = datetime_from_19_char_string('20130224_2359000500')
+        bounded_time_interval = BoundedTimeInterval(first, last)
         self.assertEqual('2013-02-24 15:56:00-05:00 - 2013-02-24 23:59:00-05:00', bounded_time_interval.__repr__())
 
     def test___repr___returns_20130225_0000000500__20130225_0012000500(self):
-        bounded_time_interval = BoundedTimeInterval()
+        first = datetime_from_19_char_string('20130225_0000000500')
+        last  = datetime_from_19_char_string('20130225_0012000500')
+        bounded_time_interval = BoundedTimeInterval(first, last)
         self.assertEqual('2013-02-25 00:00:00-05:00 - 2013-02-25 00:12:00-05:00', bounded_time_interval.__repr__())
 
     def test___repr___returns_20130225_0012460500__20130225_0014540500(self):
-        bounded_time_interval = BoundedTimeInterval()
+        first = datetime_from_19_char_string('20130225_0012460500')
+        last  = datetime_from_19_char_string('20130225_0014540500')
+        bounded_time_interval = BoundedTimeInterval(first, last)
         self.assertEqual('2013-02-25 00:12:46-05:00 - 2013-02-25 00:14:54-05:00', bounded_time_interval.__repr__())
 
     def test___repr___returns_20130225_0014540500__20130225_0016250500(self):
-        bounded_time_interval = BoundedTimeInterval()
+        first = datetime_from_19_char_string('20130225_0014540500')
+        last  = datetime_from_19_char_string('20130225_0016250500')
+        bounded_time_interval = BoundedTimeInterval(first, last)
         self.assertEqual('2013-02-25 00:14:54-05:00 - 2013-02-25 00:16:25-05:00', bounded_time_interval.__repr__())
 
     @unittest.expectedFailure
