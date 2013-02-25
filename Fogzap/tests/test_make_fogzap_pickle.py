@@ -28,7 +28,7 @@ class TestDayMonthYearDate(unittest.TestCase):
 
 class TestRunMakeFogzapPickle(unittest.TestCase):
     def test_run_make_fogzap_pickle_raises_1_for_list(self):
-        self.assertRaises(int, lambda: run_make_fogzap_pickle(['./make_fogzap_pickle', '--display']))
+        self.assertRaises(SystemExit, lambda: run_make_fogzap_pickle(['./make_fogzap_pickle', '--display']))
 
 if __name__ == '__main__':
     unittest.main()
