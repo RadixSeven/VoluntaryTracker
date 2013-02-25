@@ -342,7 +342,7 @@ all_commands[
 #
 #################
 
-def run_fogzap():
+def run_fogzap(cmd_args):
     username, password, address, last_upload_date = read_configuration_variables()
 
     # Handle command line arguments
@@ -354,7 +354,7 @@ def run_fogzap():
                         'the commands with a short description.');
     parser.add_argument('arguments', nargs=argparse.REMAINDER, 
                         help='All arguments to the command');
-    args = parser.parse_args()
+    args = parser.parse_args(cmd_args)
 
 
 
@@ -366,6 +366,6 @@ def run_fogzap():
         parser.print_help()
 
 
-
-if __name__ == "__main__":
-    run_fogzap()
+if __name__ == '__main__':
+    import sys
+    run_fogzap(sys.argv)
