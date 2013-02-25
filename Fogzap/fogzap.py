@@ -30,6 +30,91 @@ def read_configuration_variables():
               'Use the make_fogzap_pickle to create the configuration files.');
         sys.exit(0)
 
+def time_interval_for_day_containing( a_datetime, a_timezone ):
+    """Returns a BoundedTimeInterval for the 24 hour day containing a_datetime in a_timezone
+
+    A day has its first microsecond at 0:0:0 and its last microsecond
+    is the microsecond before 0:0:0 the next day.
+
+    a_datetime - a timezone aware datetime object
+
+    a_timezone - the timezone where the day is measured
+
+    """
+    instant_in_correct_tz = a_datetime.astimezone(a_timezone)
+    first = instant_in_correct_tx.replace(
+        hour=0, minute=0, second=0, microsecond=0);
+    last = (first + datetime.timedelta(days=1) - 
+            datetime.timedelta(microseconds=1))
+    return foglib.BoundedTimeInterval(first, last)
+
+def split_into_days( a_TimeInterval ):
+    """Split a_TimeInterval so that the parts each lie in only one day.
+
+    Returns a list of non-overlapping BoundedTimeInterval objects
+    whose union is a_TimeInterval and whose start and end points lie
+    in the same day. OngoingTimeInterval objects are treated as if
+    they ended at LocalTimezone.now(). EmptyTimeInterval objects cause
+    an empty list to be returned.
+
+    """
+
+    # Deal with ongoing intervals by bounding them at the present
+    if a_TimeInterval.is_ongoing():
+       remaining = new BoundedTimeInterval(
+           a_TimeInterval.first, LocalTimezone.now())
+    else:
+        remaining = a_TimeInterval
+
+    result = []
+    try:
+        while(True):
+            # Slice off the last day or part of a day in the interval
+            # and add it to the result
+            last_day = time_interval_for_day_containing( remaining.last )
+            overlap = remaining.intersection_with(last_day)
+            result.extend(overlap)
+            # Update remaining to include everything before the first
+            # instant of the last day.
+            remaining = remaining.subinterval_before(last_day.first)
+    except AttributeError as e:
+        pass # Stop when remaining is an empty interval and thus has no
+             # last attribute.
+
+    return result
+    
+def summarize_intervals_by_day(intervals):
+    """Return the number of hours covered by the given intervals in each day
+
+    intervals - an iterable sequence of non-overlapping
+        foglib.Interval objects. Each day in the output contains the
+        sum of the durations of the intervals for that date. Ongoing
+        intervals are treates as if they ended now.
+
+    return - a dictionary in which each key is a date and each value
+        is a float giving the number of hours worked on that date (as
+        determined by the local timezone.
+    """
+    # Make a list of intervals split so they don't overlap a day boundary
+    intervals = [i for i in intervals if not i.deleted]
+    split_intervals_l = [split_into_days(i.time_interval) for i in intervals]
+    split_intervals = (i for sublist in split_intervals_l for i in sublist)
+    
+    # For each interval, add its duration to the day n which it belongs
+    days = {}
+    for i in split_intervals:
+        start_day = start.date()
+        end_day = end.date()
+            
+        assert( start_day == end_day) # Make sure the splitting workede
+
+        duration = i.duration.total_seconds()
+        if days.has_key(start_day):
+            days[start_day] += duration
+        else:
+            days[start_day] = duration
+
+
 #################
 #
 # Set up commands
@@ -196,23 +281,9 @@ def list_unshared_work_times(session, last_upload_date, args):
     a = parser.parse_args(args=args)
 
     intervals = session.list_intervals_since(last_upload_date)
-    
-    days = {}
-    for i in intervals:
-        start = i.start if i.start else last_upload_date
-        start_day = start.date()
-        end = i.end if i.end else datetime.datetime.now(LocalTimezone())
-        end_day = end.date()
-            
-        if start_day != end_day:
-            print('Warning: interval {} starts and ends on different days. '
-                  'Counting it in the start day only', file=sys.stderr)
-        duration = (end - start).total_seconds()
-        if not i.deleted:
-            if not days.has_key(start_day):
-                days[start_day] = 0
-            days[start_day] += duration
 
+    days = summarize_intervals_by_day(intervals)
+    
     for day in sorted(days.keys()):
         print('{}: {} hours'.format(str(day), days[day]/3600))
         
@@ -225,6 +296,23 @@ all_commands[
                                          'each day that has not been '
                                          'shared on social media.', 
                                          list_unshared_work_times)
+
+def share_work_times(session, last_upload_date, args):
+    """Executes the share_work_times command
+
+    session - a login session
+
+    last_upload_date - a timezone aware datetime - the date of the
+        last successful upload to facebook
+
+    args - a list of strings - the arguments passed to the subcommand
+
+    """
+    parser = argparse.ArgumentParser(prog = 'list_unshared_work_times')
+    a = parser.parse_args(args=args)
+
+    intervals = session.list_intervals_since(last_upload_date)
+    
 
 
 def list_commands(last_upload_date, args):
