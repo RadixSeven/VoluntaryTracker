@@ -598,175 +598,261 @@ class TestFogbugzDatetime(unittest.TestCase):
 
 class TestInterval(unittest.TestCase):
     def test___str___returns_str_instance_after_creation_with_case_id_equal_765_and_deleted_equal_false_and_interval_id_equal_967_and_person_id_equal_2_and_time_interval_equal_20130221_1325000500__20130221_1331090500_and_title_equal_Planning(self):
-        interval = Interval(967, 2, 765, BoundedTimeInterval(), False, 'Planning')
+        first = datetime_from_19_char_string('20130221_1325000500')
+        last  = datetime_from_19_char_string('20130221_1331090500')
+        interval = Interval(967, 2, 765, BoundedTimeInterval(first, last), False, 'Planning')
         self.assertEqual('<ID:967 Person:2 Case:765 2013-02-21 13:25:00-05:00 - 2013-02-21 13:31:09-05:00 (not deleted)>', interval.__str__())
 
     def test___str___returns_str_instance_after_creation_with_case_id_equal_765_and_deleted_equal_false_and_interval_id_equal_972_and_person_id_equal_2_and_time_interval_equal_20130221_1432300500__20130221_1532380500_and_title_equal_Planning(self):
-        interval = Interval(972, 2, 765, BoundedTimeInterval(), False, 'Planning')
+        first = datetime_from_19_char_string('20130221_1432300500')
+        last  = datetime_from_19_char_string('20130221_1532380500')
+        interval = Interval(972, 2, 765, BoundedTimeInterval(first, last), False, 'Planning')
         self.assertEqual('<ID:972 Person:2 Case:765 2013-02-21 14:32:30-05:00 - 2013-02-21 15:32:38-05:00 (not deleted)>', interval.__str__())
 
     def test___str___returns_str_instance_after_creation_with_case_id_equal_766_and_deleted_equal_false_and_interval_id_equal_968_and_person_id_equal_2_and_time_interval_equal_20130221_1304000500__20130221_1325000500_and_title_equal_Email_and_social_networking(self):
-        interval = Interval(968, 2, 766, BoundedTimeInterval(), False, 'Email and social networking')
+        first = datetime_from_19_char_string('20130221_1304000500')
+        last  = datetime_from_19_char_string('20130221_1325000500')
+        interval = Interval(968, 2, 766, BoundedTimeInterval(first, last), False, 'Email and social networking')
         self.assertEqual('<ID:968 Person:2 Case:766 2013-02-21 13:04:00-05:00 - 2013-02-21 13:25:00-05:00 (not deleted)>', interval.__str__())
 
     def test___str___returns_str_instance_after_creation_with_case_id_equal_766_and_deleted_equal_false_and_interval_id_equal_974_and_person_id_equal_2_and_time_interval_equal_20130221_1630000500__20130221_1646090500_and_title_equal_Email_and_social_networking(self):
-        interval = Interval(974, 2, 766, BoundedTimeInterval(), False, 'Email and social networking')
+        first = datetime_from_19_char_string('20130221_1630000500')
+        last  = datetime_from_19_char_string('20130221_1646090500')
+        interval = Interval(974, 2, 766, BoundedTimeInterval(first, last), False, 'Email and social networking')
         self.assertEqual('<ID:974 Person:2 Case:766 2013-02-21 16:30:00-05:00 - 2013-02-21 16:46:09-05:00 (not deleted)>', interval.__str__())
 
     def test___str___returns_str_instance_after_creation_with_case_id_equal_766_and_deleted_equal_false_and_interval_id_equal_978_and_person_id_equal_2_and_time_interval_equal_20130221_1811080500__20130221_1814570500_and_title_equal_Email_and_social_networking(self):
-        interval = Interval(978, 2, 766, BoundedTimeInterval(), False, 'Email and social networking')
+        first = datetime_from_19_char_string('20130221_1811080500')
+        last  = datetime_from_19_char_string('20130221_1814570500')
+        interval = Interval(978, 2, 766, BoundedTimeInterval(first, last), False, 'Email and social networking')
         self.assertEqual('<ID:978 Person:2 Case:766 2013-02-21 18:11:08-05:00 - 2013-02-21 18:14:57-05:00 (not deleted)>', interval.__str__())
 
     def test___str___returns_str_instance_after_creation_with_case_id_equal_766_and_deleted_equal_false_and_interval_id_equal_981_and_person_id_equal_2_and_time_interval_equal_20130221_2103300500__20130221_2129260500_and_title_equal_Email_and_social_networking(self):
-        interval = Interval(981, 2, 766, BoundedTimeInterval(), False, 'Email and social networking')
+        first = datetime_from_19_char_string('20130221_2103300500')
+        last  = datetime_from_19_char_string('20130221_2129260500')
+        interval = Interval(981, 2, 766, BoundedTimeInterval(first, last), False, 'Email and social networking')
         self.assertEqual('<ID:981 Person:2 Case:766 2013-02-21 21:03:30-05:00 - 2013-02-21 21:29:26-05:00 (not deleted)>', interval.__str__())
 
     def test___str___returns_str_instance_after_creation_with_case_id_equal_767_and_deleted_equal_false_and_interval_id_equal_971_and_person_id_equal_2_and_time_interval_equal_20130221_1407160500__20130221_1432300500_and_title_equal_Computer_maintenance(self):
-        interval = Interval(971, 2, 767, BoundedTimeInterval(), False, 'Computer maintenance')
+        first = datetime_from_19_char_string('20130221_1407160500')
+        last  = datetime_from_19_char_string('20130221_1432300500')
+        interval = Interval(971, 2, 767, BoundedTimeInterval(first, last), False, 'Computer maintenance')
         self.assertEqual('<ID:971 Person:2 Case:767 2013-02-21 14:07:16-05:00 - 2013-02-21 14:32:30-05:00 (not deleted)>', interval.__str__())
 
     def test___str___returns_str_instance_after_creation_with_case_id_equal_769_and_deleted_equal_false_and_interval_id_equal_969_and_person_id_equal_2_and_time_interval_equal_20130221_1331090500__20130221_1345410500_and_title_equal_Status_Meeting_14_Feb_2013(self):
-        interval = Interval(969, 2, 769, BoundedTimeInterval(), False, 'Status Meeting (14 Feb 2013)')
+        first = datetime_from_19_char_string('20130221_1331090500')
+        last  = datetime_from_19_char_string('20130221_1345410500')
+        interval = Interval(969, 2, 769, BoundedTimeInterval(first, last), False, 'Status Meeting (14 Feb 2013)')
         self.assertEqual('<ID:969 Person:2 Case:769 2013-02-21 13:31:09-05:00 - 2013-02-21 13:45:41-05:00 (not deleted)>', interval.__str__())
 
     def test___str___returns_str_instance_after_creation_with_case_id_equal_769_and_deleted_equal_false_and_interval_id_equal_970_and_person_id_equal_2_and_time_interval_equal_20130221_1346100500__20130221_1407160500_and_title_equal_Status_Meeting_14_Feb_2013(self):
-        interval = Interval(970, 2, 769, BoundedTimeInterval(), False, 'Status Meeting (14 Feb 2013)')
+        first = datetime_from_19_char_string('20130221_1346100500')
+        last  = datetime_from_19_char_string('20130221_1407160500')
+        interval = Interval(970, 2, 769, BoundedTimeInterval(first, last), False, 'Status Meeting (14 Feb 2013)')
         self.assertEqual('<ID:970 Person:2 Case:769 2013-02-21 13:46:10-05:00 - 2013-02-21 14:07:16-05:00 (not deleted)>', interval.__str__())
 
     def test___str___returns_str_instance_after_creation_with_case_id_equal_805_and_deleted_equal_false_and_interval_id_equal_964_and_person_id_equal_2_and_time_interval_equal_20130221_0000000500__20130221_0106500500_and_title_equal_Implement_pickler(self):
-        interval = Interval(964, 2, 805, BoundedTimeInterval(), False, 'Implement pickler')
+        first = datetime_from_19_char_string('20130221_0000000500')
+        last  = datetime_from_19_char_string('20130221_0106500500')
+        interval = Interval(964, 2, 805, BoundedTimeInterval(first, last), False, 'Implement pickler')
         self.assertEqual('<ID:964 Person:2 Case:805 2013-02-21 00:00:00-05:00 - 2013-02-21 01:06:50-05:00 (not deleted)>', interval.__str__())
 
     def test___str___returns_str_instance_after_creation_with_case_id_equal_806_and_deleted_equal_false_and_interval_id_equal_965_and_person_id_equal_2_and_time_interval_equal_20130221_0107030500__20130221_0525000500_and_title_equal_Implement_fogbugz_download(self):
-        interval = Interval(965, 2, 806, BoundedTimeInterval(), False, 'Implement fogbugz download')
+        first = datetime_from_19_char_string('20130221_0107030500')
+        last  = datetime_from_19_char_string('20130221_0525000500')
+        interval = Interval(965, 2, 806, BoundedTimeInterval(first, last), False, 'Implement fogbugz download')
         self.assertEqual('<ID:965 Person:2 Case:806 2013-02-21 01:07:03-05:00 - 2013-02-21 05:25:00-05:00 (not deleted)>', interval.__str__())
 
     def test___str___returns_str_instance_after_creation_with_case_id_equal_807_and_deleted_equal_false_and_interval_id_equal_1001_and_person_id_equal_2_and_time_interval_equal_20130223_1325160500__20130223_1422040500_and_title_equal_Implement_facebook_upload(self):
-        interval = Interval(1001, 2, 807, BoundedTimeInterval(), False, 'Implement facebook upload')
+        first = datetime_from_19_char_string('20130223_1325160500')
+        last  = datetime_from_19_char_string('20130223_1422040500')
+        interval = Interval(1001, 2, 807, BoundedTimeInterval(first, last), False, 'Implement facebook upload')
         self.assertEqual('<ID:1001 Person:2 Case:807 2013-02-23 13:25:16-05:00 - 2013-02-23 14:22:04-05:00 (not deleted)>', interval.__str__())
 
     def test___str___returns_str_instance_after_creation_with_case_id_equal_807_and_deleted_equal_false_and_interval_id_equal_1002_and_person_id_equal_2_and_time_interval_equal_20130223_1434180500__20130223_1952310500_and_title_equal_Implement_facebook_upload(self):
-        interval = Interval(1002, 2, 807, BoundedTimeInterval(), False, 'Implement facebook upload')
+        first = datetime_from_19_char_string('20130223_1434180500')
+        last  = datetime_from_19_char_string('20130223_1952310500')
+        interval = Interval(1002, 2, 807, BoundedTimeInterval(first, last), False, 'Implement facebook upload')
         self.assertEqual('<ID:1002 Person:2 Case:807 2013-02-23 14:34:18-05:00 - 2013-02-23 19:52:31-05:00 (not deleted)>', interval.__str__())
 
     def test___str___returns_str_instance_after_creation_with_case_id_equal_807_and_deleted_equal_false_and_interval_id_equal_1003_and_person_id_equal_2_and_time_interval_equal_20130223_2033460500__20130223_2300060500_and_title_equal_Implement_facebook_upload(self):
-        interval = Interval(1003, 2, 807, BoundedTimeInterval(), False, 'Implement facebook upload')
+        first = datetime_from_19_char_string('20130223_2033460500')
+        last  = datetime_from_19_char_string('20130223_2300060500')
+        interval = Interval(1003, 2, 807, BoundedTimeInterval(first, last), False, 'Implement facebook upload')
         self.assertEqual('<ID:1003 Person:2 Case:807 2013-02-23 20:33:46-05:00 - 2013-02-23 23:00:06-05:00 (not deleted)>', interval.__str__())
 
     def test___str___returns_str_instance_after_creation_with_case_id_equal_808_and_deleted_equal_false_and_interval_id_equal_966_and_person_id_equal_2_and_time_interval_equal_20130221_0525000500__20130221_0551060500_and_title_equal_Push_voluntary_tracker_to_github(self):
-        interval = Interval(966, 2, 808, BoundedTimeInterval(), False, 'Push voluntary tracker to github')
+        first = datetime_from_19_char_string('20130221_0525000500')
+        last  = datetime_from_19_char_string('20130221_0551060500')
+        interval = Interval(966, 2, 808, BoundedTimeInterval(first, last), False, 'Push voluntary tracker to github')
         self.assertEqual('<ID:966 Person:2 Case:808 2013-02-21 05:25:00-05:00 - 2013-02-21 05:51:06-05:00 (not deleted)>', interval.__str__())
 
     def test___str___returns_str_instance_after_creation_with_case_id_equal_810_and_deleted_equal_false_and_interval_id_equal_973_and_person_id_equal_2_and_time_interval_equal_20130221_1532380500__20130221_1630000500_and_title_equal_Move_fogbugz_direct_stuff_into_a_module_logon_queries_etc(self):
-        interval = Interval(973, 2, 810, BoundedTimeInterval(), False, 'Move fogbugz direct stuff into a module (logon, queries, etc.)')
+        first = datetime_from_19_char_string('20130221_1532380500')
+        last  = datetime_from_19_char_string('20130221_1630000500')
+        interval = Interval(973, 2, 810, BoundedTimeInterval(first, last), False, 'Move fogbugz direct stuff into a module (logon, queries, etc.)')
         self.assertEqual('<ID:973 Person:2 Case:810 2013-02-21 15:32:38-05:00 - 2013-02-21 16:30:00-05:00 (not deleted)>', interval.__str__())
 
     def test___str___returns_str_instance_after_creation_with_case_id_equal_810_and_deleted_equal_false_and_interval_id_equal_975_and_person_id_equal_2_and_time_interval_equal_20130221_1646090500__20130221_1736020500_and_title_equal_Move_fogbugz_direct_stuff_into_a_module_logon_queries_etc(self):
-        interval = Interval(975, 2, 810, BoundedTimeInterval(), False, 'Move fogbugz direct stuff into a module (logon, queries, etc.)')
+        first = datetime_from_19_char_string('20130221_1646090500')
+        last  = datetime_from_19_char_string('20130221_1736020500')
+        interval = Interval(975, 2, 810, BoundedTimeInterval(first, last), False, 'Move fogbugz direct stuff into a module (logon, queries, etc.)')
         self.assertEqual('<ID:975 Person:2 Case:810 2013-02-21 16:46:09-05:00 - 2013-02-21 17:36:02-05:00 (not deleted)>', interval.__str__())
 
     def test___str___returns_str_instance_after_creation_with_case_id_equal_810_and_deleted_equal_false_and_interval_id_equal_976_and_person_id_equal_2_and_time_interval_equal_20130221_1800500500__20130221_1802110500_and_title_equal_Move_fogbugz_direct_stuff_into_a_module_logon_queries_etc(self):
-        interval = Interval(976, 2, 810, BoundedTimeInterval(), False, 'Move fogbugz direct stuff into a module (logon, queries, etc.)')
+        first = datetime_from_19_char_string('20130221_1800500500')
+        last  = datetime_from_19_char_string('20130221_1802110500')
+        interval = Interval(976, 2, 810, BoundedTimeInterval(first, last), False, 'Move fogbugz direct stuff into a module (logon, queries, etc.)')
         self.assertEqual('<ID:976 Person:2 Case:810 2013-02-21 18:00:50-05:00 - 2013-02-21 18:02:11-05:00 (not deleted)>', interval.__str__())
 
     def test___str___returns_str_instance_after_creation_with_case_id_equal_811_and_deleted_equal_false_and_interval_id_equal_980_and_person_id_equal_2_and_time_interval_equal_20130221_1904270500__20130221_2103300500_and_title_equal_Create_FogbugzCase_class(self):
-        interval = Interval(980, 2, 811, BoundedTimeInterval(), False, 'Create FogbugzCase class')
+        first = datetime_from_19_char_string('20130221_1904270500')
+        last  = datetime_from_19_char_string('20130221_2103300500')
+        interval = Interval(980, 2, 811, BoundedTimeInterval(first, last), False, 'Create FogbugzCase class')
         self.assertEqual('<ID:980 Person:2 Case:811 2013-02-21 19:04:27-05:00 - 2013-02-21 21:03:30-05:00 (not deleted)>', interval.__str__())
 
     def test___str___returns_str_instance_after_creation_with_case_id_equal_811_and_deleted_equal_false_and_interval_id_equal_982_and_person_id_equal_2_and_time_interval_equal_20130221_2129260500__20130221_2152300500_and_title_equal_Create_FogbugzCase_class(self):
-        interval = Interval(982, 2, 811, BoundedTimeInterval(), False, 'Create FogbugzCase class')
+        first = datetime_from_19_char_string('20130221_2129260500')
+        last  = datetime_from_19_char_string('20130221_2152300500')
+        interval = Interval(982, 2, 811, BoundedTimeInterval(first, last), False, 'Create FogbugzCase class')
         self.assertEqual('<ID:982 Person:2 Case:811 2013-02-21 21:29:26-05:00 - 2013-02-21 21:52:30-05:00 (not deleted)>', interval.__str__())
 
     def test___str___returns_str_instance_after_creation_with_case_id_equal_812_and_deleted_equal_false_and_interval_id_equal_994_and_person_id_equal_2_and_time_interval_equal_20130222_2244000500__20130222_2301180500_and_title_equal_Rename_to_fogzap_and_repurpose_to_being_a_fogbugz_command_line_uitl_that_has_as_one_of_its_functions_uploading_to_facebook(self):
-        interval = Interval(994, 2, 812, BoundedTimeInterval(), False, 'Rename to fogzap and repurpose to being a fogbugz command line uitl that has as one of its functions uploading to facebook')
+        first = datetime_from_19_char_string('20130222_2244000500')
+        last  = datetime_from_19_char_string('20130222_2301180500')
+        interval = Interval(994, 2, 812, BoundedTimeInterval(first, last), False, 'Rename to fogzap and repurpose to being a fogbugz command line uitl that has as one of its functions uploading to facebook')
         self.assertEqual('<ID:994 Person:2 Case:812 2013-02-22 22:44:00-05:00 - 2013-02-22 23:01:18-05:00 (not deleted)>', interval.__str__())
 
     def test___str___returns_str_instance_after_creation_with_case_id_equal_813_and_deleted_equal_false_and_interval_id_equal_996_and_person_id_equal_2_and_time_interval_equal_20130223_0106130500__20130223_0342000500_and_title_equal_Implement_a_subcommand_interface_with_commands_CaseStats_unimplemented_and_UnsharedIntervals(self):
-        interval = Interval(996, 2, 813, BoundedTimeInterval(), False, 'Implement a subcommand interface with commands CaseStats (unimplemented) and UnsharedIntervals')
+        first = datetime_from_19_char_string('20130223_0106130500')
+        last  = datetime_from_19_char_string('20130223_0342000500')
+        interval = Interval(996, 2, 813, BoundedTimeInterval(first, last), False, 'Implement a subcommand interface with commands CaseStats (unimplemented) and UnsharedIntervals')
         self.assertEqual('<ID:996 Person:2 Case:813 2013-02-23 01:06:13-05:00 - 2013-02-23 03:42:00-05:00 (not deleted)>', interval.__str__())
 
     def test___str___returns_str_instance_after_creation_with_case_id_equal_815_and_deleted_equal_false_and_interval_id_equal_977_and_person_id_equal_2_and_time_interval_equal_20130221_1802110500__20130221_1811080500_and_title_equal_Reimplement_fogbugz_2_fb_using_the_library(self):
-        interval = Interval(977, 2, 815, BoundedTimeInterval(), False, 'Reimplement fogbugz_2_fb using the library')
+        first = datetime_from_19_char_string('20130221_1802110500')
+        last  = datetime_from_19_char_string('20130221_1811080500')
+        interval = Interval(977, 2, 815, BoundedTimeInterval(first, last), False, 'Reimplement fogbugz_2_fb using the library')
         self.assertEqual('<ID:977 Person:2 Case:815 2013-02-21 18:02:11-05:00 - 2013-02-21 18:11:08-05:00 (not deleted)>', interval.__str__())
 
     def test___str___returns_str_instance_after_creation_with_case_id_equal_815_and_deleted_equal_false_and_interval_id_equal_979_and_person_id_equal_2_and_time_interval_equal_20130221_1814570500__20130221_1904110500_and_title_equal_Reimplement_fogbugz_2_fb_using_the_library(self):
-        interval = Interval(979, 2, 815, BoundedTimeInterval(), False, 'Reimplement fogbugz_2_fb using the library')
+        first = datetime_from_19_char_string('20130221_1814570500')
+        last  = datetime_from_19_char_string('20130221_1904110500')
+        interval = Interval(979, 2, 815, BoundedTimeInterval(first, last), False, 'Reimplement fogbugz_2_fb using the library')
         self.assertEqual('<ID:979 Person:2 Case:815 2013-02-21 18:14:57-05:00 - 2013-02-21 19:04:11-05:00 (not deleted)>', interval.__str__())
 
     def test___str___returns_str_instance_after_creation_with_case_id_equal_816_and_deleted_equal_false_and_interval_id_equal_1000_and_person_id_equal_2_and_time_interval_equal_20130223_1323510500__20130223_1325160500_and_title_equal_Add_foglibSessioncases_named_method(self):
-        interval = Interval(1000, 2, 816, BoundedTimeInterval(), False, 'Add foglib.Session.cases_named method')
+        first = datetime_from_19_char_string('20130223_1323510500')
+        last  = datetime_from_19_char_string('20130223_1325160500')
+        interval = Interval(1000, 2, 816, BoundedTimeInterval(first, last), False, 'Add foglib.Session.cases_named method')
         self.assertEqual('<ID:1000 Person:2 Case:816 2013-02-23 13:23:51-05:00 - 2013-02-23 13:25:16-05:00 (not deleted)>', interval.__str__())
 
     def test___str___returns_str_instance_after_creation_with_case_id_equal_818_and_deleted_equal_false_and_interval_id_equal_991_and_person_id_equal_2_and_time_interval_equal_20130222_1630000500__20130222_1819000500_and_title_equal_Meeting_with_Sriram_N(self):
-        interval = Interval(991, 2, 818, BoundedTimeInterval(), False, 'Meeting with Sriram N.')
+        first = datetime_from_19_char_string('20130222_1630000500')
+        last  = datetime_from_19_char_string('20130222_1819000500')
+        interval = Interval(991, 2, 818, BoundedTimeInterval(first, last), False, 'Meeting with Sriram N.')
         self.assertEqual('<ID:991 Person:2 Case:818 2013-02-22 16:30:00-05:00 - 2013-02-22 18:19:00-05:00 (not deleted)>', interval.__str__())
 
     def test___str___returns_str_instance_after_creation_with_case_id_equal_819_and_deleted_equal_false_and_interval_id_equal_986_and_person_id_equal_2_and_time_interval_equal_20130222_1059000500__20130222_1303000500_and_title_equal_Sriram_N_job_talk(self):
-        interval = Interval(986, 2, 819, BoundedTimeInterval(), False, 'Sriram N job talk')
+        first = datetime_from_19_char_string('20130222_1059000500')
+        last  = datetime_from_19_char_string('20130222_1303000500')
+        interval = Interval(986, 2, 819, BoundedTimeInterval(first, last), False, 'Sriram N job talk')
         self.assertEqual('<ID:986 Person:2 Case:819 2013-02-22 10:59:00-05:00 - 2013-02-22 13:03:00-05:00 (not deleted)>', interval.__str__())
 
     def test___str___returns_str_instance_after_creation_with_case_id_equal_820_and_deleted_equal_false_and_interval_id_equal_1004_and_person_id_equal_2_and_time_interval_equal_20130224_1431160500__20130224_1519390500_and_title_equal_Email_and_social_networking(self):
-        interval = Interval(1004, 2, 820, BoundedTimeInterval(), False, 'Email and social networking')
+        first = datetime_from_19_char_string('20130224_1431160500')
+        last  = datetime_from_19_char_string('20130224_1519390500')
+        interval = Interval(1004, 2, 820, BoundedTimeInterval(first, last), False, 'Email and social networking')
         self.assertEqual('<ID:1004 Person:2 Case:820 2013-02-24 14:31:16-05:00 - 2013-02-24 15:19:39-05:00 (not deleted)>', interval.__str__())
 
     def test___str___returns_str_instance_after_creation_with_case_id_equal_820_and_deleted_equal_false_and_interval_id_equal_983_and_person_id_equal_2_and_time_interval_equal_20130222_1824260500__20130222_1853030500_and_title_equal_Email_and_social_networking(self):
-        interval = Interval(983, 2, 820, BoundedTimeInterval(), False, 'Email and social networking')
+        first = datetime_from_19_char_string('20130222_1824260500')
+        last  = datetime_from_19_char_string('20130222_1853030500')
+        interval = Interval(983, 2, 820, BoundedTimeInterval(first, last), False, 'Email and social networking')
         self.assertEqual('<ID:983 Person:2 Case:820 2013-02-22 18:24:26-05:00 - 2013-02-22 18:53:03-05:00 (not deleted)>', interval.__str__())
 
     def test___str___returns_str_instance_after_creation_with_case_id_equal_820_and_deleted_equal_false_and_interval_id_equal_992_and_person_id_equal_2_and_time_interval_equal_20130222_1819000500__20130222_1821000500_and_title_equal_Email_and_social_networking(self):
-        interval = Interval(992, 2, 820, BoundedTimeInterval(), False, 'Email and social networking')
+        first = datetime_from_19_char_string('20130222_1819000500')
+        last  = datetime_from_19_char_string('20130222_1821000500')
+        interval = Interval(992, 2, 820, BoundedTimeInterval(first, last), False, 'Email and social networking')
         self.assertEqual('<ID:992 Person:2 Case:820 2013-02-22 18:19:00-05:00 - 2013-02-22 18:21:00-05:00 (not deleted)>', interval.__str__())
 
     def test___str___returns_str_instance_after_creation_with_case_id_equal_820_and_deleted_equal_false_and_interval_id_equal_999_and_person_id_equal_2_and_time_interval_equal_20130223_1243000500__20130223_1323510500_and_title_equal_Email_and_social_networking(self):
-        interval = Interval(999, 2, 820, BoundedTimeInterval(), False, 'Email and social networking')
+        first = datetime_from_19_char_string('20130223_1243000500')
+        last  = datetime_from_19_char_string('20130223_1323510500')
+        interval = Interval(999, 2, 820, BoundedTimeInterval(first, last), False, 'Email and social networking')
         self.assertEqual('<ID:999 Person:2 Case:820 2013-02-23 12:43:00-05:00 - 2013-02-23 13:23:51-05:00 (not deleted)>', interval.__str__())
 
     def test___str___returns_str_instance_after_creation_with_case_id_equal_821_and_deleted_equal_false_and_interval_id_equal_1008_and_person_id_equal_2_and_time_interval_equal_20130225_0014540500__20130225_0016250500_and_title_equal_Planning(self):
-        interval = Interval(1008, 2, 821, BoundedTimeInterval(), False, 'Planning')
+        first = datetime_from_19_char_string('20130225_0014540500')
+        last  = datetime_from_19_char_string('20130225_0016250500')
+        interval = Interval(1008, 2, 821, BoundedTimeInterval(first, last), False, 'Planning')
         self.assertEqual('<ID:1008 Person:2 Case:821 2013-02-25 00:14:54-05:00 - 2013-02-25 00:16:25-05:00 (not deleted)>', interval.__str__())
 
     def test___str___returns_str_instance_after_creation_with_case_id_equal_821_and_deleted_equal_false_and_interval_id_equal_984_and_person_id_equal_2_and_time_interval_equal_20130222_2147000500__20130222_2151000500_and_title_equal_Planning(self):
-        interval = Interval(984, 2, 821, BoundedTimeInterval(), False, 'Planning')
+        first = datetime_from_19_char_string('20130222_2147000500')
+        last  = datetime_from_19_char_string('20130222_2151000500')
+        interval = Interval(984, 2, 821, BoundedTimeInterval(first, last), False, 'Planning')
         self.assertEqual('<ID:984 Person:2 Case:821 2013-02-22 21:47:00-05:00 - 2013-02-22 21:51:00-05:00 (not deleted)>', interval.__str__())
 
     def test___str___returns_str_instance_after_creation_with_case_id_equal_821_and_deleted_equal_false_and_interval_id_equal_985_and_person_id_equal_2_and_time_interval_equal_20130222_2221540500__20130222_2244000500_and_title_equal_Planning(self):
-        interval = Interval(985, 2, 821, BoundedTimeInterval(), False, 'Planning')
+        first = datetime_from_19_char_string('20130222_2221540500')
+        last  = datetime_from_19_char_string('20130222_2244000500')
+        interval = Interval(985, 2, 821, BoundedTimeInterval(first, last), False, 'Planning')
         self.assertEqual('<ID:985 Person:2 Case:821 2013-02-22 22:21:54-05:00 - 2013-02-22 22:44:00-05:00 (not deleted)>', interval.__str__())
 
     def test___str___returns_str_instance_after_creation_with_case_id_equal_821_and_deleted_equal_false_and_interval_id_equal_988_and_person_id_equal_2_and_time_interval_equal_20130222_1337000500__20130222_1347000500_and_title_equal_Planning(self):
-        interval = Interval(988, 2, 821, BoundedTimeInterval(), False, 'Planning')
+        first = datetime_from_19_char_string('20130222_1337000500')
+        last  = datetime_from_19_char_string('20130222_1347000500')
+        interval = Interval(988, 2, 821, BoundedTimeInterval(first, last), False, 'Planning')
         self.assertEqual('<ID:988 Person:2 Case:821 2013-02-22 13:37:00-05:00 - 2013-02-22 13:47:00-05:00 (not deleted)>', interval.__str__())
 
     def test___str___returns_str_instance_after_creation_with_case_id_equal_821_and_deleted_equal_false_and_interval_id_equal_990_and_person_id_equal_2_and_time_interval_equal_20130222_1623000500__20130222_1630000500_and_title_equal_Planning(self):
-        interval = Interval(990, 2, 821, BoundedTimeInterval(), False, 'Planning')
+        first = datetime_from_19_char_string('20130222_1623000500')
+        last  = datetime_from_19_char_string('20130222_1630000500')
+        interval = Interval(990, 2, 821, BoundedTimeInterval(first, last), False, 'Planning')
         self.assertEqual('<ID:990 Person:2 Case:821 2013-02-22 16:23:00-05:00 - 2013-02-22 16:30:00-05:00 (not deleted)>', interval.__str__())
 
     def test___str___returns_str_instance_after_creation_with_case_id_equal_821_and_deleted_equal_false_and_interval_id_equal_993_and_person_id_equal_2_and_time_interval_equal_20130222_1821000500__20130222_1824000500_and_title_equal_Planning(self):
-        interval = Interval(993, 2, 821, BoundedTimeInterval(), False, 'Planning')
+        first = datetime_from_19_char_string('20130222_1821000500')
+        last  = datetime_from_19_char_string('20130222_1824000500')
+        interval = Interval(993, 2, 821, BoundedTimeInterval(first, last), False, 'Planning')
         self.assertEqual('<ID:993 Person:2 Case:821 2013-02-22 18:21:00-05:00 - 2013-02-22 18:24:00-05:00 (not deleted)>', interval.__str__())
 
     def test___str___returns_str_instance_after_creation_with_case_id_equal_821_and_deleted_equal_false_and_interval_id_equal_998_and_person_id_equal_2_and_time_interval_equal_20130223_0416000500__20130223_0420410500_and_title_equal_Planning(self):
-        interval = Interval(998, 2, 821, BoundedTimeInterval(), False, 'Planning')
+        first = datetime_from_19_char_string('20130223_0416000500')
+        last  = datetime_from_19_char_string('20130223_0420410500')
+        interval = Interval(998, 2, 821, BoundedTimeInterval(first, last), False, 'Planning')
         self.assertEqual('<ID:998 Person:2 Case:821 2013-02-23 04:16:00-05:00 - 2013-02-23 04:20:41-05:00 (not deleted)>', interval.__str__())
 
     def test___str___returns_str_instance_after_creation_with_case_id_equal_822_and_deleted_equal_false_and_interval_id_equal_987_and_person_id_equal_2_and_time_interval_equal_20130222_1303000500__20130222_1337000500_and_title_equal_Talk_with_coworkers(self):
-        interval = Interval(987, 2, 822, BoundedTimeInterval(), False, 'Talk with co-workers')
+        first = datetime_from_19_char_string('20130222_1303000500')
+        last  = datetime_from_19_char_string('20130222_1337000500')
+        interval = Interval(987, 2, 822, BoundedTimeInterval(first, last), False, 'Talk with co-workers')
         self.assertEqual('<ID:987 Person:2 Case:822 2013-02-22 13:03:00-05:00 - 2013-02-22 13:37:00-05:00 (not deleted)>', interval.__str__())
 
     def test___str___returns_str_instance_after_creation_with_case_id_equal_822_and_deleted_equal_false_and_interval_id_equal_989_and_person_id_equal_2_and_time_interval_equal_20130222_1347000500__20130222_1623000500_and_title_equal_Talk_with_coworkers(self):
-        interval = Interval(989, 2, 822, BoundedTimeInterval(), False, 'Talk with co-workers')
+        first = datetime_from_19_char_string('20130222_1347000500')
+        last  = datetime_from_19_char_string('20130222_1623000500')
+        interval = Interval(989, 2, 822, BoundedTimeInterval(first, last), False, 'Talk with co-workers')
         self.assertEqual('<ID:989 Person:2 Case:822 2013-02-22 13:47:00-05:00 - 2013-02-22 16:23:00-05:00 (not deleted)>', interval.__str__())
 
     def test___str___returns_str_instance_after_creation_with_case_id_equal_823_and_deleted_equal_false_and_interval_id_equal_995_and_person_id_equal_2_and_time_interval_equal_20130223_0023000500__20130223_0106030500_and_title_equal_Move_config_file_reading_to_its_own_file(self):
-        interval = Interval(995, 2, 823, BoundedTimeInterval(), False, 'Move config file reading to its own file')
+        first = datetime_from_19_char_string('20130223_0023000500')
+        last  = datetime_from_19_char_string('20130223_0106030500')
+        interval = Interval(995, 2, 823, BoundedTimeInterval(first, last), False, 'Move config file reading to its own file')
         self.assertEqual('<ID:995 Person:2 Case:823 2013-02-23 00:23:00-05:00 - 2013-02-23 01:06:03-05:00 (not deleted)>', interval.__str__())
 
     def test___str___returns_str_instance_after_creation_with_case_id_equal_824_and_deleted_equal_false_and_interval_id_equal_997_and_person_id_equal_2_and_time_interval_equal_20130223_0342000500__20130223_0416000500_and_title_equal_Implement_list_of_time_worked_for_each_unuploaded_day(self):
-        interval = Interval(997, 2, 824, BoundedTimeInterval(), False, 'Implement list of time worked for each un-uploaded day')
+        first = datetime_from_19_char_string('20130223_0342000500')
+        last  = datetime_from_19_char_string('20130223_0416000500')
+        interval = Interval(997, 2, 824, BoundedTimeInterval(first, last), False, 'Implement list of time worked for each un-uploaded day')
         self.assertEqual('<ID:997 Person:2 Case:824 2013-02-23 03:42:00-05:00 - 2013-02-23 04:16:00-05:00 (not deleted)>', interval.__str__())
 
     def test___str___returns_str_instance_after_creation_with_case_id_equal_825_and_deleted_equal_false_and_interval_id_equal_1007_and_person_id_equal_2_and_time_interval_equal_20130225_0012460500__20130225_0014540500_and_title_equal_Add_test_cases_for_fogzap_and_libraries(self):
-        interval = Interval(1007, 2, 825, BoundedTimeInterval(), False, 'Add test cases for fogzap and libraries')
+        first = datetime_from_19_char_string('20130225_0012460500')
+        last  = datetime_from_19_char_string('20130225_0014540500')
+        interval = Interval(1007, 2, 825, BoundedTimeInterval(first, last), False, 'Add test cases for fogzap and libraries')
         self.assertEqual('<ID:1007 Person:2 Case:825 2013-02-25 00:12:46-05:00 - 2013-02-25 00:14:54-05:00 (not deleted)>', interval.__str__())
 
     def test___str___returns_str_instance_after_creation_with_case_id_equal_825_and_deleted_equal_false_and_interval_id_equal_1009_and_person_id_equal_2_and_time_interval_equal_20130225_0016250500__Ongoing_and_title_equal_Add_test_cases_for_fogzap_and_libraries(self):
@@ -774,183 +860,273 @@ class TestInterval(unittest.TestCase):
         self.assertEqual('<ID:1009 Person:2 Case:825 2013-02-25 00:16:25-05:00 - Ongoing (not deleted)>', interval.__str__())
 
     def test___str___returns_str_instance_after_creation_with_case_id_equal_826_and_deleted_equal_false_and_interval_id_equal_1005_and_person_id_equal_2_and_time_interval_equal_20130224_1556000500__20130224_2359000500_and_title_equal_Refactor_foglibInterval(self):
-        interval = Interval(1005, 2, 826, BoundedTimeInterval(), False, 'Refactor foglib.Interval')
+        first = datetime_from_19_char_string('20130224_1556000500')
+        last  = datetime_from_19_char_string('20130224_2359000500')
+        interval = Interval(1005, 2, 826, BoundedTimeInterval(first, last), False, 'Refactor foglib.Interval')
         self.assertEqual('<ID:1005 Person:2 Case:826 2013-02-24 15:56:00-05:00 - 2013-02-24 23:59:00-05:00 (not deleted)>', interval.__str__())
 
     def test___str___returns_str_instance_after_creation_with_case_id_equal_826_and_deleted_equal_false_and_interval_id_equal_1006_and_person_id_equal_2_and_time_interval_equal_20130225_0000000500__20130225_0012000500_and_title_equal_Refactor_foglibInterval(self):
-        interval = Interval(1006, 2, 826, BoundedTimeInterval(), False, 'Refactor foglib.Interval')
+        first = datetime_from_19_char_string('20130225_0000000500')
+        last  = datetime_from_19_char_string('20130225_0012000500')
+        interval = Interval(1006, 2, 826, BoundedTimeInterval(first, last), False, 'Refactor foglib.Interval')
         self.assertEqual('<ID:1006 Person:2 Case:826 2013-02-25 00:00:00-05:00 - 2013-02-25 00:12:00-05:00 (not deleted)>', interval.__str__())
 
     def test_creation_with_case_id_equal_765_and_deleted_equal_false_and_interval_id_equal_967_and_person_id_equal_2_and_time_interval_equal_20130221_1325000500__20130221_1331090500_and_title_equal_Planning(self):
-        interval = Interval(967, 2, 765, BoundedTimeInterval(), False, 'Planning')
+        first = datetime_from_19_char_string('20130221_1325000500')
+        last  = datetime_from_19_char_string('20130221_1331090500')
+        interval = Interval(967, 2, 765, BoundedTimeInterval(first, last), False, 'Planning')
         # Make sure it doesn't raise any exceptions.
 
     def test_creation_with_case_id_equal_765_and_deleted_equal_false_and_interval_id_equal_972_and_person_id_equal_2_and_time_interval_equal_20130221_1432300500__20130221_1532380500_and_title_equal_Planning(self):
-        interval = Interval(972, 2, 765, BoundedTimeInterval(), False, 'Planning')
+        first = datetime_from_19_char_string('20130221_1432300500')
+        last  = datetime_from_19_char_string('20130221_1532380500')
+        interval = Interval(972, 2, 765, BoundedTimeInterval(first, last), False, 'Planning')
         # Make sure it doesn't raise any exceptions.
 
     def test_creation_with_case_id_equal_766_and_deleted_equal_false_and_interval_id_equal_968_and_person_id_equal_2_and_time_interval_equal_20130221_1304000500__20130221_1325000500_and_title_equal_Email_and_social_networking(self):
-        interval = Interval(968, 2, 766, BoundedTimeInterval(), False, 'Email and social networking')
+        first = datetime_from_19_char_string('20130221_1304000500')
+        last  = datetime_from_19_char_string('20130221_1325000500')
+        interval = Interval(968, 2, 766, BoundedTimeInterval(first, last), False, 'Email and social networking')
         # Make sure it doesn't raise any exceptions.
 
     def test_creation_with_case_id_equal_766_and_deleted_equal_false_and_interval_id_equal_974_and_person_id_equal_2_and_time_interval_equal_20130221_1630000500__20130221_1646090500_and_title_equal_Email_and_social_networking(self):
-        interval = Interval(974, 2, 766, BoundedTimeInterval(), False, 'Email and social networking')
+        first = datetime_from_19_char_string('20130221_1630000500')
+        last  = datetime_from_19_char_string('20130221_1646090500')
+        interval = Interval(974, 2, 766, BoundedTimeInterval(first, last), False, 'Email and social networking')
         # Make sure it doesn't raise any exceptions.
 
     def test_creation_with_case_id_equal_766_and_deleted_equal_false_and_interval_id_equal_978_and_person_id_equal_2_and_time_interval_equal_20130221_1811080500__20130221_1814570500_and_title_equal_Email_and_social_networking(self):
-        interval = Interval(978, 2, 766, BoundedTimeInterval(), False, 'Email and social networking')
+        first = datetime_from_19_char_string('20130221_1811080500')
+        last  = datetime_from_19_char_string('20130221_1814570500')
+        interval = Interval(978, 2, 766, BoundedTimeInterval(first, last), False, 'Email and social networking')
         # Make sure it doesn't raise any exceptions.
 
     def test_creation_with_case_id_equal_766_and_deleted_equal_false_and_interval_id_equal_981_and_person_id_equal_2_and_time_interval_equal_20130221_2103300500__20130221_2129260500_and_title_equal_Email_and_social_networking(self):
-        interval = Interval(981, 2, 766, BoundedTimeInterval(), False, 'Email and social networking')
+        first = datetime_from_19_char_string('20130221_2103300500')
+        last  = datetime_from_19_char_string('20130221_2129260500')
+        interval = Interval(981, 2, 766, BoundedTimeInterval(first, last), False, 'Email and social networking')
         # Make sure it doesn't raise any exceptions.
 
     def test_creation_with_case_id_equal_767_and_deleted_equal_false_and_interval_id_equal_971_and_person_id_equal_2_and_time_interval_equal_20130221_1407160500__20130221_1432300500_and_title_equal_Computer_maintenance(self):
-        interval = Interval(971, 2, 767, BoundedTimeInterval(), False, 'Computer maintenance')
+        first = datetime_from_19_char_string('20130221_1407160500')
+        last  = datetime_from_19_char_string('20130221_1432300500')
+        interval = Interval(971, 2, 767, BoundedTimeInterval(first, last), False, 'Computer maintenance')
         # Make sure it doesn't raise any exceptions.
 
     def test_creation_with_case_id_equal_769_and_deleted_equal_false_and_interval_id_equal_969_and_person_id_equal_2_and_time_interval_equal_20130221_1331090500__20130221_1345410500_and_title_equal_Status_Meeting_14_Feb_2013(self):
-        interval = Interval(969, 2, 769, BoundedTimeInterval(), False, 'Status Meeting (14 Feb 2013)')
+        first = datetime_from_19_char_string('20130221_1331090500')
+        last  = datetime_from_19_char_string('20130221_1345410500')
+        interval = Interval(969, 2, 769, BoundedTimeInterval(first, last), False, 'Status Meeting (14 Feb 2013)')
         # Make sure it doesn't raise any exceptions.
 
     def test_creation_with_case_id_equal_769_and_deleted_equal_false_and_interval_id_equal_970_and_person_id_equal_2_and_time_interval_equal_20130221_1346100500__20130221_1407160500_and_title_equal_Status_Meeting_14_Feb_2013(self):
-        interval = Interval(970, 2, 769, BoundedTimeInterval(), False, 'Status Meeting (14 Feb 2013)')
+        first = datetime_from_19_char_string('20130221_1346100500')
+        last  = datetime_from_19_char_string('20130221_1407160500')
+        interval = Interval(970, 2, 769, BoundedTimeInterval(first, last), False, 'Status Meeting (14 Feb 2013)')
         # Make sure it doesn't raise any exceptions.
 
     def test_creation_with_case_id_equal_805_and_deleted_equal_false_and_interval_id_equal_964_and_person_id_equal_2_and_time_interval_equal_20130221_0000000500__20130221_0106500500_and_title_equal_Implement_pickler(self):
-        interval = Interval(964, 2, 805, BoundedTimeInterval(), False, 'Implement pickler')
+        first = datetime_from_19_char_string('20130221_0000000500')
+        last  = datetime_from_19_char_string('20130221_0106500500')
+        interval = Interval(964, 2, 805, BoundedTimeInterval(first, last), False, 'Implement pickler')
         # Make sure it doesn't raise any exceptions.
 
     def test_creation_with_case_id_equal_806_and_deleted_equal_false_and_interval_id_equal_965_and_person_id_equal_2_and_time_interval_equal_20130221_0107030500__20130221_0525000500_and_title_equal_Implement_fogbugz_download(self):
-        interval = Interval(965, 2, 806, BoundedTimeInterval(), False, 'Implement fogbugz download')
+        first = datetime_from_19_char_string('20130221_0107030500')
+        last  = datetime_from_19_char_string('20130221_0525000500')
+        interval = Interval(965, 2, 806, BoundedTimeInterval(first, last), False, 'Implement fogbugz download')
         # Make sure it doesn't raise any exceptions.
 
     def test_creation_with_case_id_equal_807_and_deleted_equal_false_and_interval_id_equal_1001_and_person_id_equal_2_and_time_interval_equal_20130223_1325160500__20130223_1422040500_and_title_equal_Implement_facebook_upload(self):
-        interval = Interval(1001, 2, 807, BoundedTimeInterval(), False, 'Implement facebook upload')
+        first = datetime_from_19_char_string('20130223_1325160500')
+        last  = datetime_from_19_char_string('20130223_1422040500')
+        interval = Interval(1001, 2, 807, BoundedTimeInterval(first, last), False, 'Implement facebook upload')
         # Make sure it doesn't raise any exceptions.
 
     def test_creation_with_case_id_equal_807_and_deleted_equal_false_and_interval_id_equal_1002_and_person_id_equal_2_and_time_interval_equal_20130223_1434180500__20130223_1952310500_and_title_equal_Implement_facebook_upload(self):
-        interval = Interval(1002, 2, 807, BoundedTimeInterval(), False, 'Implement facebook upload')
+        first = datetime_from_19_char_string('20130223_1434180500')
+        last  = datetime_from_19_char_string('20130223_1952310500')
+        interval = Interval(1002, 2, 807, BoundedTimeInterval(first, last), False, 'Implement facebook upload')
         # Make sure it doesn't raise any exceptions.
 
     def test_creation_with_case_id_equal_807_and_deleted_equal_false_and_interval_id_equal_1003_and_person_id_equal_2_and_time_interval_equal_20130223_2033460500__20130223_2300060500_and_title_equal_Implement_facebook_upload(self):
-        interval = Interval(1003, 2, 807, BoundedTimeInterval(), False, 'Implement facebook upload')
+        first = datetime_from_19_char_string('20130223_2033460500')
+        last  = datetime_from_19_char_string('20130223_2300060500')
+        interval = Interval(1003, 2, 807, BoundedTimeInterval(first, last), False, 'Implement facebook upload')
         # Make sure it doesn't raise any exceptions.
 
     def test_creation_with_case_id_equal_808_and_deleted_equal_false_and_interval_id_equal_966_and_person_id_equal_2_and_time_interval_equal_20130221_0525000500__20130221_0551060500_and_title_equal_Push_voluntary_tracker_to_github(self):
-        interval = Interval(966, 2, 808, BoundedTimeInterval(), False, 'Push voluntary tracker to github')
+        first = datetime_from_19_char_string('20130221_0525000500')
+        last  = datetime_from_19_char_string('20130221_0551060500')
+        interval = Interval(966, 2, 808, BoundedTimeInterval(first, last), False, 'Push voluntary tracker to github')
         # Make sure it doesn't raise any exceptions.
 
     def test_creation_with_case_id_equal_810_and_deleted_equal_false_and_interval_id_equal_973_and_person_id_equal_2_and_time_interval_equal_20130221_1532380500__20130221_1630000500_and_title_equal_Move_fogbugz_direct_stuff_into_a_module_logon_queries_etc(self):
-        interval = Interval(973, 2, 810, BoundedTimeInterval(), False, 'Move fogbugz direct stuff into a module (logon, queries, etc.)')
+        first = datetime_from_19_char_string('20130221_1532380500')
+        last  = datetime_from_19_char_string('20130221_1630000500')
+        interval = Interval(973, 2, 810, BoundedTimeInterval(first, last), False, 'Move fogbugz direct stuff into a module (logon, queries, etc.)')
         # Make sure it doesn't raise any exceptions.
 
     def test_creation_with_case_id_equal_810_and_deleted_equal_false_and_interval_id_equal_975_and_person_id_equal_2_and_time_interval_equal_20130221_1646090500__20130221_1736020500_and_title_equal_Move_fogbugz_direct_stuff_into_a_module_logon_queries_etc(self):
-        interval = Interval(975, 2, 810, BoundedTimeInterval(), False, 'Move fogbugz direct stuff into a module (logon, queries, etc.)')
+        first = datetime_from_19_char_string('20130221_1646090500')
+        last  = datetime_from_19_char_string('20130221_1736020500')
+        interval = Interval(975, 2, 810, BoundedTimeInterval(first, last), False, 'Move fogbugz direct stuff into a module (logon, queries, etc.)')
         # Make sure it doesn't raise any exceptions.
 
     def test_creation_with_case_id_equal_810_and_deleted_equal_false_and_interval_id_equal_976_and_person_id_equal_2_and_time_interval_equal_20130221_1800500500__20130221_1802110500_and_title_equal_Move_fogbugz_direct_stuff_into_a_module_logon_queries_etc(self):
-        interval = Interval(976, 2, 810, BoundedTimeInterval(), False, 'Move fogbugz direct stuff into a module (logon, queries, etc.)')
+        first = datetime_from_19_char_string('20130221_1800500500')
+        last  = datetime_from_19_char_string('20130221_1802110500')
+        interval = Interval(976, 2, 810, BoundedTimeInterval(first, last), False, 'Move fogbugz direct stuff into a module (logon, queries, etc.)')
         # Make sure it doesn't raise any exceptions.
 
     def test_creation_with_case_id_equal_811_and_deleted_equal_false_and_interval_id_equal_980_and_person_id_equal_2_and_time_interval_equal_20130221_1904270500__20130221_2103300500_and_title_equal_Create_FogbugzCase_class(self):
-        interval = Interval(980, 2, 811, BoundedTimeInterval(), False, 'Create FogbugzCase class')
+        first = datetime_from_19_char_string('20130221_1904270500')
+        last  = datetime_from_19_char_string('20130221_2103300500')
+        interval = Interval(980, 2, 811, BoundedTimeInterval(first, last), False, 'Create FogbugzCase class')
         # Make sure it doesn't raise any exceptions.
 
     def test_creation_with_case_id_equal_811_and_deleted_equal_false_and_interval_id_equal_982_and_person_id_equal_2_and_time_interval_equal_20130221_2129260500__20130221_2152300500_and_title_equal_Create_FogbugzCase_class(self):
-        interval = Interval(982, 2, 811, BoundedTimeInterval(), False, 'Create FogbugzCase class')
+        first = datetime_from_19_char_string('20130221_2129260500')
+        last  = datetime_from_19_char_string('20130221_2152300500')
+        interval = Interval(982, 2, 811, BoundedTimeInterval(first, last), False, 'Create FogbugzCase class')
         # Make sure it doesn't raise any exceptions.
 
     def test_creation_with_case_id_equal_812_and_deleted_equal_false_and_interval_id_equal_994_and_person_id_equal_2_and_time_interval_equal_20130222_2244000500__20130222_2301180500_and_title_equal_Rename_to_fogzap_and_repurpose_to_being_a_fogbugz_command_line_uitl_that_has_as_one_of_its_functions_uploading_to_facebook(self):
-        interval = Interval(994, 2, 812, BoundedTimeInterval(), False, 'Rename to fogzap and repurpose to being a fogbugz command line uitl that has as one of its functions uploading to facebook')
+        first = datetime_from_19_char_string('20130222_2244000500')
+        last  = datetime_from_19_char_string('20130222_2301180500')
+        interval = Interval(994, 2, 812, BoundedTimeInterval(first, last), False, 'Rename to fogzap and repurpose to being a fogbugz command line uitl that has as one of its functions uploading to facebook')
         # Make sure it doesn't raise any exceptions.
 
     def test_creation_with_case_id_equal_813_and_deleted_equal_false_and_interval_id_equal_996_and_person_id_equal_2_and_time_interval_equal_20130223_0106130500__20130223_0342000500_and_title_equal_Implement_a_subcommand_interface_with_commands_CaseStats_unimplemented_and_UnsharedIntervals(self):
-        interval = Interval(996, 2, 813, BoundedTimeInterval(), False, 'Implement a subcommand interface with commands CaseStats (unimplemented) and UnsharedIntervals')
+        first = datetime_from_19_char_string('20130223_0106130500')
+        last  = datetime_from_19_char_string('20130223_0342000500')
+        interval = Interval(996, 2, 813, BoundedTimeInterval(first, last), False, 'Implement a subcommand interface with commands CaseStats (unimplemented) and UnsharedIntervals')
         # Make sure it doesn't raise any exceptions.
 
     def test_creation_with_case_id_equal_815_and_deleted_equal_false_and_interval_id_equal_977_and_person_id_equal_2_and_time_interval_equal_20130221_1802110500__20130221_1811080500_and_title_equal_Reimplement_fogbugz_2_fb_using_the_library(self):
-        interval = Interval(977, 2, 815, BoundedTimeInterval(), False, 'Reimplement fogbugz_2_fb using the library')
+        first = datetime_from_19_char_string('20130221_1802110500')
+        last  = datetime_from_19_char_string('20130221_1811080500')
+        interval = Interval(977, 2, 815, BoundedTimeInterval(first, last), False, 'Reimplement fogbugz_2_fb using the library')
         # Make sure it doesn't raise any exceptions.
 
     def test_creation_with_case_id_equal_815_and_deleted_equal_false_and_interval_id_equal_979_and_person_id_equal_2_and_time_interval_equal_20130221_1814570500__20130221_1904110500_and_title_equal_Reimplement_fogbugz_2_fb_using_the_library(self):
-        interval = Interval(979, 2, 815, BoundedTimeInterval(), False, 'Reimplement fogbugz_2_fb using the library')
+        first = datetime_from_19_char_string('20130221_1814570500')
+        last  = datetime_from_19_char_string('20130221_1904110500')
+        interval = Interval(979, 2, 815, BoundedTimeInterval(first, last), False, 'Reimplement fogbugz_2_fb using the library')
         # Make sure it doesn't raise any exceptions.
 
     def test_creation_with_case_id_equal_816_and_deleted_equal_false_and_interval_id_equal_1000_and_person_id_equal_2_and_time_interval_equal_20130223_1323510500__20130223_1325160500_and_title_equal_Add_foglibSessioncases_named_method(self):
-        interval = Interval(1000, 2, 816, BoundedTimeInterval(), False, 'Add foglib.Session.cases_named method')
+        first = datetime_from_19_char_string('20130223_1323510500')
+        last  = datetime_from_19_char_string('20130223_1325160500')
+        interval = Interval(1000, 2, 816, BoundedTimeInterval(first, last), False, 'Add foglib.Session.cases_named method')
         # Make sure it doesn't raise any exceptions.
 
     def test_creation_with_case_id_equal_818_and_deleted_equal_false_and_interval_id_equal_991_and_person_id_equal_2_and_time_interval_equal_20130222_1630000500__20130222_1819000500_and_title_equal_Meeting_with_Sriram_N(self):
-        interval = Interval(991, 2, 818, BoundedTimeInterval(), False, 'Meeting with Sriram N.')
+        first = datetime_from_19_char_string('20130222_1630000500')
+        last  = datetime_from_19_char_string('20130222_1819000500')
+        interval = Interval(991, 2, 818, BoundedTimeInterval(first, last), False, 'Meeting with Sriram N.')
         # Make sure it doesn't raise any exceptions.
 
     def test_creation_with_case_id_equal_819_and_deleted_equal_false_and_interval_id_equal_986_and_person_id_equal_2_and_time_interval_equal_20130222_1059000500__20130222_1303000500_and_title_equal_Sriram_N_job_talk(self):
-        interval = Interval(986, 2, 819, BoundedTimeInterval(), False, 'Sriram N job talk')
+        first = datetime_from_19_char_string('20130222_1059000500')
+        last  = datetime_from_19_char_string('20130222_1303000500')
+        interval = Interval(986, 2, 819, BoundedTimeInterval(first, last), False, 'Sriram N job talk')
         # Make sure it doesn't raise any exceptions.
 
     def test_creation_with_case_id_equal_820_and_deleted_equal_false_and_interval_id_equal_1004_and_person_id_equal_2_and_time_interval_equal_20130224_1431160500__20130224_1519390500_and_title_equal_Email_and_social_networking(self):
-        interval = Interval(1004, 2, 820, BoundedTimeInterval(), False, 'Email and social networking')
+        first = datetime_from_19_char_string('20130224_1431160500')
+        last  = datetime_from_19_char_string('20130224_1519390500')
+        interval = Interval(1004, 2, 820, BoundedTimeInterval(first, last), False, 'Email and social networking')
         # Make sure it doesn't raise any exceptions.
 
     def test_creation_with_case_id_equal_820_and_deleted_equal_false_and_interval_id_equal_983_and_person_id_equal_2_and_time_interval_equal_20130222_1824260500__20130222_1853030500_and_title_equal_Email_and_social_networking(self):
-        interval = Interval(983, 2, 820, BoundedTimeInterval(), False, 'Email and social networking')
+        first = datetime_from_19_char_string('20130222_1824260500')
+        last  = datetime_from_19_char_string('20130222_1853030500')
+        interval = Interval(983, 2, 820, BoundedTimeInterval(first, last), False, 'Email and social networking')
         # Make sure it doesn't raise any exceptions.
 
     def test_creation_with_case_id_equal_820_and_deleted_equal_false_and_interval_id_equal_992_and_person_id_equal_2_and_time_interval_equal_20130222_1819000500__20130222_1821000500_and_title_equal_Email_and_social_networking(self):
-        interval = Interval(992, 2, 820, BoundedTimeInterval(), False, 'Email and social networking')
+        first = datetime_from_19_char_string('20130222_1819000500')
+        last  = datetime_from_19_char_string('20130222_1821000500')
+        interval = Interval(992, 2, 820, BoundedTimeInterval(first, last), False, 'Email and social networking')
         # Make sure it doesn't raise any exceptions.
 
     def test_creation_with_case_id_equal_820_and_deleted_equal_false_and_interval_id_equal_999_and_person_id_equal_2_and_time_interval_equal_20130223_1243000500__20130223_1323510500_and_title_equal_Email_and_social_networking(self):
-        interval = Interval(999, 2, 820, BoundedTimeInterval(), False, 'Email and social networking')
+        first = datetime_from_19_char_string('20130223_1243000500')
+        last  = datetime_from_19_char_string('20130223_1323510500')
+        interval = Interval(999, 2, 820, BoundedTimeInterval(first, last), False, 'Email and social networking')
         # Make sure it doesn't raise any exceptions.
 
     def test_creation_with_case_id_equal_821_and_deleted_equal_false_and_interval_id_equal_1008_and_person_id_equal_2_and_time_interval_equal_20130225_0014540500__20130225_0016250500_and_title_equal_Planning(self):
-        interval = Interval(1008, 2, 821, BoundedTimeInterval(), False, 'Planning')
+        first = datetime_from_19_char_string('20130225_0014540500')
+        last  = datetime_from_19_char_string('20130225_0016250500')
+        interval = Interval(1008, 2, 821, BoundedTimeInterval(first, last), False, 'Planning')
         # Make sure it doesn't raise any exceptions.
 
     def test_creation_with_case_id_equal_821_and_deleted_equal_false_and_interval_id_equal_984_and_person_id_equal_2_and_time_interval_equal_20130222_2147000500__20130222_2151000500_and_title_equal_Planning(self):
-        interval = Interval(984, 2, 821, BoundedTimeInterval(), False, 'Planning')
+        first = datetime_from_19_char_string('20130222_2147000500')
+        last  = datetime_from_19_char_string('20130222_2151000500')
+        interval = Interval(984, 2, 821, BoundedTimeInterval(first, last), False, 'Planning')
         # Make sure it doesn't raise any exceptions.
 
     def test_creation_with_case_id_equal_821_and_deleted_equal_false_and_interval_id_equal_985_and_person_id_equal_2_and_time_interval_equal_20130222_2221540500__20130222_2244000500_and_title_equal_Planning(self):
-        interval = Interval(985, 2, 821, BoundedTimeInterval(), False, 'Planning')
+        first = datetime_from_19_char_string('20130222_2221540500')
+        last  = datetime_from_19_char_string('20130222_2244000500')
+        interval = Interval(985, 2, 821, BoundedTimeInterval(first, last), False, 'Planning')
         # Make sure it doesn't raise any exceptions.
 
     def test_creation_with_case_id_equal_821_and_deleted_equal_false_and_interval_id_equal_988_and_person_id_equal_2_and_time_interval_equal_20130222_1337000500__20130222_1347000500_and_title_equal_Planning(self):
-        interval = Interval(988, 2, 821, BoundedTimeInterval(), False, 'Planning')
+        first = datetime_from_19_char_string('20130222_1337000500')
+        last  = datetime_from_19_char_string('20130222_1347000500')
+        interval = Interval(988, 2, 821, BoundedTimeInterval(first, last), False, 'Planning')
         # Make sure it doesn't raise any exceptions.
 
     def test_creation_with_case_id_equal_821_and_deleted_equal_false_and_interval_id_equal_990_and_person_id_equal_2_and_time_interval_equal_20130222_1623000500__20130222_1630000500_and_title_equal_Planning(self):
-        interval = Interval(990, 2, 821, BoundedTimeInterval(), False, 'Planning')
+        first = datetime_from_19_char_string('20130222_1623000500')
+        last  = datetime_from_19_char_string('20130222_1630000500')
+        interval = Interval(990, 2, 821, BoundedTimeInterval(first, last), False, 'Planning')
         # Make sure it doesn't raise any exceptions.
 
     def test_creation_with_case_id_equal_821_and_deleted_equal_false_and_interval_id_equal_993_and_person_id_equal_2_and_time_interval_equal_20130222_1821000500__20130222_1824000500_and_title_equal_Planning(self):
-        interval = Interval(993, 2, 821, BoundedTimeInterval(), False, 'Planning')
+        first = datetime_from_19_char_string('20130222_1821000500')
+        last  = datetime_from_19_char_string('20130222_1824000500')
+        interval = Interval(993, 2, 821, BoundedTimeInterval(first, last), False, 'Planning')
         # Make sure it doesn't raise any exceptions.
 
     def test_creation_with_case_id_equal_821_and_deleted_equal_false_and_interval_id_equal_998_and_person_id_equal_2_and_time_interval_equal_20130223_0416000500__20130223_0420410500_and_title_equal_Planning(self):
-        interval = Interval(998, 2, 821, BoundedTimeInterval(), False, 'Planning')
+        first = datetime_from_19_char_string('20130223_0416000500')
+        last  = datetime_from_19_char_string('20130223_0420410500')
+        interval = Interval(998, 2, 821, BoundedTimeInterval(first, last), False, 'Planning')
         # Make sure it doesn't raise any exceptions.
 
     def test_creation_with_case_id_equal_822_and_deleted_equal_false_and_interval_id_equal_987_and_person_id_equal_2_and_time_interval_equal_20130222_1303000500__20130222_1337000500_and_title_equal_Talk_with_coworkers(self):
-        interval = Interval(987, 2, 822, BoundedTimeInterval(), False, 'Talk with co-workers')
+        first = datetime_from_19_char_string('20130222_1303000500')
+        last  = datetime_from_19_char_string('20130222_1337000500')
+        interval = Interval(987, 2, 822, BoundedTimeInterval(first, last), False, 'Talk with co-workers')
         # Make sure it doesn't raise any exceptions.
 
     def test_creation_with_case_id_equal_822_and_deleted_equal_false_and_interval_id_equal_989_and_person_id_equal_2_and_time_interval_equal_20130222_1347000500__20130222_1623000500_and_title_equal_Talk_with_coworkers(self):
-        interval = Interval(989, 2, 822, BoundedTimeInterval(), False, 'Talk with co-workers')
+        first = datetime_from_19_char_string('20130222_1347000500')
+        last  = datetime_from_19_char_string('20130222_1623000500')
+        interval = Interval(989, 2, 822, BoundedTimeInterval(first, last), False, 'Talk with co-workers')
         # Make sure it doesn't raise any exceptions.
 
     def test_creation_with_case_id_equal_823_and_deleted_equal_false_and_interval_id_equal_995_and_person_id_equal_2_and_time_interval_equal_20130223_0023000500__20130223_0106030500_and_title_equal_Move_config_file_reading_to_its_own_file(self):
-        interval = Interval(995, 2, 823, BoundedTimeInterval(), False, 'Move config file reading to its own file')
+        first = datetime_from_19_char_string('20130223_0023000500')
+        last  = datetime_from_19_char_string('20130223_0106030500')
+        interval = Interval(995, 2, 823, BoundedTimeInterval(first, last), False, 'Move config file reading to its own file')
         # Make sure it doesn't raise any exceptions.
 
     def test_creation_with_case_id_equal_824_and_deleted_equal_false_and_interval_id_equal_997_and_person_id_equal_2_and_time_interval_equal_20130223_0342000500__20130223_0416000500_and_title_equal_Implement_list_of_time_worked_for_each_unuploaded_day(self):
-        interval = Interval(997, 2, 824, BoundedTimeInterval(), False, 'Implement list of time worked for each un-uploaded day')
+        first = datetime_from_19_char_string('20130223_0342000500')
+        last  = datetime_from_19_char_string('20130223_0416000500')
+        interval = Interval(997, 2, 824, BoundedTimeInterval(first, last), False, 'Implement list of time worked for each un-uploaded day')
         # Make sure it doesn't raise any exceptions.
 
     def test_creation_with_case_id_equal_825_and_deleted_equal_false_and_interval_id_equal_1007_and_person_id_equal_2_and_time_interval_equal_20130225_0012460500__20130225_0014540500_and_title_equal_Add_test_cases_for_fogzap_and_libraries(self):
-        interval = Interval(1007, 2, 825, BoundedTimeInterval(), False, 'Add test cases for fogzap and libraries')
+        first = datetime_from_19_char_string('20130225_0012460500')
+        last  = datetime_from_19_char_string('20130225_0014540500')
+        interval = Interval(1007, 2, 825, BoundedTimeInterval(first, last), False, 'Add test cases for fogzap and libraries')
         # Make sure it doesn't raise any exceptions.
 
     def test_creation_with_case_id_equal_825_and_deleted_equal_false_and_interval_id_equal_1009_and_person_id_equal_2_and_time_interval_equal_20130225_0016250500__Ongoing_and_title_equal_Add_test_cases_for_fogzap_and_libraries(self):
@@ -958,11 +1134,15 @@ class TestInterval(unittest.TestCase):
         # Make sure it doesn't raise any exceptions.
 
     def test_creation_with_case_id_equal_826_and_deleted_equal_false_and_interval_id_equal_1005_and_person_id_equal_2_and_time_interval_equal_20130224_1556000500__20130224_2359000500_and_title_equal_Refactor_foglibInterval(self):
-        interval = Interval(1005, 2, 826, BoundedTimeInterval(), False, 'Refactor foglib.Interval')
+        first = datetime_from_19_char_string('20130224_1556000500')
+        last  = datetime_from_19_char_string('20130224_2359000500')
+        interval = Interval(1005, 2, 826, BoundedTimeInterval(first, last), False, 'Refactor foglib.Interval')
         # Make sure it doesn't raise any exceptions.
 
     def test_creation_with_case_id_equal_826_and_deleted_equal_false_and_interval_id_equal_1006_and_person_id_equal_2_and_time_interval_equal_20130225_0000000500__20130225_0012000500_and_title_equal_Refactor_foglibInterval(self):
-        interval = Interval(1006, 2, 826, BoundedTimeInterval(), False, 'Refactor foglib.Interval')
+        first = datetime_from_19_char_string('20130225_0000000500')
+        last  = datetime_from_19_char_string('20130225_0012000500')
+        interval = Interval(1006, 2, 826, BoundedTimeInterval(first, last), False, 'Refactor foglib.Interval')
         # Make sure it doesn't raise any exceptions.
 
     @unittest.expectedFailure
@@ -1331,7 +1511,9 @@ class TestBoundedTimeInterval(unittest.TestCase):
         self.assertRaises(AttributeError, lambda: bounded_time_interval.intersection_with(bounded_time_interval))
 
     def test_is_ongoing_returns_false(self):
-        bounded_time_interval = BoundedTimeInterval()
+        first = datetime_from_19_char_string('20130224_1431160500')
+        last  = datetime_from_19_char_string('20130224_1519390500')
+        bounded_time_interval = BoundedTimeInterval(first, last)
         self.assertEqual(False, bounded_time_interval.is_ongoing())
 
 
