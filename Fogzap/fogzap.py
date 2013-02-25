@@ -42,7 +42,7 @@ def time_interval_for_day_containing( a_datetime, a_timezone ):
 
     """
     instant_in_correct_tz = a_datetime.astimezone(a_timezone)
-    first = instant_in_correct_tx.replace(
+    first = instant_in_correct_tz.replace(
         hour=0, minute=0, second=0, microsecond=0);
     last = (first + datetime.timedelta(days=1) - 
             datetime.timedelta(microseconds=1))
@@ -66,12 +66,14 @@ def split_into_days( a_TimeInterval ):
     else:
         remaining = a_TimeInterval
 
+    localtz = LocalTimezone()
     result = []
     try:
         while(True):
             # Slice off the last day or part of a day in the interval
             # and add it to the result
-            last_day = time_interval_for_day_containing( remaining.last )
+            last_day = time_interval_for_day_containing( 
+                remaining.last, localtz )
             overlap = remaining.intersection_with(last_day)
             result.extend(overlap)
             # Update remaining to include everything before the first
@@ -100,7 +102,7 @@ def summarize_intervals_by_day(intervals):
     split_intervals_l = [split_into_days(i.time_interval) for i in intervals]
     split_intervals = (i for sublist in split_intervals_l for i in sublist)
     
-    # For each interval, add its duration to the day n which it belongs
+    # For each interval, add its duration to the day in which it falls
     days = {}
     for i in split_intervals:
         start_day = start.date()
@@ -113,7 +115,7 @@ def summarize_intervals_by_day(intervals):
             days[start_day] += duration
         else:
             days[start_day] = duration
-
+    return days
 
 #################
 #
