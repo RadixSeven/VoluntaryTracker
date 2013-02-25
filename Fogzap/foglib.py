@@ -179,7 +179,13 @@ class TimeInterval(object)
         containing all time up to but not including the microsecond
         represented by a_datetime (which must be a timezone aware
         datetime object) Raises a ValueError when a_datetime is in the
-        future and is_ongoing is true.
+        future and is_ongoing is true. (Note that this means that this
+        can never return a result for which is_ongoing is true since;
+        the latest a_datetime can be is the present and a_datetime
+        must be strictly after the result of subinterval_before so the
+        result must not include the present. However is_ongoing
+        implies that the interval includes the present. Thus the
+        result cannot be ongoing.)
 
     subinterval_starting_at_or_after (self, a_datetime ) - which returns the
         intersection between this TimeInterval and the interval which
@@ -189,6 +195,13 @@ class TimeInterval(object)
         future and is_ongoing is true.
 
     __repr__( self ) - just as usual
+
+
+    All TimeInterval subclasses for which is_ongoing is false should
+    also have a duration member:
+
+    duration (self) - returns the length of this time interval as a
+        timedelta object.
 
     """
     def __str__(self):
@@ -247,6 +260,12 @@ class EmptyTimeInterval(TimeInterval):
 
         """
         return EmptyTimeInterval()
+
+    def duration (self):
+        """Returns the length of this TimeInterval as a timedelta object.
+
+        """
+        return datetime.timedelta() # No time
 
     def __repr__(self):
         return "Empty time interval"
@@ -423,12 +442,24 @@ class BoundedTimeInterval(collections.namedtuple("BoundedTimeInterval", ["first"
               # beginning of the method
             return EmptyTimeInterval()
 
+
+    def duration (self):
+        """Returns the length of this TimeInterval as a timedelta object.
+
+        """
+        # This is a closed time interval, so it includes its endpoints,
+        # which have a resolution of 1 microsecond. Thus if the
+        # endpoints are the same, we have an interval of 1
+        # microsecond. timedelta objects are guaranteed to have an
+        # integral number of microseconds.
+        return self.last - self.first + datetime.timedelta(microseconds=1)
+
     def __repr__(self):
         return ''.join([str(self.first), ' - ', str(last)])
 
 
 
-class OngoingTimeInterval(collections.namedtuple("BoundedTimeInterval", ["first"]),TimeInterval): #TODO: finish
+class OngoingTimeInterval(collections.namedtuple("BoundedTimeInterval", ["first"]),TimeInterval): 
     """Represents a closed interval in time with a known start time, that includes the present but for which the end point is known. 
 
     first - A timezone aware datetime object giving the first
@@ -480,7 +511,8 @@ class OngoingTimeInterval(collections.namedtuple("BoundedTimeInterval", ["first"
         microsecond represented by a_datetime
 
         Raises a ValueError when a_datetime is in the future and
-        is_ongoing is true.
+        is_ongoing is true. Thus cannot return a TimeInterval object
+        that is ongoing.
 
         a_datetime - a timezone aware datetime object
 
