@@ -82,9 +82,9 @@ def run_make_fogzap_pickle(cmd_args):
     # Handle the display command
 
     if args.display:
-        print('Username:', str(username))
-        print('Password:', str(password))
-        print('Address:', str(address))
+        print 'Username:', str(username)
+        print 'Password:', str(password)
+        print 'Address:', str(address)
         if last_upload_date is None:
             last_upload_date_str = 'None'
         else:
@@ -94,7 +94,7 @@ def run_make_fogzap_pickle(cmd_args):
             else:
                 last_upload_date_str = '{} (includes timezone information)'.format(
                     str(last_upload_date))
-        print('Last upload date:', last_upload_date_str)
+        print 'Last upload date:', last_upload_date_str
         sys.exit(-1)
 
     # Set (and possibly write) any new values for fogbugz.pickle
