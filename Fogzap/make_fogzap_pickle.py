@@ -12,7 +12,7 @@ def day_month_year_date(date_string):
         d = d.replace(tzinfo=LocalTimezone())
         return d
     except:
-        msg = "The date must be in the format: 25 Dec 1955"
+        msg = "The date must be in the format: 25 Dec 1955 (you might need quotes around the date to make it a single argument)"
         raise argparse.ArgumentTypeError(msg)
 
 def run_make_fogzap_pickle(cmd_args):
